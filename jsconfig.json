@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/home/*": ["src/home/*"],
+      "@/homesList/*": ["src/homesList/*"],
+      "@/addHome/*": ["src/addHome/*"],
+      "@/editHome/*": ["src/editHome/*"],
+      "@/compare/*": ["src/compare/*"],
+      "@/shared/*": ["src/shared/*"],
+      "@/state/*": ["src/state/*"]
+    }
+  }
+}
