@@ -1,9 +1,9 @@
+import {useEffect} from 'react';
 import {ThemeProvider, StyleSheetManager} from 'styled-components';
 import NextApp from 'next/app';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import Router from 'next/router';
 import rtlcss from 'stylis-rtlcss';
 
 import {useStore, usePersist} from '@/state/store';
@@ -12,12 +12,20 @@ import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
 import * as gtag from '@/shared/utils/gtag';
 
-// Notice how we track pageview when route is changed
-Router.events.on('routeChangeComplete', gtag.pageview);
-
 const App = ({Component, pageProps, i18nServerInstance, router}) => {
   const store = useStore(pageProps.initialReduxState);
   const persistor = usePersist(store);
+
+  useEffect(() => {
+    const handleRouteChange = url => {
+      gtag.pageview(url);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   const isRTL = i18nServerInstance?.dir() === 'rtl' || router.asPath?.includes('/he');
 
