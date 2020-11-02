@@ -21,7 +21,7 @@ const AddHome = () => {
     } : formValues;
 
     modefiedFormValues.id = uuidv4();
-    event('new home added', 'categoryV', 'labelV', modefiedFormValues);
+    event('new_home_added', 'categoryV', 'labelV', modefiedFormValues);
 
     await dispatch(actions.addHome(modefiedFormValues));
     pushRoute(`/home/${modefiedFormValues.id}`);
