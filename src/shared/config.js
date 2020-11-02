@@ -10,4 +10,5 @@ module.exports = {
   siteUrl,
   supportedLanguages,
   defaultLanguage,
+  GA_TRACKING_ID: 'G-V314HPC4XM',
 };

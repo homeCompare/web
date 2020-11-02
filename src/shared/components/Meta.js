@@ -1,16 +1,17 @@
-import React, { memo } from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import {useRouter} from 'next/router';
-import { siteUrl, supportedLanguages } from '../config';
-import { useTranslation, lngPathCorrector } from '../i18n';
+import {useTheme} from 'styled-components';
+// import {useRouter} from 'next/router';
 
-console.log('lngPathCorrector', lngPathCorrector);
+// import {siteUrl, supportedLanguages} from '../config';
+// import {useTranslation} from '../i18n';
 
 const Meta = ({ title }) => {
-  const {i18n} = useTranslation();
-  const router = useRouter();
-  console.log('router', router, i18n);
+  const theme = useTheme();
+  // const {i18n} = useTranslation();
+  // const router = useRouter();
+  // console.log('router', router, i18n);
 
   return (
     <Head>
@@ -19,13 +20,15 @@ const Meta = ({ title }) => {
       <meta name="apple-mobile-web-app-status-bar-style" content="black" />
       <meta name="description" content="Description of the page less than 150 characters" />
       <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-      <link rel="alternate" href={siteUrl} hrefLang="x-default" />
+      {/* <link rel="alternate" href={siteUrl} hrefLang="x-default" />
       {supportedLanguages.filter(sl => sl !== i18n.language).map(lang => (
         <link rel="alternate" href="http://example.com/en-au" hrefLang={lang} key={lang} />
-      ))}
+      ))} */}
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/custom-icon.png" />
       <link rel="icon" type="image/png" href="/favicon.png" />
+
+      <meta name="theme-color" content={theme.colors.darkGrey} />
     </Head>
   );
 };

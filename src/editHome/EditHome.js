@@ -7,6 +7,7 @@ import { pushRoute } from '@/shared/utils/router';
 import { toBase64 } from '@/shared/utils/base64';
 import * as actions from '@/state/actions';
 import HomeForm from '@/shared/components/HomeForm';
+import { event } from '@/shared/utils/gtag';
 
 const EditHome = ({home}) => {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ const EditHome = ({home}) => {
       ...omit(formValues, 'dropImage'),
       images: await Promise.all(formValues?.dropImage?.map(await toBase64)),
     } : formValues;
+
+    event('editHome', 'categoryV', 'label', 'value');
 
     await dispatch(actions.editHome(modefiedFormValues));
     pushRoute(`/home/${modefiedFormValues.id}`);

@@ -8,6 +8,7 @@ import { toBase64 } from '@/shared/utils/base64';
 import * as actions from '@/state/actions';
 import HomeForm from '@/shared/components/HomeForm';
 import fields from '@/shared/utils/homeFields';
+import { event } from '@/shared/utils/gtag';
 
 const AddHome = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const AddHome = () => {
     } : formValues;
 
     modefiedFormValues.id = uuidv4();
+    event('new home added', 'categoryV', 'labelV', modefiedFormValues);
 
     await dispatch(actions.addHome(modefiedFormValues));
     pushRoute(`/home/${modefiedFormValues.id}`);
