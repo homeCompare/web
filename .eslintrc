@@ -39,7 +39,7 @@
             ["@/shared", "./src/shared/"],
             ["@/state", "./src/state/"]
          ],
-         "extensions": [".js", ".jsx", ".json"]
+         "extensions": [".js", ".jsx", ".json", ".jpg", ".png", ".ico"]
       }
     }
   },

@@ -17,8 +17,4 @@ const AddPage = () => {
   );
 };
 
-AddPage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
-
 export default AddPage;
