@@ -19,7 +19,7 @@ const EditHome = ({home}) => {
       images: await Promise.all(formValues?.dropImage?.map(await toBase64)),
     } : formValues;
 
-    event('edit_home_event', 'categoryV', 'label', 'value');
+    event('edit_home_event', 'home_action', 'key_address', [formValues?.city, formValues?.street, formValues?.houseNumber].join(', '));
 
     await dispatch(actions.editHome(modefiedFormValues));
     router.push(`/home/${modefiedFormValues.id}`);

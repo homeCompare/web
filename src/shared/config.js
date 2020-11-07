@@ -10,5 +10,5 @@ module.exports = {
   siteUrl,
   supportedLanguages,
   defaultLanguage,
-  GA_TRACKING_ID: 'G-06L6BRGHQ8',
+  GA_TRACKING_ID: 'G-KZHRTVZ53K',
 };
