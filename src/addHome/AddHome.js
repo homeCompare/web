@@ -22,7 +22,7 @@ const AddHome = () => {
     } : formValues;
 
     modefiedFormValues.id = uuidv4();
-    event('new_home_added', 'categoryV', 'labelV', modefiedFormValues);
+    event('new_home_added', 'home_action', 'key_address', [formValues?.city, formValues?.street, formValues?.houseNumber].join(', '));
 
     await dispatch(actions.addHome(modefiedFormValues));
     router.push(`/home/${modefiedFormValues.id}`);
