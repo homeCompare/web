@@ -24,8 +24,4 @@ const IndexPage = () => {
   );
 };
 
-IndexPage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
-
 export default IndexPage;

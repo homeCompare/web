@@ -1,6 +1,7 @@
 import React, { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {useRouter} from 'next/router';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -13,7 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 import EditIcon from '@material-ui/icons/Edit';
 
-import { Link, pushRoute } from '@/shared/utils/router';
+import { Link } from '@/shared/utils/router';
 import { IconButton } from '@/shared/components/Button';
 import { usePriceWithCurrency } from '@/shared/utils/general';
 
@@ -67,6 +68,7 @@ const HomeCard = ({
   id, city, street, blockNumber, houseNumber, images, onRemoveHome,
 }) => {
   const [expanded, setExpanded] = useState(false);
+  const router = useRouter();
 
   const onRemoveHomeClick = () => {
     onRemoveHome(id);
@@ -81,7 +83,7 @@ const HomeCard = ({
         title={cardTitle}
         action={(
           <>
-            <StyledIconButton onClick={() => pushRoute(`/edit/${id}`)}>
+            <StyledIconButton onClick={() => router.push(`/edit/${id}`)}>
               <EditIcon />
             </StyledIconButton>
             <StyledIconButton onClick={onRemoveHomeClick}>

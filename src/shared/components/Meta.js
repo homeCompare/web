@@ -2,6 +2,9 @@ import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import {useTheme} from 'styled-components';
+
+import faviconIco from '@/shared/images/favicon.ico';
+import logoPng from '@/shared/images/homeCompare.png';
 // import {useRouter} from 'next/router';
 
 // import {siteUrl, supportedLanguages} from '../config';
@@ -24,9 +27,9 @@ const Meta = ({ title }) => {
       {supportedLanguages.filter(sl => sl !== i18n.language).map(lang => (
         <link rel="alternate" href="http://example.com/en-au" hrefLang={lang} key={lang} />
       ))} */}
-      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" href="/custom-icon.png" />
-      <link rel="icon" type="image/png" href="/favicon.png" />
+      <link rel="icon" type="image/x-icon" href={faviconIco} />
+      <link rel="apple-touch-icon" href={logoPng} />
+      <link rel="icon" type="image/png" href={logoPng} />
 
       <meta name="theme-color" content={theme.colors.darkGrey} />
     </Head>

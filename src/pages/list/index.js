@@ -17,8 +17,4 @@ const ListPage = () => {
   );
 };
 
-ListPage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
-
 export default ListPage;

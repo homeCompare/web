@@ -17,8 +17,4 @@ const ComparePage = () => {
   );
 };
 
-ComparePage.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
-
 export default ComparePage;

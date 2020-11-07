@@ -24,8 +24,4 @@ const HomeItem = () => {
   );
 };
 
-HomeItem.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
-});
-
 export default HomeItem;

@@ -11,7 +11,8 @@ import { IconButton } from '@material-ui/core';
 import { isDev } from '@/shared/config';
 import { Link } from '@/shared/utils/router';
 import { gitLink, hostLink } from '@/shared/consts';
-import HeaderMenu from './HeaderMenu';
+import HeaderMenu from '@/shared/components/HeaderMenu';
+import CoverImageCatched from '@/shared/images/cover18.jpg';
 
 const HeaderRoot = styled.header`
   height: ${({ theme }) => theme.base.header.height}px;
@@ -92,7 +93,7 @@ const Header = () => (
         )}
       </InnerWrapper>
     </HeaderRoot>
-    <CoverImage src="/images/cover18.jpg" alt="" />
+    <CoverImage src={CoverImageCatched} alt="" />
   </>
 );
 
