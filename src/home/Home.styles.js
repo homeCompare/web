@@ -20,6 +20,12 @@ export const CardImage = styled.div`
     margin-top: 15px;
 
   }
+  .image-gallery-left-nav {
+    padding-left: 10px;
+  }
+  .image-gallery-right-nav {
+    padding-right: 25px;
+  }
   .image-gallery-image {
     border-radius: 1%;
     object-fit: cover;
