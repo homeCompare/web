@@ -8,15 +8,21 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
 const StyledCard = styled(Card)`
-  width: 1200px;
+  width: 100%;
+  ${({ theme }) => theme.media('xl', `
+    width: 1200px;
+  `)};
 `;
 
 const CardImage = styled.div`
-  width: 50%;
-  float: left;
+  ${({ theme }) => theme.media('md', `
+     width: 50%;
+     float: left;
+  `)};
   .image-gallery-content {
     margin-left: 20px;
     margin-top: 15px;
+
   }
   .image-gallery-image {
     border-radius: 1%;
@@ -36,8 +42,12 @@ const CardImage = styled.div`
   }
   .image-gallery-thumbnail .image-gallery-thumbnail-image {
     border-radius: 5%;
+    width: 50px;
+    height: 50px;
+    ${({ theme }) => theme.media('xl', `
     width: 100px;
     height: 100px;
+  `)};
   }
   .image-gallery-thumbnail.active, .image-gallery-thumbnail:hover, .image-gallery-thumbnail:focus {
     border: none;
@@ -63,12 +73,20 @@ const CardImage = styled.div`
   .image-gallery-slides {
     border-radius: 1%;
       max-height: 350px;
+      margin-right: 20px;
+      margin-bottom: 15px;
+  
+    
   }
+  .image-gallery-thumbnail-inner {
+    width: 50px;
+  }
+ 
 `;
 
 const StyledCardContent = styled(CardContent)`
+ margin-left: 52%;
   margin-top: 30px;
-  margin-left: 51%;
   color: #67088F;
   font-family: 'Roboto', sans-serif;
   border-bottom: 2px solid whitesmoke;
