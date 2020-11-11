@@ -74,6 +74,10 @@ const menu = [
     to: '/compare',
     label: 'menu_compare',
   },
+  {
+    to: '/login',
+    label: 'menu_login',
+  },
 ];
 
 const Menu = () => {

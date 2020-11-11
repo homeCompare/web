@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 import React, { memo } from 'react';
+import {useSelector} from 'react-redux';
+import { isEmpty } from 'lodash';
 import styled from 'styled-components';
 import Image from 'next/image';
 
@@ -72,7 +74,9 @@ const Logo = () => (
   </LogoWrapper>
 );
 
-const Header = () => (
+const Header = () => {
+  const user = useSelector((state) => state.user);
+  return (
   <>
     <HeaderRoot>
       <InnerWrapper>
@@ -95,6 +99,7 @@ const Header = () => (
     </HeaderRoot>
     <CoverImage src={CoverImageCatched} alt="" />
   </>
-);
+  )
+};
 
 export default memo(Header);
