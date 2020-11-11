@@ -20,7 +20,6 @@ export const facebookLogin = makeThunkAsyncActionCreator('FACEBOOK_LOGIN', async
 export const googleLogin = makeThunkAsyncActionCreator('GOOGLE_LOGIN', async (userCredentials) => {
   try {
     const googleResponse = await signInWithGoogle();
-    console.log(googleResponse);
     return googleResponse;
   } catch (err) {
     return err;
@@ -30,8 +29,7 @@ export const googleLogin = makeThunkAsyncActionCreator('GOOGLE_LOGIN', async (us
 export const logout = makeThunkAsyncActionCreator('LOGOUT', async () => {
   try {
     const logoutRES = await signOut();
-    console.log(logoutRES);
-    return logoutRES;
+    return null;
   } catch (err) {
     return err;
   }
