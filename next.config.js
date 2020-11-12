@@ -32,6 +32,14 @@ module.exports = withPlugins([
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:match*',
+        destination: 'https://api.homeCompare.io/:match*',
+      },
+    ];
+  },
 });
 
 // module.exports = {

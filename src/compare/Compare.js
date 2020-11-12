@@ -1,8 +1,9 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
+import axios from 'axios';
 
-import {useTranslation} from '@/shared/i18n';
+// import {useTranslation} from '@/shared/i18n';
 import TouchAppIconIcon from '@material-ui/icons/TouchApp';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
@@ -20,9 +21,19 @@ const CompareWrapper = styled.div`
 `;
 
 const Compare = () => {
-  const { t } = useTranslation();
+  // const {t} = useTranslation();
   const homes = useSelector((state) => state.homes);
   const [homesToCompare, setHomesToCompare] = useState();
+
+  // just testing api here!
+  useEffect(() => {
+    const fetchData = async () => {
+      const resHolder = await axios.get('/api/upsert');
+      return resHolder;
+    };
+
+    fetchData();
+  }, []);
 
   const addHomeToCompare = home => {
     const isHomeAlreadyInCompareList = homesToCompare?.find(({ id }) => id === home.id);
