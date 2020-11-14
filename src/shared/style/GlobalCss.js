@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
 
   body, button, input, textarea {
     font-size: ${theme.size(1)};
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', "Helvetica Neue", Helvetica, sans-serif;
     color: ${theme.base.textColor};
   }
 

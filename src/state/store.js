@@ -7,7 +7,6 @@ import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import * as reducers from './reducers';
 
-
 let store;
 const rootReducer = composeReducers(combineReducers(reducers));
 

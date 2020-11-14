@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import rtlcss from 'stylis-rtlcss';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 
 import {useStore, usePersist} from '@/state/store';
 // import {appWithTranslation} from '@/shared/i18n';
 import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
 import * as gtag from '@/shared/utils/gtag';
+import {firebaseConfig} from '@/shared/config';
 
 export function reportWebVitals({ id, name, label, value }) {
   // report prefromance to GA
@@ -28,6 +32,13 @@ const handleRouteChange = url => {
 const App = ({Component, pageProps, router}) => {
   const store = useStore(pageProps.initialReduxState);
   const persistor = usePersist(store);
+
+  useEffect(() => {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+      console.debug('firebase is initialized');
+    }
+  }, []);
 
   useEffect(() => {
     router.events.on('routeChangeComplete', handleRouteChange);

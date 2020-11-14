@@ -12,20 +12,19 @@ const StyledContainer = styled.div`
 `;
 
 const SignIn = () => {
-  const user = useSelector((state) => state.user);
-  console.log(user);
+  const userData = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
   return (
     <StyledContainer>
-      <Button variant="contained" color="primary" onClick={() => dispatch(actions.facebookLogin())}>
-        Login With Facebook
-      </Button>
-      <Button variant="contained" color="secondary" onClick={() => dispatch(actions.googleLogin())}>
-        Login With Google
-      </Button>
-      <Button variant="contained" color="primary" onClick={() => dispatch(actions.logout())}>
-        Logout
-      </Button>
+      {!userData ? (
+        <Button variant="contained" color="primary" onClick={() => dispatch(actions.facebookLogin())}>
+          Login With Facebook
+        </Button>
+      ) : (
+        <Button variant="contained" color="primary" onClick={() => dispatch(actions.logout())}>
+          Logout
+        </Button>
+      )}
     </StyledContainer>
   );
 };
