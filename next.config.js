@@ -1,5 +1,8 @@
 const withPlugins = require('next-compose-plugins');
 const optimizedImages = require('@mrroll/next-optimized-images');
+
+const isDev = process.env.NODE_ENV === 'development';
+
 // const {nextI18NextRewrites} = require('next-i18next/rewrites');
 // const {supportedLanguages} = require('./src/shared/config');
 
@@ -36,7 +39,7 @@ module.exports = withPlugins([
     return [
       {
         source: '/api/:match*',
-        destination: 'https://api.homeCompare.io/:match*',
+        destination: isDev ? 'http://localhost:3001/:match*' : 'https://api.homeCompare.io/:match*',
       },
     ];
   },

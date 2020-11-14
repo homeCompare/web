@@ -4,12 +4,26 @@ import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import rtlcss from 'stylis-rtlcss';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 
 import {useStore, usePersist} from '@/state/store';
 // import {appWithTranslation} from '@/shared/i18n';
 import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
 import * as gtag from '@/shared/utils/gtag';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyCpxYMgLfFbAd3V1GONvpyo0TWGBFh-RRs',
+  authDomain: 'homecompare-ac80b.firebaseapp.com',
+  databaseURL: 'https://homecompare-ac80b.firebaseio.com',
+  projectId: 'homecompare-ac80b',
+  storageBucket: 'homecompare-ac80b.appspot.com',
+  messagingSenderId: '794063471547',
+  appId: '1:794063471547:web:7f03096726c8aa6b4bba9e',
+  measurementId: 'G-8XR9VH9XX2',
+};
 
 export function reportWebVitals({ id, name, label, value }) {
   // report prefromance to GA
@@ -28,6 +42,13 @@ const handleRouteChange = url => {
 const App = ({Component, pageProps, router}) => {
   const store = useStore(pageProps.initialReduxState);
   const persistor = usePersist(store);
+
+  useEffect(() => {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+      console.debug('firebase is initialized');
+    }
+  }, []);
 
   useEffect(() => {
     router.events.on('routeChangeComplete', handleRouteChange);
