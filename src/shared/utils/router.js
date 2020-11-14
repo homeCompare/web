@@ -8,7 +8,7 @@ const StyledLink = styled.a``;
 
 export const Link = ({children, href, ...props}) => {
   return (
-    <NextLink href={href}>
+    <NextLink href={href} {...props}>
       <StyledLink {...props}>
         {children}
       </StyledLink>

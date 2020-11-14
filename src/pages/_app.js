@@ -13,17 +13,7 @@ import {useStore, usePersist} from '@/state/store';
 import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
 import * as gtag from '@/shared/utils/gtag';
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyCpxYMgLfFbAd3V1GONvpyo0TWGBFh-RRs',
-  authDomain: 'homecompare-ac80b.firebaseapp.com',
-  databaseURL: 'https://homecompare-ac80b.firebaseio.com',
-  projectId: 'homecompare-ac80b',
-  storageBucket: 'homecompare-ac80b.appspot.com',
-  messagingSenderId: '794063471547',
-  appId: '1:794063471547:web:7f03096726c8aa6b4bba9e',
-  measurementId: 'G-8XR9VH9XX2',
-};
+import {firebaseConfig} from '@/shared/config';
 
 export function reportWebVitals({ id, name, label, value }) {
   // report prefromance to GA

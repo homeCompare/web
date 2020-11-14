@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import {useRouter} from 'next/router';
 
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -33,9 +34,11 @@ const MenuUL = styled.ul`
 
 const MenuLI = styled.li``;
 
-const MenuLink = styled(Link).attrs({
-  activeClassName: 'active',
-})`
+const menuLinkHoverCss = `
+  background-color: #333;
+  color: #fff;
+`;
+const MenuLink = styled(Link)`
   height: 100%;
   display: flex;
   align-items: center;
@@ -47,9 +50,11 @@ const MenuLink = styled(Link).attrs({
   ${({ theme }) => theme.media('md', `
     padding: 0 ${theme.size(1)};
   `)}
-  &.active {
-    background-color: ${({ theme }) => theme.colors.darkGrey};
-    color: ${({ theme }) => theme.colors.thinGrey};
+
+  ${({active}) => active && menuLinkHoverCss}
+
+  &:hover {
+    ${menuLinkHoverCss}
   }
 `;
 
@@ -81,13 +86,14 @@ const menu = [
 ];
 
 const Menu = () => {
+  const {pathname} = useRouter();
   const {t} = useTranslation();
 
   return (
     <MenuUL>
       {menu.map(({ to, label }) => (
         <MenuLI key={label}>
-          <MenuLink href={to}>{t(label)}</MenuLink>
+          <MenuLink href={to} active={pathname === to}>{t(label)}</MenuLink>
         </MenuLI>
       ))}
     </MenuUL>
@@ -115,9 +121,7 @@ const HeaderMenu = () => {
       <HideOnMedium>
         <IconButton onClick={() => setIsOpen(!isOpen)}>
           <MenuIcon />
-          <MenuWrapper
-            isOpen={isOpen}
-          >
+          <MenuWrapper isOpen={isOpen}>
             <Menu />
           </MenuWrapper>
         </IconButton>

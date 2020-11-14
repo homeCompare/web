@@ -7,14 +7,15 @@ import Image from 'next/image';
 
 import GithubIcon from '@material-ui/icons/GitHub';
 import PublicIcon from '@material-ui/icons/Public';
-import HomeIcon from '@material-ui/icons/Home';
 import { IconButton } from '@material-ui/core';
 
 import { isDev } from '@/shared/config';
 import { Link } from '@/shared/utils/router';
 import { gitLink, hostLink } from '@/shared/consts';
 import HeaderMenu from '@/shared/components/HeaderMenu';
+
 import CoverImageCatched from '@/shared/images/cover18.jpg';
+import HomeCompareLogoImage from '@/shared/images/homeCompare.png';
 
 const HeaderRoot = styled.header`
   height: ${({ theme }) => theme.base.header.height}px;
@@ -39,11 +40,10 @@ const InnerWrapper = styled.div`
   align-items: center;
 `;
 
-const StyledHomeIcon = styled(HomeIcon)`
-  &&& {
-    font-size: 35px;
-    color: ${({ theme }) => theme.colors.lightGrey};
-  }
+const StyledHomeIcon = styled.img`
+  width: 35px;
+  height: 35px;
+  display: flex;
 `;
 
 const LogoWrapper = styled.div`
@@ -70,7 +70,8 @@ const CoverImage = styled(Image).attrs({
 
 const Logo = () => (
   <LogoWrapper>
-    <StyledHomeIcon />Compare.io
+    <StyledHomeIcon src={HomeCompareLogoImage} alt="homeCompare.io" />
+    Compare.io
   </LogoWrapper>
 );
 

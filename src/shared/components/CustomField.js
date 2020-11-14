@@ -10,6 +10,7 @@ import Slider from '@/shared/components/Slider';
 import TextInput from '@/shared/components/TextInput';
 import Dropzone from '@/shared/components/Dropzone';
 import Switch from '@/shared/components/Switch';
+import {useTranslation} from '@/shared/i18n';
 
 const StyledTextInput = styled(TextInput)`
   width: 100%;
@@ -46,6 +47,7 @@ const fieldComponentByType = {
 };
 
 const CustomField = (field) => {
+  const {t} = useTranslation();
   const FieldComponent = fieldComponentByType[field.type];
   return (
     <Field name={field.name}>
@@ -54,7 +56,7 @@ const CustomField = (field) => {
           return (
             <>
               <SliderLabel>
-                {field.label}
+                {t(field.label)}
               </SliderLabel>
               <SliderWrapper>
                 <ThumbnailWrapper>
@@ -78,6 +80,8 @@ const CustomField = (field) => {
         return (
           <FieldComponent
             {...{ ...field, ...input }}
+            label={t(field.label)}
+            placeholder={t(field.placeholder)}
             input={input}
             required={field?.validation?.required}
             helperText={hasError && meta.error}

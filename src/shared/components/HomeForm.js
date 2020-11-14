@@ -67,7 +67,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
                   <CustomField {...field} />
                 </FieldWrapper>
               ))}
-              <StyledButton type="submit" disabled={invalid}>{t(isEditMode ? 'add_new_home' : 'edit_home')}</StyledButton>
+              <StyledButton type="submit" disabled={invalid}>{t(isEditMode ? 'edit_home' : 'add_new_home')}</StyledButton>
             </FormWrapper>
           </form>
         );
