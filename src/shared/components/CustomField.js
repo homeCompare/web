@@ -14,6 +14,7 @@ import {useTranslation} from '@/shared/i18n';
 
 const StyledTextInput = styled(TextInput)`
   width: 100%;
+
 `;
 
 const StyledSlider = styled(Slider)`

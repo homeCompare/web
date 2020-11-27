@@ -39,6 +39,15 @@ const InnerWrapper = styled.div`
   height: 100%;
   align-items: center;
 `;
+const StyledName = styled.span`
+display: flex;
+justify-content: center;
+align-items: center;
+ text-align: center;
+ font-size: 20px;
+ 
+
+`;
 
 const StyledHomeIcon = styled.img`
   width: 35px;
@@ -76,7 +85,7 @@ const Logo = () => (
 );
 
 const Header = () => {
-  const user = useSelector((state) => state.user);
+  const userData = useSelector((state) => state.user.data);
   return (
   <>
     <HeaderRoot>
@@ -96,11 +105,12 @@ const Header = () => {
             </IconButton>
           </>
         )}
+      {userData != undefined ? <StyledName>Hello,{userData.name}</StyledName> : null}
       </InnerWrapper>
     </HeaderRoot>
     <CoverImage src={CoverImageCatched} alt="" />
   </>
-  )
+  );
 };
 
 export default memo(Header);

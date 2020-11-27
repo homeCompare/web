@@ -8,6 +8,7 @@
   "menu_add": "Add",
   "menu_compare": "Compare",
   "menu_login": "Login",
+  "menu_logout": "Logout",
   "city": "City",
   "street": "Street",
   "block_number": "Block #",

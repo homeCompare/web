@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {useRouter} from 'next/router';
-
 import MenuIcon from '@material-ui/icons/Menu';
-
 import {useTranslation} from '@/shared/i18n';
 import { Link } from '@/shared/utils/router';
 import { IconButton } from '@/shared/components/Button';
@@ -82,6 +80,10 @@ const menu = [
   {
     to: '/login',
     label: 'menu_login',
+  },
+  {
+    to: '/logout',
+    label: 'menu_logout',
   },
 ];
 
