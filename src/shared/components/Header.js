@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React, { memo } from 'react';
 import {useSelector} from 'react-redux';
-import { isEmpty } from 'lodash';
 import styled from 'styled-components';
 import Image from 'next/image';
 
@@ -14,7 +13,8 @@ import { Link } from '@/shared/utils/router';
 import { gitLink, hostLink } from '@/shared/consts';
 import HeaderMenu from '@/shared/components/HeaderMenu';
 
-import CoverImageCatched from '@/shared/images/cover18.jpg';
+import CoverImageCatched from '@/shared/images/cover.jpg';
+import Cover2ImageCatched from '@/shared/images/cover4.jpg';
 import HomeCompareLogoImage from '@/shared/images/homeCompare.png';
 
 const HeaderRoot = styled.header`
@@ -71,10 +71,13 @@ const StyledLogoLink = styled(Link)`
 const CoverImage = styled(Image).attrs({
   unsized: true,
 })`
-  width: 100%;
+width: 100%;
   height: 300px;
   object-fit: cover;
   box-shadow: 0px 7px 10px 5px rgba(0,0,0, 0.12);
+`;
+const CoverImageWrapper = styled.div`
+display: flex;
 `;
 
 const Logo = () => (
@@ -105,10 +108,13 @@ const Header = () => {
             </IconButton>
           </>
         )}
-      {userData != undefined ? <StyledName>Hello,{userData.name}</StyledName> : null}
+        {userData != undefined ? <StyledName>Hello,{userData.name}</StyledName> : null}
       </InnerWrapper>
     </HeaderRoot>
-    <CoverImage src={CoverImageCatched} alt="" />
+    <CoverImageWrapper>
+      <CoverImage src={CoverImageCatched} alt="" />
+      <CoverImage src={Cover2ImageCatched} alt="" />
+    </CoverImageWrapper>
   </>
   );
 };
