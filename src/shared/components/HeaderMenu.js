@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
 import MenuIcon from '@material-ui/icons/Menu';
 import {useTranslation} from '@/shared/i18n';
@@ -90,14 +91,20 @@ const menu = [
 const Menu = () => {
   const {pathname} = useRouter();
   const {t} = useTranslation();
+  const userData = useSelector((state) => state.user.data);
 
   return (
     <MenuUL>
-      {menu.map(({ to, label }) => (
+      {userData != undefined ? menu.filter(item => item.to !== '/login').map(({ to, label }) => (
         <MenuLI key={label}>
           <MenuLink href={to} active={pathname === to}>{t(label)}</MenuLink>
         </MenuLI>
-      ))}
+      ))
+        : menu.map(({ to, label }) => (
+          <MenuLI key={label}>
+            <MenuLink href={to} active={pathname === to}>{t(label)}</MenuLink>
+          </MenuLI>
+        ))}
     </MenuUL>
   );
 };
