@@ -11,25 +11,32 @@ const Root = styled.div`
   flex-direction: column;
   display: flex;
   flex-wrap: wrap;
-  ${({ theme }) => theme.media('lg', `
+  ${({ theme }) =>
+    theme.media(
+      'lg',
+      `
     flex-direction: row;
-  `)};
+  `,
+    )};
 `;
 
 const HomeCardWrapper = styled.div`
   width: 100%;
   margin-right: ${({ theme }) => theme.size(1)};
-  ${({ theme }) => theme.media('lg', `
-    width: 300px;
-  `)}
-  margin-bottom: ${({ theme }) => theme.size(1)};
+  ${({ theme }) =>
+    theme.media(
+      'lg',
+      `
+    width: 282px;
+  `,
+    )} margin-bottom: ${({ theme }) => theme.size(1)};
   &:last-child {
     margin-bottom: 0;
   }
 `;
 
 const HomesList = () => {
-  const [confirmRemoveHomeId, setConfirmRemoveHomeId] = useState();
+  const [ confirmRemoveHomeId, setConfirmRemoveHomeId ] = useState();
   const dispatch = useDispatch();
   const Homes = useSelector((state) => state.homes);
   const currency = useSelector((state) => state.currency);
@@ -38,7 +45,7 @@ const HomesList = () => {
     return <div>no homes stored</div>;
   }
 
-  const onRemoveHomeButtonClick = homeId => {
+  const onRemoveHomeButtonClick = (homeId) => {
     setConfirmRemoveHomeId(homeId);
   };
 
