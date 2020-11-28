@@ -13,8 +13,8 @@ import { Link } from '@/shared/utils/router';
 import { gitLink, hostLink } from '@/shared/consts';
 import HeaderMenu from '@/shared/components/HeaderMenu';
 
-import CoverImageCatched from '@/shared/images/cover.jpg';
-import Cover2ImageCatched from '@/shared/images/cover4.jpg';
+import CoverImageCatched from '@/shared/images/cover4.jpg';
+import Cover2ImageCatched from '@/shared/images/cover5.jpg';
 import HomeCompareLogoImage from '@/shared/images/homeCompare.png';
 
 const HeaderRoot = styled.header`

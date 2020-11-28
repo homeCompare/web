@@ -100,7 +100,7 @@ const Menu = () => {
           <MenuLink href={to} active={pathname === to}>{t(label)}</MenuLink>
         </MenuLI>
       ))
-        : menu.map(({ to, label }) => (
+        : menu.filter(item => item.to !== '/logout').map(({ to, label }) => (
           <MenuLI key={label}>
             <MenuLink href={to} active={pathname === to}>{t(label)}</MenuLink>
           </MenuLI>

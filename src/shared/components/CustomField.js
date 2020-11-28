@@ -19,15 +19,18 @@ const StyledTextInput = styled(TextInput)`
 
 const StyledSlider = styled(Slider)`
   margin: 0 15px;
+ 
 `;
 
 const SliderWrapper = styled.div`
   display: flex;
   align-items: center;
+
 `;
 
 const ThumbnailWrapper = styled.div`
   display: flex;
+
 `;
 
 const SliderLabel = styled(Typography)`

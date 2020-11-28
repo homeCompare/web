@@ -11,6 +11,7 @@ import fields from '@/shared/utils/homeFields';
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column; 
+  
 `;
 
 const FieldWrapper = styled.div`
