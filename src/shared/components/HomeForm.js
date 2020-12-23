@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useState} from 'react';
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
 
@@ -53,6 +53,101 @@ const onSubmitNewHomeValidation = entries => {
 const HomeForm = ({onSubmit, initialValues = {}}) => {
   const isEditMode = initialValues.id;
   const {t} = useTranslation();
+
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const next = () => {
+    let updatedCurrentStep = currentStep;
+    updatedCurrentStep = updatedCurrentStep >= 2 ? 3 : updatedCurrentStep + 1;
+    setCurrentStep(updatedCurrentStep);
+  };
+
+  const prev = () => {
+    let updatedCurrentStep = currentStep;
+    updatedCurrentStep = updatedCurrentStep <= 1 ? 1 : updatedCurrentStep - 1;
+    setCurrentStep(updatedCurrentStep);
+  };
+
+  const previousButton = () => {
+    if (currentStep !== 1) {
+      return (
+        <button
+          type="button"
+          onClick={prev}
+        >
+          Previous
+        </button>
+      );
+    }
+    return null;
+  };
+
+  const nextButton = () => {
+    if (currentStep < 3) {
+      return (
+        <button
+          type="button"
+          onClick={next}
+        >
+          Next
+        </button>
+      );
+    }
+    return null;
+  };
+
+  const step1 = () => {
+    if (currentStep !== 1) {
+      return null;
+    }
+    return fields.map((field, index) => {
+      if (index < 5) {
+        return (
+          <FieldWrapper key={field.name}>
+            <CustomField {...field} />
+          </FieldWrapper>
+        );
+      }
+    });
+  };
+
+  const step2 = () => {
+    if (currentStep !== 2) {
+      return null;
+    }
+    return fields.map((field, index) => {
+      if (index >= 5 && index < 10) {
+        return (
+          <FieldWrapper key={field.name}>
+            <CustomField {...field} />
+          </FieldWrapper>
+        );
+      }
+    });
+  };
+
+  const step3 = (invalid) => {
+    if (currentStep !== 3) {
+      return null;
+    }
+    const fieldZone = fields.map((field, index) => {
+      if (index >= 10 && index < 20) {
+        return (
+          <FieldWrapper key={field.name}>
+            <CustomField {...field} />
+          </FieldWrapper>
+        );
+      }
+    });
+    return (
+      <>
+        {fieldZone}
+        <StyledButton type="submit" disabled={invalid}>{t(isEditMode ? 'edit_home' : 'add_new_home')}</StyledButton>
+
+      </>
+    );
+  };
+
   return (
     <Form
       onSubmit={onSubmit}
@@ -63,13 +158,13 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
         return (
           <form name="homeForm" id="homeForm" onSubmit={handleSubmit}>
             <FormWrapper>
-              {fields.map(field => (
-                <FieldWrapper key={field.name}>
-                  <CustomField {...field} />
-                </FieldWrapper>
-              ))}
-              <StyledButton type="submit" disabled={invalid}>{t(isEditMode ? 'edit_home' : 'add_new_home')}</StyledButton>
+              {step1()}
+              {step2()}
+              {step3(invalid)}
+
             </FormWrapper>
+            { previousButton()}
+            { nextButton()}
           </form>
         );
       }}

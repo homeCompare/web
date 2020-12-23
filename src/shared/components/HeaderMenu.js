@@ -95,16 +95,28 @@ const Menu = () => {
 
   return (
     <MenuUL>
-      {userData != undefined ? menu.filter(item => item.to !== '/login').map(({ to, label }) => (
-        <MenuLI key={label}>
-          <MenuLink href={to} active={pathname === to}>{t(label)}</MenuLink>
-        </MenuLI>
-      ))
-        : menu.filter(item => item.to !== '/logout').map(({ to, label }) => (
-          <MenuLI key={label}>
-            <MenuLink href={to} active={pathname === to}>{t(label)}</MenuLink>
-          </MenuLI>
-        ))}
+      {userData != undefined
+        ? menu.map((item) => {
+          if (item.to !== '/login') {
+            return (
+              <MenuLI key={item.label}>
+                <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
+              </MenuLI>
+
+            );
+          }
+          return null;
+        })
+        : menu.map((item) => {
+          if (item.to !== '/logout') {
+            return (
+              <MenuLI key={item.label}>
+                <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
+              </MenuLI>
+            );
+          }
+          return null;
+        })}
     </MenuUL>
   );
 };
