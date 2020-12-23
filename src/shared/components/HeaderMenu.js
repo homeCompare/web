@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
-
 import MenuIcon from '@material-ui/icons/Menu';
-
 import {useTranslation} from '@/shared/i18n';
 import { Link } from '@/shared/utils/router';
 import { IconButton } from '@/shared/components/Button';
@@ -83,19 +82,41 @@ const menu = [
     to: '/login',
     label: 'menu_login',
   },
+  {
+    to: '/logout',
+    label: 'menu_logout',
+  },
 ];
 
 const Menu = () => {
   const {pathname} = useRouter();
   const {t} = useTranslation();
+  const userData = useSelector((state) => state.user.data);
 
   return (
     <MenuUL>
-      {menu.map(({ to, label }) => (
-        <MenuLI key={label}>
-          <MenuLink href={to} active={pathname === to}>{t(label)}</MenuLink>
-        </MenuLI>
-      ))}
+      {userData != undefined
+        ? menu.map((item) => {
+          if (item.to !== '/login') {
+            return (
+              <MenuLI key={item.label}>
+                <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
+              </MenuLI>
+
+            );
+          }
+          return null;
+        })
+        : menu.map((item) => {
+          if (item.to !== '/logout') {
+            return (
+              <MenuLI key={item.label}>
+                <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
+              </MenuLI>
+            );
+          }
+          return null;
+        })}
     </MenuUL>
   );
 };

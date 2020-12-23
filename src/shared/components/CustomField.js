@@ -14,19 +14,23 @@ import {useTranslation} from '@/shared/i18n';
 
 const StyledTextInput = styled(TextInput)`
   width: 100%;
+
 `;
 
 const StyledSlider = styled(Slider)`
   margin: 0 15px;
+ 
 `;
 
 const SliderWrapper = styled.div`
   display: flex;
   align-items: center;
+
 `;
 
 const ThumbnailWrapper = styled.div`
   display: flex;
+
 `;
 
 const SliderLabel = styled(Typography)`

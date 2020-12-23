@@ -42,13 +42,13 @@ const StyledBrokenImageIcon = styled(BrokenImageIcon)`
 const StyledCardMedia = styled(CardMedia)`
   width: 100%;
   height: 250px;
-  background-size: cover;
 `;
 
 const SmallImageBox = styled.img`
   width: 100px;
   height: 100px;
   border: 1px solid black;
+  object-fit: cover;
 `;
 
 const StyledLink = styled(Link)`
