@@ -45,10 +45,10 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 const Footer = () => {
   const [languageMenuAnchorEl, setLanguageMenuAnchorEl] = useState(false);
-  const {i18n: {language, changeLanguage}} = useTranslation();
+  const {currentLanguageKey, changeLanguage} = useTranslation();
 
   const onChangeLanguage = newLanguageKey => {
-    if (language === newLanguageKey) {
+    if (currentLanguageKey === newLanguageKey) {
       return;
     }
 
@@ -73,7 +73,7 @@ const Footer = () => {
             {supportedLanguages.map(languageKey => (
               <MenuItem
                 key={languageKey}
-                selected={languageKey === language}
+                selected={languageKey === currentLanguageKey}
                 onClick={() => onChangeLanguage(languageKey)}
               >
                 {languageKey}

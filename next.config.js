@@ -1,14 +1,8 @@
 const withPlugins = require('next-compose-plugins');
 const optimizedImages = require('@mrroll/next-optimized-images');
+const {supportedLanguages, defaultLanguage} = require('./src/shared/config');
 
 const isDev = process.env.NODE_ENV === 'development';
-
-// const {nextI18NextRewrites} = require('next-i18next/rewrites');
-// const {supportedLanguages} = require('./src/shared/config');
-
-// const localeSubpaths = supportedLanguages.slice(1).reduce(
-//   (all, item) => ({...all, [item]: item}), {},
-// );
 
 module.exports = withPlugins([
   [optimizedImages, {
@@ -22,6 +16,10 @@ module.exports = withPlugins([
   }],
   // your other plugins here
 ], {
+  i18n: {
+    locales: supportedLanguages,
+    defaultLocale: defaultLanguage,
+  },
   async headers() {
     return [
       {
@@ -44,10 +42,3 @@ module.exports = withPlugins([
     ];
   },
 });
-
-// module.exports = {
-//   // rewrites: async () => nextI18NextRewrites(localeSubpaths),
-//   publicRuntimeConfig: {
-//     localeSubpaths,
-//   },
-// };

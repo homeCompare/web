@@ -1,27 +1,21 @@
-// const NextI18Next = require('next-i18next').default;
-// const path = require('path');
-// const {supportedLanguages, defaultLanguage} = require('./config');
-const {noop} = require('lodash');
-const enStrings = require('../../public/static/locales/en/common.json');
+import { useRouter } from 'next/router';
+import allTranslates from '../../public/static/locales';
 
-const useTranslation = () => ({
-  t: keyString => enStrings[keyString],
-  i18n: {
-    changeLanguage: () => noop,
-  },
-});
+export const useTranslation = () => {
+  const { locale: currentLanguageKey, pathname, asPath, query, push } = useRouter();
+  if (!currentLanguageKey) {
+    console.error('[i18n.js]: locale isnt recognized');
+  }
 
-module.exports = {
-  useTranslation,
+  return {
+    isRTL: currentLanguageKey === 'he',
+    currentLanguageKey,
+    t: keyString => allTranslates[currentLanguageKey][keyString],
+    changeLanguage: languageKey => {
+      if (languageKey === currentLanguageKey) {
+        return;
+      }
+      push({ pathname, query }, asPath, { locale: languageKey });
+    },
+  }
 };
-// module.exports = new NextI18Next({
-//   otherLanguages: supportedLanguages.slice(1),
-//   localeSubpaths: supportedLanguages.slice(1).reduce(
-//     (all, item) => ({...all, [item]: item}), {},
-//   ),
-//   defaultNS: 'common',
-//   debug: true,
-//   fallbackLng: defaultLanguage,
-//   supportedLngs: supportedLanguages,
-//   localePath: path.resolve('./public/static/locales'),
-// });
