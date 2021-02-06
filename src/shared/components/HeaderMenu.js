@@ -89,10 +89,11 @@ const menu = [
 ];
 
 const Menu = () => {
-  const {pathname} = useRouter();
-  const {t} = useTranslation();
-  const userData = useSelector((state) => state.user.data);
+  const { pathname } = useRouter();
+  const { t } = useTranslation();
+  const userData = useSelector(state => state.user.data);
 
+  // todo: this needs refactor too much repetitve code
   return (
     <MenuUL>
       {userData != undefined

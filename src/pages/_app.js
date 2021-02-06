@@ -9,11 +9,11 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 import {useStore, usePersist} from '@/state/store';
-// import {appWithTranslation} from '@/shared/i18n';
 import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
 import * as gtag from '@/shared/utils/gtag';
 import {firebaseConfig} from '@/shared/config';
+import { useTranslation } from '@/shared/i18n';
 
 export function reportWebVitals({ id, name, label, value }) {
   // report prefromance to GA
@@ -32,6 +32,7 @@ const handleRouteChange = url => {
 const App = ({Component, pageProps, router}) => {
   const store = useStore(pageProps.initialReduxState);
   const persistor = usePersist(store);
+  const {isRTL} = useTranslation();
 
   useEffect(() => {
     if (!firebase.apps.length) {
@@ -46,8 +47,6 @@ const App = ({Component, pageProps, router}) => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
-
-  const isRTL = false;
 
   return (
     <Provider store={store}>
