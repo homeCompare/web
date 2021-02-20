@@ -7,7 +7,7 @@ import styled from 'styled-components';
 // if you need to add something just override it in your own component
 // const CustomStyledButton = styled(Button)``;
 const StyledButton = styled(ButtonBone)`
-  &&& {
+  && {
     border: 1px solid ${({ theme }) => theme.colors.thinGrey};
     &:disabled {
       cursor: not-allowed;

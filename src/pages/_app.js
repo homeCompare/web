@@ -12,8 +12,8 @@ import {useStore, usePersist} from '@/state/store';
 import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
 import * as gtag from '@/shared/utils/gtag';
-import {firebaseConfig} from '@/shared/config';
-import { useTranslation } from '@/shared/i18n';
+import {firebaseConfig, isDev} from '@/shared/config';
+import {useTranslation} from '@/shared/i18n';
 
 export function reportWebVitals({ id, name, label, value }) {
   // report prefromance to GA
@@ -37,7 +37,9 @@ const App = ({Component, pageProps, router}) => {
   useEffect(() => {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
-      console.debug('firebase is initialized');
+      if (isDev) {
+        console.debug('firebase is initialized');
+      }
     }
   }, []);
 
