@@ -59,7 +59,7 @@ const Footer = () => {
   return (
     <Root>
       <InnerWrapper>
-        <FlexI>&copy; homeCompare.io {CURRENT_YEAR}</FlexI>
+        <FlexI>&copy; homeCompare.io 2020 - {CURRENT_YEAR}</FlexI>
         <Flex>
           <IconButton onClick={event => setLanguageMenuAnchorEl(event.currentTarget)}>
             <StyledLanguageIcon />

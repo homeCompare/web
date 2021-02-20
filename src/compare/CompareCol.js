@@ -1,17 +1,24 @@
 import React, {memo} from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {toPairs, omit, isEmpty} from 'lodash';
+import {toPairs, omit, isEmpty, isBoolean} from 'lodash';
 import ImageGallery from 'react-image-gallery';
+import {getPriceWithCurrency} from '@/shared/utils/general';
 
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
-export const HomeCompareCard = styled.ul`
+export const HomeCompareCardUL = styled.ul`
   display: flex;
   flex-direction: column;
   list-style-type: none;
   text-align: left;
   padding: 0;
+`;
+
+export const HomeCompareCardULRow = styled(HomeCompareCardUL)`
+  flex-direction: row;
 `;
 
 const StyledBrokenImageIcon = styled(BrokenImageIcon)`
@@ -61,7 +68,13 @@ export const HomeCompareItem = styled.li`
   flex-direction: column;
   display: flex;
   justify-content: center;
+  font-weight: ${({$isBold}) => $isBold ? 'bold' : 'inherit'};
+  svg {
+    margin: auto;
+  }
 `;
+
+const priceFields = ['price', 'propertyTax', 'buildingTax'];
 
 const CompareCard = (home) => {
   const nonTextFieldToExclude = ['images'];
@@ -72,7 +85,7 @@ const CompareCard = (home) => {
 
   const pairsModifyedHome = toPairs(omit(home, nonTextFieldToExclude));
   return (
-    <HomeCompareCard>
+    <HomeCompareCardUL>
       <HomeCompareImage>
         {!isEmpty(galleryImages) ? (
           <ImageGallery
@@ -85,10 +98,17 @@ const CompareCard = (home) => {
           <StyledBrokenImageIcon />
         )}
       </HomeCompareImage>
-      {pairsModifyedHome.map(([key, value]) => (
-        <HomeCompareItem key={key}>{value}</HomeCompareItem>
-      ))}
-    </HomeCompareCard>
+      {pairsModifyedHome.map(([key, value]) => {
+        if (key.includes('is') || key.includes('has')) {
+          const BooleanIconComponent = value ? CheckCircleOutlineIcon : RadioButtonUncheckedIcon;
+          return (<HomeCompareItem key={key} className={`key_${key}`}><BooleanIconComponent /></HomeCompareItem>);
+        }
+        if (priceFields.includes(key)) {
+          return (<HomeCompareItem key={key} className={`key_${key}`}>{getPriceWithCurrency(value)}</HomeCompareItem>);
+        }
+        return (<HomeCompareItem key={key} className={`key_${key}`}>b:{value}</HomeCompareItem>);
+      })}
+    </HomeCompareCardUL>
   );
 };
 
