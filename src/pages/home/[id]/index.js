@@ -13,7 +13,7 @@ const HomeItem = () => {
 
   return (
     <>
-      <Meta title={t('single home item')} />
+      <Meta title={t('single_home_item')} />
       <Layout>
         <Home homeId={homeId} />
       </Layout>

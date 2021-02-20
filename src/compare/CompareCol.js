@@ -74,16 +74,17 @@ export const HomeCompareItem = styled.li`
   }
 `;
 
-const priceFields = ['price', 'propertyTax', 'buildingTax']
+const priceFields = ['price', 'propertyTax', 'buildingTax'];
 
-const CompareCard = (home) => {
-  const nonTextFieldToExclude = ['images', 'id'];
+const CompareCard = ({fieldsToCompare, ...home}) => {
+  const nonTextFieldToExclude = ['images'];
 
   const galleryImages = home?.images?.map((image) => {
     return { original: image, thumbnail: image };
   });
 
-  const pairsModifyedHome = toPairs(omit(home, nonTextFieldToExclude));
+  // const pairsModifyedHome = toPairs(omit(home, nonTextFieldToExclude));
+  // console.log('pairsModifyedHome', pairsModifyedHome);
   return (
     <HomeCompareCardUL>
       <HomeCompareImage>
@@ -98,8 +99,10 @@ const CompareCard = (home) => {
           <StyledBrokenImageIcon />
         )}
       </HomeCompareImage>
-      {pairsModifyedHome.map(([key, value]) => {
-        if (isBoolean(value)) {
+
+      {fieldsToCompare.map(key => {
+        const value = home[key];
+        if (key.includes('is') || key.includes('has')) {
           const BooleanIconComponent = value ? CheckCircleOutlineIcon : RadioButtonUncheckedIcon;
           return (<HomeCompareItem key={key}><BooleanIconComponent /></HomeCompareItem>);
         }

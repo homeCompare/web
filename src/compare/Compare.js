@@ -49,18 +49,20 @@ const fieldToCompare = [
   'numberOfRooms',
   'floor',
   'squarMeter',
+  'freeText',
   'entryDate',
   'hasBlacony',
   'hasGarage',
   'isRenovated',
   'hasAirConditioner',
+  'id',
 ];
 
 const Compare = () => {
   const {t} = useTranslation();
   const homes = useSelector((state) => state.homes);
   const [homesToCompare, setHomesToCompare] = useState();
-
+  
   const onDragEnd = result => {
     if (!result.destination) {
       return; // dropped outside the list
@@ -115,7 +117,6 @@ const Compare = () => {
                 ))}
               </HomeCompareCardUL>
             </li>
-            
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="droppable" direction="horizontal">
                 {(provided, snapshot) => (
@@ -133,7 +134,7 @@ const Compare = () => {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            <CompareCard {...home}/>
+                            <CompareCard fieldsToCompare={fieldToCompare} {...home}/>
                           </DraggableItem>
                         )}
                       </Draggable>
