@@ -31,5 +31,14 @@
   "add_new_home": "Add new home",
   "edit_home": "Update home",
   "add_home_page_title": "Add new home",
-  "edit_home_page_title": "Update home"
+  "edit_home_page_title": "Update home",
+  "compare_page_title": "Comparession",
+  "personal_rate": "Personal Rate",
+  "has_blacony": "Has blacony",
+  "has_air_conditioner": "Has air conditioner",
+  "squar_meter": "Squar meter",
+  "compare_page_paragraph": "Pick apartments to compare between",
+  "compare_page_paragraph_1": "after picking apartments a comparasion table will be exposed to you, the table will help you decide which apartment is the right one for you.",
+  "compare_page_paragraph_2": "you can scroll to the sides to see the full compare + drag and drop to sort it to be more comfy.",
+  "main_image": "#"
 }
