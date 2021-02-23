@@ -9,7 +9,7 @@ const ListPage = () => {
   return (
     <>
       <Meta title={t('homes_list_page_title')} />
-      <Layout>
+      <Layout hideSide>
         <h1>{t('homes_list_page_title')}</h1>
         <HomesList />
       </Layout>

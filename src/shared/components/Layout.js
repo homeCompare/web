@@ -49,7 +49,23 @@ const Aside = styled.aside`
   `)}
 `;
 
-const Layout = ({ children, hideSide }) => (
+export const OpenLayout = ({ className, children, hideSide }) => (
+  <Container>
+    <Header />
+    <Content className={className}>
+      {children}
+      {!hideSide && (
+        <Aside>
+          <Side />
+        </Aside>
+      )}
+    </Content>
+    <Footer />
+    <GlobalCss />
+  </Container>
+);
+
+const Layout = ({children, hideSide}) => (
   <Container>
     <Header />
     <Content>
