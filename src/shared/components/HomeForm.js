@@ -25,7 +25,7 @@ const ProgressBar = styled.ul`
   text-align: center;
 
   li {
-    
+  
   list-style-type: none;
   color: rgb(51, 51, 51);
   text-transform: uppercase;
@@ -43,6 +43,7 @@ const ProgressBar = styled.ul`
   }
 
   li:before {
+
     content: counter(step);
   counter-increment: step;
   width: 20px;
@@ -64,7 +65,7 @@ const ProgressBar = styled.ul`
   position: absolute;
   left: -50%;
   top: 9px;
-  z-index: 0; /*put it behind the numbers*/
+  z-index: -1; /*put it behind the numbers*/
   }
 
   li:first-child:after{
