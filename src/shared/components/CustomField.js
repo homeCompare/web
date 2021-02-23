@@ -14,6 +14,44 @@ import {useTranslation} from '@/shared/i18n';
 
 const StyledTextInput = styled(TextInput)`
   width: 100%;
+  label {
+   margin-left: 30px;
+  font-size: 20px;
+  display: inline-block;
+  margin-bottom: 80px;
+
+  }
+
+  input {
+    outline: none;
+  display: block;
+  width: 100%;
+  margin: 30px;
+  padding: 20px 40px;
+  border: 1px solid #d9d9d9;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #837E7E;
+  font-family: "Roboto";
+  -webkti-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-wieght: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: all 0.3s linear 0s;
+  -moz-transition: all 0.3s linear 0s;
+  -ms-transition: all 0.3s linear 0s;
+  -o-transition: all 0.3s linear 0s;
+  transition: all 0.3s linear 0s;
+
+  &:focus {
+    color: #333333;
+  border: 1px solid #7B1FA2;
+  }
+  }
 
 `;
 
@@ -34,6 +72,7 @@ const ThumbnailWrapper = styled.div`
 `;
 
 const SliderLabel = styled(Typography)`
+
   &&& {
     margin-bottom: ${({ theme }) => theme.size(3)};
   }
@@ -89,6 +128,7 @@ const CustomField = (field) => {
             input={input}
             required={field?.validation?.required}
             helperText={hasError && meta.error}
+            InputProps={{disableUnderline: true}}
           />
         );
       }}

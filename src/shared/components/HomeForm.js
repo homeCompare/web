@@ -1,16 +1,83 @@
 import React, {memo, useState} from 'react';
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
-
+import Button from '@material-ui/core/Button';
 import {useTranslation} from '@/shared/i18n';
-import Button from '@/shared/components/Button';
 import CustomField from '@/shared/components/CustomField';
 
 import fields from '@/shared/utils/homeFields';
 
+const ButtonZone = styled.div`
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+
+`;
+
+const ProgressBar = styled.ul`
+
+  margin-bottom: 30px;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+  text-align: center;
+
+  li {
+    
+  list-style-type: none;
+  color: rgb(51, 51, 51);
+  text-transform: uppercase;
+  font-size: 12px;
+  width: 33%;
+  float: left;
+  position: relative;
+
+
+  &.active:before, &.active:after {
+    background: #7B1FA2;
+    color: white;
+  }
+  
+  }
+
+  li:before {
+    content: counter(step);
+  counter-increment: step;
+  width: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 10px;
+  color: #333;
+  background: white;
+  border-radius: 3px;
+  margin: 0 auto 5px auto;
+
+  }
+
+  li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: -50%;
+  top: 9px;
+  z-index: 0; /*put it behind the numbers*/
+  }
+
+  li:first-child:after{
+   content: none;
+  }
+
+ 
+`;
+
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column; 
+
   
 `;
 
@@ -71,12 +138,15 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const previousButton = () => {
     if (currentStep !== 1) {
       return (
-        <button
+        <Button
+          color="primary"
           type="button"
           onClick={prev}
         >
+
           Previous
-        </button>
+        </Button>
+
       );
     }
     return null;
@@ -85,12 +155,16 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const nextButton = () => {
     if (currentStep < 3) {
       return (
-        <button
+        <Button
+          style={{alignItems: 'flex-end'}}
+          color="secondary"
           type="button"
           onClick={next}
         >
+
           Next
-        </button>
+        </Button>
+
       );
     }
     return null;
@@ -157,14 +231,30 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
       {({ handleSubmit, invalid }) => {
         return (
           <form name="homeForm" id="homeForm" onSubmit={handleSubmit}>
+            <ProgressBar>
+              <li className={(currentStep === 1) ? 'active' : 'null'}>Location
+
+              </li>
+              <li
+                className={(currentStep === 2) ? 'active' : 'null'}
+              >Aquisition
+              </li>
+              <li
+                className={(currentStep === 3) ? 'active' : 'null'}
+              >Features
+              </li>
+            </ProgressBar>
+
             <FormWrapper>
               {step1()}
               {step2()}
               {step3(invalid)}
 
             </FormWrapper>
-            { previousButton()}
-            { nextButton()}
+            <ButtonZone>
+              { previousButton()}
+              { nextButton()}
+            </ButtonZone>
           </form>
         );
       }}
