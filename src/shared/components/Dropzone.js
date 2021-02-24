@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
+import Button from '@material-ui/core/Button';
 
-const ClearButton = styled.button`margin-bottom: 2rem;`;
+const ClearButton = styled(Button)`margin-bottom: 2rem;`;
 
 const Textarea = styled.div`
   flex: 1;

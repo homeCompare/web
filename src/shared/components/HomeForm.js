@@ -1,9 +1,12 @@
-import React, {memo, useState} from 'react';
+import React, {memo} from 'react';
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import {useTranslation} from '@/shared/i18n';
 import CustomField from '@/shared/components/CustomField';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
 
 import fields from '@/shared/utils/homeFields';
 
@@ -14,65 +17,6 @@ const ButtonZone = styled.div`
   justify-content: space-between;
 
 
-`;
-
-const ProgressBar = styled.ul`
-
-  margin-bottom: 30px;
-  overflow: hidden;
-  /*CSS counters to number the steps*/
-  counter-reset: step;
-  text-align: center;
-
-  li {
-  
-  list-style-type: none;
-  color: rgb(51, 51, 51);
-  text-transform: uppercase;
-  font-size: 12px;
-  width: 33%;
-  float: left;
-  position: relative;
-
-
-  &.active:before, &.active:after {
-    background: #7B1FA2;
-    color: white;
-  }
-  
-  }
-
-  li:before {
-
-    content: counter(step);
-  counter-increment: step;
-  width: 20px;
-  line-height: 20px;
-  display: block;
-  font-size: 10px;
-  color: #333;
-  background: white;
-  border-radius: 3px;
-  margin: 0 auto 5px auto;
-
-  }
-
-  li:after {
-  content: '';
-  width: 100%;
-  height: 2px;
-  background: white;
-  position: absolute;
-  left: -50%;
-  top: 9px;
-  z-index: -1; /*put it behind the numbers*/
-  }
-
-  li:first-child:after{
-   content: none;
-  }
-
- 
 `;
 
 const FormWrapper = styled.div`
@@ -117,32 +61,43 @@ const onSubmitNewHomeValidation = entries => {
 
   return errors;
 };
+function getSteps() {
+  return ['Location', 'Pricing', 'Features'];
+}
 
 const HomeForm = ({onSubmit, initialValues = {}}) => {
   const isEditMode = initialValues.id;
   const {t} = useTranslation();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [skipped, setSkipped] = React.useState(new Set());
+  const steps = getSteps();
 
-  const [currentStep, setCurrentStep] = useState(1);
-
-  const next = () => {
-    let updatedCurrentStep = currentStep;
-    updatedCurrentStep = updatedCurrentStep >= 2 ? 3 : updatedCurrentStep + 1;
-    setCurrentStep(updatedCurrentStep);
+  const isStepSkipped = (step) => {
+    return skipped.has(step);
   };
 
-  const prev = () => {
-    let updatedCurrentStep = currentStep;
-    updatedCurrentStep = updatedCurrentStep <= 1 ? 1 : updatedCurrentStep - 1;
-    setCurrentStep(updatedCurrentStep);
+  const handleNext = () => {
+    let newSkipped = skipped;
+    if (isStepSkipped(activeStep)) {
+      newSkipped = new Set(newSkipped.values());
+      newSkipped.delete(activeStep);
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped(newSkipped);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const previousButton = () => {
-    if (currentStep !== 1) {
+    if (activeStep !== 0) {
       return (
         <Button
           color="primary"
           type="button"
-          onClick={prev}
+          onClick={handleBack}
         >
 
           Previous
@@ -154,13 +109,13 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   };
 
   const nextButton = () => {
-    if (currentStep < 3) {
+    if (activeStep < 2) {
       return (
         <Button
           style={{alignItems: 'flex-end'}}
           color="secondary"
           type="button"
-          onClick={next}
+          onClick={handleNext}
         >
 
           Next
@@ -172,7 +127,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   };
 
   const step1 = () => {
-    if (currentStep !== 1) {
+    if (activeStep !== 0) {
       return null;
     }
     return fields.map((field, index) => {
@@ -187,7 +142,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   };
 
   const step2 = () => {
-    if (currentStep !== 2) {
+    if (activeStep !== 1) {
       return null;
     }
     return fields.map((field, index) => {
@@ -202,7 +157,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   };
 
   const step3 = (invalid) => {
-    if (currentStep !== 3) {
+    if (activeStep !== 2) {
       return null;
     }
     const fieldZone = fields.map((field, index) => {
@@ -232,19 +187,21 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
       {({ handleSubmit, invalid }) => {
         return (
           <form name="homeForm" id="homeForm" onSubmit={handleSubmit}>
-            <ProgressBar>
-              <li className={(currentStep === 1) ? 'active' : 'null'}>Location
+            <Stepper activeStep={activeStep} style={{backgroundColor: 'transparent'}}>
+              {steps.map((label, index) => {
+                const stepProps = {};
+                const labelProps = {};
 
-              </li>
-              <li
-                className={(currentStep === 2) ? 'active' : 'null'}
-              >Aquisition
-              </li>
-              <li
-                className={(currentStep === 3) ? 'active' : 'null'}
-              >Features
-              </li>
-            </ProgressBar>
+                if (isStepSkipped(index)) {
+                  stepProps.completed = false;
+                }
+                return (
+                  <Step key={label} {...stepProps}>
+                    <StepLabel {...labelProps}>{label}</StepLabel>
+                  </Step>
+                );
+              })}
+            </Stepper>
 
             <FormWrapper>
               {step1()}
