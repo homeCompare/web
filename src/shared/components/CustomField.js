@@ -110,6 +110,7 @@ const CustomField = (field) => {
                   value={input.value}
                   onChange={(changeEvent, newValue) => input.onChange(newValue)}
                   valueLabelDisplay="on"
+
                 />
                 <ThumbnailWrapper>
                   <ThumbUpIcon />
@@ -121,6 +122,7 @@ const CustomField = (field) => {
 
         const hasError = meta.touched && meta.error;
         return (
+
           <FieldComponent
             {...{ ...field, ...input }}
             label={t(field.label)}

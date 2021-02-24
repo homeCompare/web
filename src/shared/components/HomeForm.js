@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useState} from 'react';
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
@@ -64,12 +64,11 @@ const onSubmitNewHomeValidation = entries => {
 function getSteps() {
   return ['Location', 'Pricing', 'Features'];
 }
-
-const HomeForm = ({onSubmit, initialValues = {}}) => {
+const HomeForm = ({onSubmit, initialValues = {} }) => {
   const isEditMode = initialValues.id;
   const {t} = useTranslation();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
+  const [skipped, setSkipped] = useState(new Set());
   const steps = getSteps();
 
   const isStepSkipped = (step) => {
@@ -132,6 +131,13 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
     }
     return fields.map((field, index) => {
       if (index < 5) {
+        if (field.type === 'dropZone') {
+          return (
+            <FieldWrapper key={field.name}>
+              <CustomField {...field} />
+            </FieldWrapper>
+          );
+        }
         return (
           <FieldWrapper key={field.name}>
             <CustomField {...field} />
@@ -184,7 +190,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
       validate={onSubmitNewHomeValidation}
       initialValues={initialValues}
     >
-      {({ handleSubmit, invalid }) => {
+      {({ handleSubmit, invalid}) => {
         return (
           <form name="homeForm" id="homeForm" onSubmit={handleSubmit}>
             <Stepper activeStep={activeStep} style={{backgroundColor: 'transparent'}}>

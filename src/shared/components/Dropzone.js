@@ -1,9 +1,12 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import * as actions from '@/state/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import Button from '@material-ui/core/Button';
+import { v4 as uuidv4 } from 'uuid';
 
 const ClearButton = styled(Button)`margin-bottom: 2rem;`;
 
@@ -53,26 +56,35 @@ const Img = styled.img`
   height: 100%;
 `;
 
-const MyDropzone = ({ input, placeholder }) => {
+const MyDropzone = ({ input, placeholder}) => {
+  const tempImages = useSelector((state) => state.dropzone);
+  const dispatch = useDispatch();
   const [files, setFiles] = useState([]);
+
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (acceptedFiles) => {
+    onDrop: async (acceptedFiles) => {
+      const acceptedFilesWithId = acceptedFiles.map((file) => Object.assign(file, {
+        id: uuidv4(),
+        preview: URL.createObjectURL(file),
+      }));
+      await dispatch(actions.addTempImages([...acceptedFilesWithId]));
+
       setFiles(
-        acceptedFiles.map((file) => Object.assign(file, {
+        acceptedFilesWithId.map((file) => Object.assign(file, {
           preview: URL.createObjectURL(file),
         })),
       );
       input.onChange(
-        acceptedFiles.map((file) => Object.assign(file, {
+        acceptedFilesWithId.map((file) => Object.assign(file, {
           preview: URL.createObjectURL(file),
         })),
       );
     },
   });
 
-  const removeAll = () => {
-    setFiles([]);
-  };
+  async function removeById(id) {
+    await dispatch(actions.removeImageById(id));
+  }
 
   return (
     <section className="container">
@@ -81,15 +93,20 @@ const MyDropzone = ({ input, placeholder }) => {
         <p>{placeholder}</p>
       </Textarea>
       <PreviewContainer>
-        {files.map((file) => (
-          <PreviewTag key={file.name}>
-            <PreviewInner>
-              <Img src={file.preview} />
-            </PreviewInner>
-          </PreviewTag>
-        ))}
+        {(tempImages) ? tempImages.map((file) => (
+          <>
+            <PreviewTag key={file.name}>
+              <PreviewInner>
+                <Img src={file.preview} />
+
+              </PreviewInner>
+
+            </PreviewTag>
+            <ClearButton onClick={() => removeById(file.id)}>Remove Image</ClearButton>
+          </>
+        )) : null}
       </PreviewContainer>
-      {files.length > 0 && <ClearButton onClick={removeAll}>Remove Image</ClearButton>}
+
     </section>
   );
 };

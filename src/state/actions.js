@@ -31,3 +31,8 @@ export const addHome = makeActionCreator('ADD_HOME');
 export const editHome = makeActionCreator('EDIT_HOME');
 export const removeHomeById = makeActionCreator('REMOVE_HOME_BY_ID');
 export const setCurrency = makeActionCreator('SET_CURRENCY');
+
+// DROPZONE ACTIONS
+export const addTempImages = makeActionCreator('ADD_TEMP_IMAGES');
+export const removeImageById = makeActionCreator('REMOVE_IMAGE_BY_ID');
+export const removeAllTempImages = makeActionCreator('REMOVE_ALL_TEMP_IMAGES');
