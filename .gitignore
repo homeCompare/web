@@ -31,4 +31,4 @@ yarn-error.log*
 .env.production.local
 
 # storybook bundle should be stored in git.
-./public/sb/
+/public/sb/

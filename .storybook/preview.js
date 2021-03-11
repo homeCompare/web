@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import theme from '@/shared/style/theme';
 import GlobalCss from '@/shared/style/GlobalCss';
-
+import {isDev} from '@/shared/config';
 // Global decorator to apply the styles to all stories
 export const decorators = [
   Story => (
@@ -18,6 +18,4 @@ export const decorators = [
   ),
 ];
 
-export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-}
+export const parameters = {}

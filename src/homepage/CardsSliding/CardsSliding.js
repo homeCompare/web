@@ -13,7 +13,7 @@ export const CardsWrapper = styled.ul`
 	margin: 0;
 	background: fff;
 
-	& > * {
+	& > li {
 		transition: all 0.5s ease-in-out;
 	}
 `;

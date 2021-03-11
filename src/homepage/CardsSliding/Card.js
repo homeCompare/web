@@ -12,11 +12,16 @@ const CardRoot = styled.li`
 	overflow: hidden;
 	padding: 10px;
 	align-items: center;
+	white-space: nowrap;
+	
 	&:hover {
 		width: 105%;
 		height: 100%;
 		justify-content: center;
-		text-align: center;
+
+		& > h3 {
+			width: 100%;
+		}
 	}
 `;
 
@@ -27,7 +32,10 @@ const Icon = styled.img`
 `;
 
 const Title = styled.h3`
+	text-align: center;
 	font-size: 30px;
+	width: 0;
+	transition: width 0.5s ease-in-out;
 `;
 
 const Description = styled.p`
@@ -37,8 +45,8 @@ const Description = styled.p`
 	margin-top: 15px;
 `;
 
-const Card = ({title, iconUrl, description, onClick, total}) => (
-  <CardRoot onClick={onClick} total={total}>
+const Card = ({title, iconUrl, description, onClick, total, className}) => (
+  <CardRoot onClick={onClick} total={total} className={className}>
     <Title>{title}</Title>
     {iconUrl && (
       <Icon
@@ -51,15 +59,33 @@ const Card = ({title, iconUrl, description, onClick, total}) => (
 );
 
 Card.propTypes = {
+	/**
+   * Title will be presented at the top of the card.
+	*/
   title: PropTypes.string.isRequired,
+	/**
+   * Number of cards to split them evenly.
+	*/
   total: PropTypes.number.isRequired,
+	/**
+   * Url of icon.
+	*/
   icon: PropTypes.string,
+	/**
+   * Free description text
+	*/
   description: PropTypes.string,
+	/**
+   * onClick event
+	*/
   onClick: PropTypes.func,
+	/**
+   * className for styles
+	*/
+	className: PropTypes.string
 };
 
 Card.defaultProps = {
-	onClick: () => null,
 	total: 1,
 };
 
