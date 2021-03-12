@@ -5,6 +5,7 @@ import * as actions from './actions';
 
 const EMPTY_ARRAY = [];
 const userDefaultState = {loading: false, data: null, loaded: false};
+const dropzoneDefaultState = [];
 
 export const user = composeReducers(
   makeAsyncReducer(actions.facebookLogin, (currentState, {payload: userData}) => ({
@@ -26,6 +27,15 @@ export const homes = composeReducers(
   makeReducer(actions.removeHomeById, (currentState, { payload: homeId }) => [
     ...currentState.filter(({ id }) => id !== homeId),
   ]),
+);
+
+export const dropzone = composeReducers(
+  makeReducer(actions.addTempImages, (currentState, {payload: tempImages}) => [...(currentState || EMPTY_ARRAY), ...tempImages]),
+  makeReducer(actions.removeImageById, (currentState, { payload: imageId }) => [
+    ...currentState.filter(({ id }) => id !== imageId),
+  ]),
+  makeReducer(actions.removeAllTempImages, () => dropzoneDefaultState),
+
 );
 
 export const currency = makeReducer(actions.setCurrency, { defaultState: 'EUR' });
