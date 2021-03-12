@@ -1,5 +1,6 @@
 const withPlugins = require('next-compose-plugins');
 const optimizedImages = require('@mrroll/next-optimized-images');
+
 const {supportedLanguages, defaultLanguage} = require('./src/shared/config');
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -27,7 +28,7 @@ module.exports = withPlugins([
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000',
+            value: 'public, max-age=31536000, s-maxage=604800, stale-while-revalidate',
           },
         ],
       },

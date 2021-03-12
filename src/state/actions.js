@@ -1,10 +1,10 @@
-import { makeActionCreator } from 'redux-toolbelt';
-import { makeThunkAsyncActionCreator } from 'redux-toolbelt-thunk';
-import { omit } from 'lodash';
+import {makeActionCreator} from 'redux-toolbelt';
+import {makeThunkAsyncActionCreator} from 'redux-toolbelt-thunk';
+import {omit} from 'lodash';
 import firebase from 'firebase/app';
 import axios from 'axios';
 
-import { signInWithFacebook } from '@/shared/utils/auth';
+import {signInWithFacebook} from '@/shared/utils/auth';
 
 export const facebookLogin = makeThunkAsyncActionCreator('FACEBOOK_LOGIN', async () => {
   try {

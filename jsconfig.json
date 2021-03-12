@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/homepage/*": ["src/homepage/*"],
       "@/home/*": ["src/home/*"],
       "@/homesList/*": ["src/homesList/*"],
       "@/addHome/*": ["src/addHome/*"],

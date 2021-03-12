@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
@@ -47,9 +46,9 @@ export const CardImage = styled.div`
     width:  85px;
     height: 75px;
     ${({ theme }) => theme.media('xl', `
-    width: 100px;
-    height: 100px;
-  `)};
+      width: 100px;
+      height: 100px;
+    `)};
   }
   .image-gallery-thumbnail.active, .image-gallery-thumbnail:hover, .image-gallery-thumbnail:focus {
     border: none;

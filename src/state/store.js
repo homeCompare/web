@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
+import {useMemo} from 'react';
 
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { composeReducers } from 'redux-toolbelt';
-import { persistReducer, persistStore } from 'redux-persist';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {composeReducers} from 'redux-toolbelt';
+import {persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 

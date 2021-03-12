@@ -1,17 +1,18 @@
-import React, { memo } from 'react';
+import React, {memo} from 'react';
 
+import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Header from '@/shared/components/Header';
+import HeaderBone from '@/shared/components/Header';
 import Side from '@/shared/components/Side';
 import Footer from '@/shared/components/Footer';
 import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
 
 const Container = styled.main`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   direction: ltr;
@@ -49,7 +50,12 @@ const Aside = styled.aside`
   `)}
 `;
 
-export const OpenLayout = ({ className, children, hideSide }) => (
+const Header = props => {
+  const userData = useSelector(state => state.user.data);
+  return (<HeaderBone {...props} userData={userData} />);
+};
+
+export const OpenLayout = ({className, children, hideSide}) => (
   <Container>
     <Header />
     <Content className={className}>
@@ -61,9 +67,30 @@ export const OpenLayout = ({ className, children, hideSide }) => (
       )}
     </Content>
     <Footer />
-    <GlobalCss />
   </Container>
 );
+
+OpenLayout.propTypes = {
+  /**
+   * React component
+	*/
+  children: PropTypes.node,
+  /**
+   * should hide sidebar
+	*/
+  hideSide: PropTypes.bool,
+  /**
+   * string of styling class names (needed for styled-components)
+	*/
+  className: PropTypes.string,
+};
+
+Header.propTypes = {
+  /**
+   * user data object.
+	*/
+  userData: PropTypes.node,
+};
 
 const Layout = ({children, hideSide}) => (
   <Container>

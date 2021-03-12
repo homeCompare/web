@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import React, {memo} from 'react';
 
-import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
+import Button from '@/shared/components/Button';
 
 // base design only!
 // if you need to add something just override it in your own component
@@ -31,10 +31,10 @@ const ConfirmDialog = React.forwardRef((props, ref) => (
       </DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Button onClick={props.handleClose} color="primary">
+      <Button onClick={props.handleClose}>
         Disagree
       </Button>
-      <Button onClick={props.handleConfirm || props.handleClose} color="primary" autoFocus>
+      <Button onClick={props.handleConfirm || props.handleClose} autoFocus>
         Agree
       </Button>
     </DialogActions>
@@ -42,10 +42,25 @@ const ConfirmDialog = React.forwardRef((props, ref) => (
 ));
 
 ConfirmDialog.propTypes = {
+  /**
+   * close fn (fn that will change the open state)
+	*/
   handleClose: PropTypes.func.isRequired,
+  /**
+   * on confirm function.
+	*/
   handleConfirm: PropTypes.func,
+  /**
+   * is open state.
+	*/
   open: PropTypes.bool.isRequired,
+  /**
+   * Dialog content.
+	*/
   content: PropTypes.string,
+  /**
+   * Dialog title.
+	*/
   title: PropTypes.string,
 };
 

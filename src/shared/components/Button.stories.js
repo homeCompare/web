@@ -1,16 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
 
+import styled from 'styled-components';
 import PublicIcon from '@material-ui/icons/Public';
+import {withKnobs, text, boolean} from '@storybook/addon-knobs';
+import {action} from '@storybook/addon-actions';
 
 import Button, {IconButton} from '@/shared/components/Button';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Button',
   component: Button,
-  subcomponents: { IconButton },
+  subcomponents: {IconButton},
   decorators: [withKnobs],
 };
 
@@ -26,7 +26,7 @@ const TemplateForIcocns = () => (
     onClick={action('click')}
     disabled={boolean('disabled', false)}
   >
-    <PublicIcon/>
+    <PublicIcon />
   </StyledIconButton>
 );
 

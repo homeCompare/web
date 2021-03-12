@@ -33,11 +33,7 @@ CardsSliding.propTypes = {
     icon: PropTypes.string,
     description: PropTypes.string,
     onClick: PropTypes.func,
-  })),
-};
-
-CardsSliding.defaultProps = {
-  data: [],
+  })).isRequired,
 };
 
 export default memo(CardsSliding);

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import styled from 'styled-components';
 import {times} from 'lodash';
-import action from '@storybook/addon-actions';
+import {action} from '@storybook/addon-actions';
 
 import Button from '@/shared/components/Button';
 
@@ -15,7 +15,7 @@ export default {
   subcomponents: { Card },
 };
 
-const AddCardButton = styled(Button)`
+const ButtonWithMargin = styled(Button)`
   && {
     margin-top: 50px;
   }
@@ -54,26 +54,36 @@ const MultiTemplate = () => {
   return (
     <>
       <CardsSliding data={cards} />
-      <AddCardButton onClick={addCard}>Add Card</AddCardButton>
+      <ButtonWithMargin onClick={addCard}>Add Card</ButtonWithMargin>
     </>
   );
 };
 
 const NUMBER_OF_CARDS = 5;
 const StyledCardsTemplate = () => {
+  const [num, setNum] = useState(0);
+  // state change will cause a re-render that will cause new getRandtomTill255 fn regenerate.
+
   return (
-    <CardsWrapper>
-      {times(NUMBER_OF_CARDS, (i) => (
-        <StyledCard
-          key={i}
-          total={NUMBER_OF_CARDS}
-          title="title"
-          description="description"
-          onClick={action('click')}
-          background={`radial-gradient(at top left, rgb(${getRandtomTill255()},${getRandtomTill255()},${getRandtomTill255()}), rgb(${getRandtomTill255()},${getRandtomTill255()},${getRandtomTill255()}))`}
-        />
-      ))}
-    </CardsWrapper>
+    <>
+      <CardsWrapper>
+        {times(NUMBER_OF_CARDS, (i) => (
+          <StyledCard
+            key={i}
+            total={NUMBER_OF_CARDS}
+            title="title"
+            description="description"
+            onClick={action('click')}
+            background={`radial-gradient(at top left, rgb(${getRandtomTill255()},${getRandtomTill255()},${getRandtomTill255()}), rgb(${getRandtomTill255()},${getRandtomTill255()},${getRandtomTill255()}))`}
+          />
+        ))}
+      </CardsWrapper>
+      <ButtonWithMargin
+        onClick={() => setNum(num + 1)}
+      >
+        Generate random background every render
+      </ButtonWithMargin>
+    </>
   );
 };
 

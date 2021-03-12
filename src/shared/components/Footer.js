@@ -1,6 +1,6 @@
 import React, {useState, memo} from 'react';
-import styled from 'styled-components';
 
+import styled from 'styled-components';
 import LanguageIcon from '@material-ui/icons/Language';
 import {IconButton} from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
@@ -10,16 +10,18 @@ import {useTranslation} from '@/shared/i18n';
 import {supportedLanguages} from '@/shared/config';
 
 const InnerWrapper = styled.div`
-  ${({ theme }) => theme.defaultSizer}
+  ${({theme}) => theme.defaultSizer}
   display: flex;
+  overflow: hidden;
 `;
+
 const Root = styled.footer`
-  background-color: ${({ theme }) => theme.colors.darkGrey};
-  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({theme}) => theme.colors.darkGrey};
+  color: ${({theme}) => theme.colors.white};
 `;
 
 const StyledLanguageIcon = styled(LanguageIcon)`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({theme}) => theme.colors.white};
 `;
 
 const Flex = styled.div`

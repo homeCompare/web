@@ -30,6 +30,7 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [
+          ['@/homepage', './src/homepage/'],
           ['@/home', './src/home/'],
           ['@/homesList', './src/homesList/'],
           ['@/addHome', './src/addHome/'],
@@ -44,6 +45,7 @@ module.exports = {
   },
   plugins: ['import'],
   rules: {
+    'object-curly-spacing': [2, 'never'],
     indent: ['error', 2, {
       ignoreComments: true,
       SwitchCase: 1,
@@ -52,7 +54,6 @@ module.exports = {
     'no-tabs': 0,
     quotes: ['error', 'single'],
     'linebreak-style': 'off',
-    'object-curly-spacing': 'off',
     'lineeslintreact/jsx-one-expression-per-line': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': 'off',

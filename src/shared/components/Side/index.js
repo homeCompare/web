@@ -1,13 +1,12 @@
-import React, { memo } from 'react';
+import React, {memo} from 'react';
 
 import styled from 'styled-components';
 
 const Root = styled.div`
   margin-left: 0;
-  ${({ theme }) => theme.media('md', `
+  ${({theme}) => theme.media('md', `
     margin-left: ${theme.size(1)};
   `)}
-  margin-top: ${({ theme }) => theme.size(1)};
   text-align: center;
 `;
 

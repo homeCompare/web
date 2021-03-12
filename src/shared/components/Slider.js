@@ -1,6 +1,7 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { memo } from 'react';
+import React, {memo} from 'react';
+
+import PropTypes from 'prop-types';
 import SliderBone from '@material-ui/core/Slider';
 import styled from 'styled-components';
 
@@ -22,8 +23,23 @@ const StyledSlider = styled(SliderBone)`
 
 // see possible properties
 // https://material-ui.com/components/text-fields/
-const Slider = React.forwardRef(({ initialValue, ...props }, ref) => (
+const Slider = React.forwardRef((props, ref) => (
   <StyledSlider ref={ref} {...props} />
 ));
+
+Slider.propTypes = {
+  /**
+   * value of the slider
+   */
+  value: PropTypes.number.isRequired,
+  /**
+   * event fn.
+   */
+  onChange: PropTypes.func,
+  /**
+   * Show should label above value.
+   */
+  valueLabelDisplay: PropTypes.oneOf(['on', 'off']),
+};
 
 export default memo(Slider);

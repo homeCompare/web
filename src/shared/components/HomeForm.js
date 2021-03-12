@@ -3,31 +3,28 @@ import React, {memo, useState} from 'react';
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import {useTranslation} from '@/shared/i18n';
-import CustomField from '@/shared/components/CustomField';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+
+import CustomField from '@/shared/components/CustomField';
+import {useTranslation} from '@/shared/i18n';
 import fields from '@/shared/utils/homeFields';
 
 const ButtonZone = styled.div`
-
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-
 `;
 
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column; 
-
   
 `;
 
 const FieldWrapper = styled.div`
-  margin: ${({ theme }) => theme.size(1)} 0;
+  margin: ${({theme}) => theme.size(1)} 0;
 `;
 
 const StyledButton = styled(Button)`
@@ -37,9 +34,7 @@ const StyledButton = styled(Button)`
 const onSubmitNewHomeValidation = entries => {
   const errors = {};
 
-  
-  
-  .forEach(field => {
+  fields.forEach(field => {
     if (!field.validation) {
       return;
     }
@@ -63,10 +58,12 @@ const onSubmitNewHomeValidation = entries => {
 
   return errors;
 };
+
 function getSteps() {
   return ['Location', 'Pricing', 'Features'];
 }
-const HomeForm = ({onSubmit, initialValues = {} }) => {
+
+const HomeForm = ({onSubmit, initialValues = {}}) => {
   const isEditMode = initialValues.id;
   const {t} = useTranslation();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -118,10 +115,8 @@ const HomeForm = ({onSubmit, initialValues = {} }) => {
           type="button"
           onClick={handleNext}
         >
-
           Next
         </Button>
-
       );
     }
     return null;
@@ -192,7 +187,7 @@ const HomeForm = ({onSubmit, initialValues = {} }) => {
       validate={onSubmitNewHomeValidation}
       initialValues={initialValues}
     >
-      {({ handleSubmit, invalid}) => {
+      {({handleSubmit, invalid}) => {
         return (
           <form name="homeForm" id="homeForm" onSubmit={handleSubmit}>
             <Stepper activeStep={activeStep} style={{backgroundColor: 'transparent'}}>
@@ -215,8 +210,8 @@ const HomeForm = ({onSubmit, initialValues = {} }) => {
               {step1()}
               {step2()}
               {step3(invalid)}
-
             </FormWrapper>
+
             <ButtonZone>
               { previousButton()}
               { nextButton()}

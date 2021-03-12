@@ -1,12 +1,14 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+
 import styled from 'styled-components';
-import * as actions from '@/state/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
-import { useDropzone } from 'react-dropzone';
+import {useDropzone} from 'react-dropzone';
 import Button from '@material-ui/core/Button';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
+
+import * as actions from '@/state/actions';
 
 const ClearButton = styled(Button)`margin-bottom: 2rem;`;
 
@@ -56,12 +58,12 @@ const Img = styled.img`
   height: 100%;
 `;
 
-const MyDropzone = ({ input, placeholder}) => {
+const MyDropzone = ({input, placeholder}) => {
   const tempImages = useSelector((state) => state.dropzone);
   const dispatch = useDispatch();
   const [files, setFiles] = useState([]);
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const {getRootProps, getInputProps} = useDropzone({
     onDrop: async (acceptedFiles) => {
       const acceptedFilesWithId = acceptedFiles.map((file) => Object.assign(file, {
         id: uuidv4(),

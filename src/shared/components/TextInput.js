@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { memo } from 'react';
+import React, {memo} from 'react';
+
 import TextInputBone from '@material-ui/core/TextField';
 import styled from 'styled-components';
 
@@ -9,13 +9,13 @@ import styled from 'styled-components';
 // const CustomStyledInput = styled(Input)``;
 const StyledTextInput = styled(TextInputBone)`
   .MuiInput-underline:after {
-    border-bottom: 2px solid ${({ theme }) => theme.colors.thinGrey};
+    border-bottom: 2px solid ${({theme}) => theme.colors.thinGrey};
   }
 `;
 
 // see possible properties
 // https://material-ui.com/components/text-fields/
-const TextInput = React.forwardRef(({ initialValue, ...props }, ref) => (
+const TextInput = React.forwardRef((props, ref) => (
   <StyledTextInput ref={ref} {...props} />
 ));
 

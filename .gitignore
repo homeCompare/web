@@ -30,5 +30,5 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# storybook bundle should be stored in git.
+# storybook bundle should not be stored in git.
 /public/sb/

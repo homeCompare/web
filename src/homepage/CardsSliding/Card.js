@@ -1,4 +1,5 @@
-import React, { memo } from 'react';
+import React, {memo} from 'react';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -80,13 +81,9 @@ Card.propTypes = {
 	*/
   onClick: PropTypes.func,
   /**
-   * className for styles
+   * string of styling class names (needed for styled-components)
 	*/
   className: PropTypes.string,
-};
-
-Card.defaultProps = {
-  total: 1,
 };
 
 export default memo(Card);

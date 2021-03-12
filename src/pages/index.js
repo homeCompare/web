@@ -1,11 +1,12 @@
-import { memo } from 'react';
-import styled from 'styled-components';
+import {memo} from 'react';
 
-import { useTranslation } from '@/shared/i18n';
+import styled from 'styled-components';
+import CircleWithIcon from 'src/homepage/CircleWithIcon';
+
+import {useTranslation} from '@/shared/i18n';
 import Meta from '@/shared/components/Meta';
 import Button from '@/shared/components/Button';
 import {OpenLayout} from '@/shared/components/Layout';
-import CircleWithIcon from '@/shared/components/CircleWithIcon';
 
 const RootHomePage = styled(OpenLayout).attrs({
   hideSide: true,
@@ -15,12 +16,13 @@ const RootHomePage = styled(OpenLayout).attrs({
 `;
 
 const MessageOnHeader = styled.div`
-  position: absolute;
   background-color: ${({theme}) => theme.colors.white};
-  width: 500px;
-  padding: ${({ theme }) => theme.size(1)};
+  width: 80%;
+  padding: ${({theme}) => theme.size(1)};
   position: absolute;
   top: 100px;
+  ${({theme}) => theme.media('md', 'width: 500px;')};
+  box-shadow: 0px 7px 10px 5px rgba(0,0,0, 0.15);
 `;
 
 const SectionTitle = styled.h2`
@@ -67,25 +69,25 @@ const IndexPage = () => {
           <p>Breathe a sigh of relief every time you tackle a moving to-do. From researching your new city with our guides to budgeting with free moving quotes, our resources help you every step of the way.</p>
           <FeaturesList>
             <FeatureItem>
-              <CircleWithIcon icon="CompareIcon"/>
+              <CircleWithIcon icon="CompareIcon" />
               <FeatureTitle>Wide Comparsion</FeatureTitle>
               <FeatureDescription>See the difference between the houses you already visited in aspect of payment and other.</FeatureDescription>
             </FeatureItem>
 
             <FeatureItem>
-              <CircleWithIcon icon="EuroIcon"/>
+              <CircleWithIcon icon="EuroIcon" />
               <FeatureTitle>Money wised</FeatureTitle>
               <FeatureDescription>We know that everyone is had a badget, comparing property tax or building fees might the different sometimes.</FeatureDescription>
             </FeatureItem>
 
             <FeatureItem>
-              <CircleWithIcon icon="EuroIcon"/>
+              <CircleWithIcon icon="EuroIcon" />
               <FeatureTitle>Money wised</FeatureTitle>
               <FeatureDescription>We know that everyone is had a badget, comparing property tax or building fees might the different sometimes.</FeatureDescription>
             </FeatureItem>
 
             <FeatureItem>
-              <CircleWithIcon icon="EuroIcon"/>
+              <CircleWithIcon icon="EuroIcon" />
               <FeatureTitle>Multiple sort options</FeatureTitle>
               <FeatureDescription>We know that everyone is had a badget, comparing property tax or building fees might the different sometimes.</FeatureDescription>
             </FeatureItem>
@@ -93,7 +95,7 @@ const IndexPage = () => {
         </ShowFeaturesSection>
 
         <ShowFeaturesSection>
-        <SectionTitle>{t('homepage_p2_title_h2')}</SectionTitle>
+          <SectionTitle>{t('homepage_p2_title_h2')}</SectionTitle>
           <p>Breathe a sigh of relief every time you tackle a moving to-do. From researching your new city with our guides to budgeting with free moving quotes, our resources help you every step of the way.</p>
         </ShowFeaturesSection>
       </RootHomePage>

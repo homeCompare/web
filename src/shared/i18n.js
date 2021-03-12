@@ -1,9 +1,11 @@
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
+
 import {isDev} from '@/shared/config';
+
 import allTranslates from '../../public/static/locales';
 
 export const useTranslation = () => {
-  const { locale: currentLanguageKey, pathname, asPath, query, push } = useRouter();
+  const {locale: currentLanguageKey, pathname, asPath, query, push} = useRouter();
   if (!currentLanguageKey) {
     console.error('[i18n.js]: locale isnt recognized');
   }
@@ -11,7 +13,7 @@ export const useTranslation = () => {
   return {
     isRTL: currentLanguageKey === 'he',
     currentLanguageKey,
-    t: keyString => { 
+    t: keyString => {
       const translate = allTranslates[currentLanguageKey][keyString];
       if (!translate) {
         if (isDev) {
@@ -25,7 +27,7 @@ export const useTranslation = () => {
       if (languageKey === currentLanguageKey) {
         return;
       }
-      push({ pathname, query }, asPath, { locale: languageKey });
+      push({pathname, query}, asPath, {locale: languageKey});
     },
-  }
+  };
 };

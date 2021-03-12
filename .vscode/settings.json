@@ -2,6 +2,7 @@
     "editor.snippetSuggestions": "top",
     "editor.trimAutoWhitespace": true,
     "editor.tabSize": 2,
+    "editor.insertSpaces": true,
     "eslint.lintTask.enable": true,
     "eslint.packageManager": "yarn",
     "eslint.options": {
@@ -21,4 +22,5 @@
     },
   
     "gitlens.advanced.fileHistoryFollowsRenames": true,
+    "compile-hero.disable-compile-files-on-did-save-code": false,
   }

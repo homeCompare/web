@@ -1,4 +1,5 @@
-import React, { memo } from 'react';
+import React, {memo} from 'react';
+
 import ButtonBone from '@material-ui/core/Button';
 import IconButtonBone from '@material-ui/core/IconButton';
 import styled from 'styled-components';
@@ -9,7 +10,7 @@ import styled from 'styled-components';
 const StyledButton = styled(ButtonBone)`
   && {
     text-transform: inherit;
-    border: 1px solid ${({ theme }) => theme.colors.thinGrey};
+    border: 1px solid ${({theme}) => theme.colors.thinGrey};
     &:disabled {
       cursor: not-allowed;
     }

@@ -1,20 +1,21 @@
 import {memo} from 'react';
-import styled from 'styled-components';
 
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import MoodIcon from '@material-ui/icons/Mood';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 
 const sizeByCurrentTier = currentTier => {
-	if (currentTier === 0) {
-		return '10%';
-	}
+  if (currentTier === 0) {
+    return '10%';
+  }
 
-	if (currentTier === 1) {
-		return '55%';
-	}
+  if (currentTier === 1) {
+    return '55%';
+  }
 
-	return '100%';
+  return '100%';
 };
 
 const ScaleRoot = styled.div`
@@ -39,14 +40,25 @@ const Tier = styled.div`
 `;
 
 const NumberAsScale = ({number, className}) => {
-	const currentTier = number <= 5 ? 0 : number <= 6 ? 1 : 2;
-	return (
-		<ScaleRoot currentTier={currentTier} className={className}>
-			<Tier><MoodIcon/></Tier>
-			<Tier><SentimentSatisfiedIcon/></Tier>
-			<Tier><MoodBadIcon/></Tier>
-		</ScaleRoot>
-	);
-}
+  const currentTier = number <= 5 ? 0 : number <= 6 ? 1 : 2;
+  return (
+    <ScaleRoot currentTier={currentTier} className={className}>
+      <Tier><MoodIcon /></Tier>
+      <Tier><SentimentSatisfiedIcon /></Tier>
+      <Tier><MoodBadIcon /></Tier>
+    </ScaleRoot>
+  );
+};
+
+NumberAsScale.propTypes = {
+  /**
+   * the value of the scale number between (0 to 10).
+	*/
+  number: PropTypes.number.isRequired,
+  /**
+   * string of styling class names (needed for styled-components)
+	*/
+  className: PropTypes.string,
+};
 
 export default memo(NumberAsScale);
