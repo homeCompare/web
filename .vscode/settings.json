@@ -1,3 +1,24 @@
 {
-    "compile-hero.disable-compile-files-on-did-save-code": true
-}
+    "editor.snippetSuggestions": "top",
+    "editor.trimAutoWhitespace": true,
+    "editor.tabSize": 2,
+    "eslint.lintTask.enable": true,
+    "eslint.packageManager": "yarn",
+    "eslint.options": {
+      "configFile": "./.eslintrc.js"
+    },
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+    ],
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.codeActionsOnSave.mode": "problems",
+    
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true,
+      "source.fixAll.stylelint": false
+    },
+  
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
+  }

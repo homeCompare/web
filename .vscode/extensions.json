@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "jpoissonnier.vscode-styled-components",
+    "saharavr.react-component-splitter",
+    "dsznajder.es7-react-js-snippets",
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "eg2.vscode-npm-script",
+    "ofhumanbondage.react-proptypes-intellisense",
+    "vscode-icons-team.vscode-icons",
+    "streetsidesoftware.code-spell-checker",
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "coenraads.bracket-pair-colorizer",
+    "alefragnani.bookmarks",
+    "stylelint.vscode-stylelint",
+    "ambooth.git-rename"
+  ]
+}

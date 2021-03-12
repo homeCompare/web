@@ -59,34 +59,34 @@ const Card = ({title, iconUrl, description, onClick, total, className}) => (
 );
 
 Card.propTypes = {
-	/**
+  /**
    * Title will be presented at the top of the card.
 	*/
   title: PropTypes.string.isRequired,
-	/**
+  /**
    * Number of cards to split them evenly.
 	*/
   total: PropTypes.number.isRequired,
-	/**
+  /**
    * Url of icon.
 	*/
-  icon: PropTypes.string,
-	/**
+  iconUrl: PropTypes.string,
+  /**
    * Free description text
 	*/
   description: PropTypes.string,
-	/**
+  /**
    * onClick event
 	*/
   onClick: PropTypes.func,
-	/**
+  /**
    * className for styles
 	*/
-	className: PropTypes.string
+  className: PropTypes.string,
 };
 
 Card.defaultProps = {
-	total: 1,
+  total: 1,
 };
 
 export default memo(Card);

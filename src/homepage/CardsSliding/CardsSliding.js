@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -18,27 +19,25 @@ export const CardsWrapper = styled.ul`
 	}
 `;
 
-
 const CardsSliding = ({data}) => (
-	<CardsWrapper>
-		{data?.map(card => (
-			<Card {...card} key={card.title} total={data.length} />
-		))}
-	</CardsWrapper>
+  <CardsWrapper>
+    {data?.map(card => (
+      <Card {...card} key={card.title} total={data.length} />
+    ))}
+  </CardsWrapper>
 );
-
 
 CardsSliding.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
-		title: PropTypes.string.isRequired,
-		icon: PropTypes.string,
-		description: PropTypes.string,
-		onClick: PropTypes.func,
-	})),
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.string,
+    description: PropTypes.string,
+    onClick: PropTypes.func,
+  })),
 };
 
 CardsSliding.defaultProps = {
-	data: [],
-}
+  data: [],
+};
 
 export default memo(CardsSliding);

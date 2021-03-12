@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
+
 import styled from 'styled-components';
 import {times} from 'lodash';
+import action from '@storybook/addon-actions';
 
 import Button from '@/shared/components/Button';
 
 import Card from './Card';
 import CardsSliding, {CardsWrapper} from './CardsSliding';
-import {action} from '@storybook/addon-actions';
 
 export default {
   title: 'Cards Sliding',
@@ -20,16 +21,13 @@ const AddCardButton = styled(Button)`
   }
 `;
 
-
-const getRandtomTill255 = () => Math.random()*255;
-
+const getRandtomTill255 = () => Math.random() * 255;
 
 const StyledCard = styled(Card)`
   && {
     ${({background}) => background && `background: ${background};`}
   }
 `;
-
 
 const SingleTemplate = args => <CardsWrapper><Card {...args} /></CardsWrapper>;
 const MultiTemplate = () => {
@@ -38,7 +36,7 @@ const MultiTemplate = () => {
     total: 2,
     description: 'some content',
     onClick: action('click'),
-  }, { 
+  }, {
     title: '2nd card',
     total: 2,
     description: 'some content some content some content some content',
@@ -49,9 +47,9 @@ const MultiTemplate = () => {
     const newCardsLength = cards.length + 1;
     setCards([
       ...cards.map(card => ({...card, total: newCardsLength})),
-      {title: `random title ${newCardsLength}`, total: newCardsLength, description: `auto added card number ${newCardsLength}`, onClick: action('click')}
+      {title: `random title ${newCardsLength}`, total: newCardsLength, description: `auto added card number ${newCardsLength}`, onClick: action('click')},
     ]);
-  }
+  };
 
   return (
     <>
@@ -84,7 +82,7 @@ SingleCard.args = {
   title: 'Card title5',
   description: 'Card description',
   onClick: action('click'),
-  total: 1
+  total: 1,
 };
 
 export const InfinityCards = MultiTemplate.bind({});
