@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "next build && build-storybook -o ./public/sb/",
+    "start": "next start",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -o ./public/sb/"
   },
   "repository": {
     "type": "git",
@@ -51,12 +53,22 @@
     "uuid": "^8.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-knobs": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/addon-storysource": "^6.1.21",
+    "@storybook/addon-viewport": "^6.1.21",
+    "@storybook/react": "^6.1.21",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.11.1",
     "cross-env": "^7.0.3",
-    "eslint": "^7.12.1",
+    "eslint": "^7.21.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-webpack": "^0.13.0",
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",

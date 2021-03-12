@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { makeReducer, composeReducers, makeAsyncReducer } from 'redux-toolbelt';
+
 import * as actions from './actions';
 
 const EMPTY_ARRAY = [];

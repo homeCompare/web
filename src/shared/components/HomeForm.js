@@ -1,4 +1,5 @@
 import React, {memo, useState} from 'react';
+
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
@@ -7,7 +8,6 @@ import CustomField from '@/shared/components/CustomField';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-
 import fields from '@/shared/utils/homeFields';
 
 const ButtonZone = styled.div`
@@ -37,7 +37,9 @@ const StyledButton = styled(Button)`
 const onSubmitNewHomeValidation = entries => {
   const errors = {};
 
-  fields.forEach(field => {
+  
+  
+  .forEach(field => {
     if (!field.validation) {
       return;
     }
