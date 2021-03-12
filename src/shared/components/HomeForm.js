@@ -1,11 +1,11 @@
 import React, {memo, useState} from 'react';
+
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
 
 import {useTranslation} from '@/shared/i18n';
 import Button from '@/shared/components/Button';
 import CustomField from '@/shared/components/CustomField';
-
 import fields from '@/shared/utils/homeFields';
 
 const FormWrapper = styled.div`

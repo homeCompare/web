@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Header from '@/shared/components/Header';
 import Side from '@/shared/components/Side';
 import Footer from '@/shared/components/Footer';
-
 import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
 
