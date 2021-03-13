@@ -1,3 +1,4 @@
+import MessageOnHeader from './MessageOnHeader';
 import {memo} from 'react';
 
 import styled from 'styled-components';
@@ -5,7 +6,6 @@ import CircleWithIcon from 'src/homepage/CircleWithIcon';
 
 import {useTranslation} from '@/shared/i18n';
 import Meta from '@/shared/components/Meta';
-import Button from '@/shared/components/Button';
 import {OpenLayout} from '@/shared/components/Layout';
 
 const RootHomePage = styled(OpenLayout).attrs({
@@ -15,15 +15,6 @@ const RootHomePage = styled(OpenLayout).attrs({
   flex-direction: column;
 `;
 
-const MessageOnHeader = styled.div`
-  background-color: ${({theme}) => theme.colors.white};
-  width: 80%;
-  padding: ${({theme}) => theme.size(1)};
-  position: absolute;
-  top: 100px;
-  ${({theme}) => theme.media('md', 'width: 500px;')};
-  box-shadow: 0px 7px 10px 5px rgba(0,0,0, 0.15);
-`;
 
 const SectionTitle = styled.h2`
   border-bottom: 10px solid #333;
@@ -58,11 +49,7 @@ const IndexPage = () => {
     <>
       <Meta title={t('homepage_meta_title')} />
       <RootHomePage>
-        <MessageOnHeader>
-          <h1>{t('homepage_h1_title')}</h1>
-          <p>{t('homepage_description')}</p>
-          <Button>{t('homepage_start_for_free_button')}</Button>
-        </MessageOnHeader>
+        <MessageOnHeader />
 
         <ShowFeaturesSection>
           <SectionTitle>{t('homepage_p2_title_h2')}</SectionTitle>

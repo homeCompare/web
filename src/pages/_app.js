@@ -1,4 +1,5 @@
 import {useEffect} from 'react';
+
 import {ThemeProvider, StyleSheetManager} from 'styled-components';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
@@ -15,7 +16,7 @@ import * as gtag from '@/shared/utils/gtag';
 import {firebaseConfig, isDev} from '@/shared/config';
 import {useTranslation} from '@/shared/i18n';
 
-export function reportWebVitals({ id, name, label, value }) {
+export function reportWebVitals({id, name, label, value}) {
   // report prefromance to GA
   window.gtag('event', name, {
     event_category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',

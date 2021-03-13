@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GithubIcon from '@material-ui/icons/GitHub';
 import PublicIcon from '@material-ui/icons/Public';
+import {useSelector} from 'react-redux';
 
 import {IconButton} from '@/shared/components/Button';
 import {isDev} from '@/shared/config';
@@ -94,7 +95,8 @@ Logo.propTypes = {
   className: PropTypes.string,
 };
 
-const Header = ({userData, withCoverImage}) => {
+const Header = ({withCoverImage}) => {
+  const userData = useSelector(state => state.user.data);
   return (
     <>
       <HeaderRoot>
@@ -108,8 +110,8 @@ const Header = ({userData, withCoverImage}) => {
       </HeaderRoot>
       {withCoverImage && (
         <CoverImageWrapper>
-          <CoverImage src={CoverImageCatched} alt="" />
-          <CoverImage src={Cover2ImageCatched} alt="" />
+          <CoverImage src={CoverImageCatched} key="coverImg1" alt="" />
+          <CoverImage src={Cover2ImageCatched} key="coverImg2" alt="" />
         </CoverImageWrapper>
       )}
     </>
@@ -117,10 +119,6 @@ const Header = ({userData, withCoverImage}) => {
 };
 
 Header.propTypes = {
-  /**
-   * user data object.
-	*/
-  userData: PropTypes.node,
   /**
    * indicate if header will render the cover image,
    */

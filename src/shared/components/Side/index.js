@@ -10,10 +10,19 @@ const Root = styled.div`
   text-align: center;
 `;
 
+const Wrapper = styled.aside`
+  width: 100%;
+  ${({theme}) => theme.media('md', `
+    width: 320px;
+  `)}
+`;
+
 const Side = () => (
-  <Root>
-    side part
-  </Root>
+  <Wrapper>
+    <Root>
+      side part
+    </Root>
+  </Wrapper>
 );
 
 export default memo(Side);
