@@ -104,7 +104,7 @@ const MyDropzone = ({input, placeholder}) => {
               </PreviewInner>
 
             </PreviewTag>
-            <ClearButton onClick={() => removeById(file.id)}>Remove Image</ClearButton>
+            <ClearButton variant="outlined" size="small" onClick={() => removeById(file.id)}>Remove Image</ClearButton>
           </>
         )) : null}
       </PreviewContainer>

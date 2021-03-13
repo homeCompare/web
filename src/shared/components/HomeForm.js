@@ -95,6 +95,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
         <Button
           color="primary"
           type="button"
+          variant="contained"
           onClick={handleBack}
         >
 
@@ -112,6 +113,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
         <Button
           style={{alignItems: 'flex-end'}}
           color="secondary"
+          variant="contained"
           type="button"
           onClick={handleNext}
         >
