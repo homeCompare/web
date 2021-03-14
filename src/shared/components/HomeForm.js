@@ -1,20 +1,81 @@
 import React, {memo, useState} from 'react';
 
+import PropTypes from 'prop-types';
+import {createMuiTheme, makeStyles, withStyles, ThemeProvider} from '@material-ui/core/styles';
+import StepConnector from '@material-ui/core/StepConnector';
+import clsx from 'clsx';
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import EuroIcon from '@material-ui/icons/Euro';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 import CustomField from '@/shared/components/CustomField';
 import {useTranslation} from '@/shared/i18n';
 import fields from '@/shared/utils/homeFields';
 
+const useColorlibStepIconStyles = makeStyles({
+  root: {
+    backgroundColor: '#ccc',
+    zIndex: 1,
+    color: '#fff',
+    width: 50,
+    height: 50,
+    display: 'flex',
+    borderRadius: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  active: {
+    backgroundImage:
+      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+  },
+  completed: {
+    backgroundImage:
+      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+  },
+});
+
+const ColorlibConnector = withStyles({
+  alternativeLabel: {
+    top: 22,
+  },
+  active: {
+    '& $line': {
+      backgroundImage:
+        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+    },
+  },
+  completed: {
+    '& $line': {
+      backgroundImage:
+        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+    },
+  },
+  line: {
+    height: 3,
+    border: 0,
+    backgroundColor: '#eaeaf0',
+    borderRadius: 1,
+  },
+})(StepConnector);
+
+const SubmitWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+`;
+
 const ButtonZone = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 `;
 
 const FormWrapper = styled.div`
@@ -28,8 +89,19 @@ const FieldWrapper = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-  width: 100%;
+  width: 40%;
 `;
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#FF416C',
+    },
+    secondary: {
+      main: '#f64f59',
+    },
+  },
+});
 
 const onSubmitNewHomeValidation = entries => {
   const errors = {};
@@ -92,15 +164,17 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const previousButton = () => {
     if (activeStep !== 0) {
       return (
-        <Button
-          color="primary"
-          type="button"
-          variant="contained"
-          onClick={handleBack}
-        >
+        <ThemeProvider theme={theme}>
+          <Button
+            color="secondary"
+            type="button"
+            variant="contained"
+            onClick={handleBack}
+          >
 
-          Previous
-        </Button>
+            Previous
+          </Button>
+        </ThemeProvider>
 
       );
     }
@@ -110,15 +184,17 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const nextButton = () => {
     if (activeStep < 2) {
       return (
-        <Button
-          style={{alignItems: 'flex-end'}}
-          color="secondary"
-          variant="contained"
-          type="button"
-          onClick={handleNext}
-        >
-          Next
-        </Button>
+        <ThemeProvider theme={theme}>
+          <Button
+            style={{alignItems: 'flex-end'}}
+            color="primary"
+            variant="contained"
+            type="button"
+            onClick={handleNext}
+          >
+            Next
+          </Button>
+        </ThemeProvider>
       );
     }
     return null;
@@ -143,6 +219,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
           </FieldWrapper>
         );
       }
+      return false;
     });
   };
 
@@ -158,6 +235,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
           </FieldWrapper>
         );
       }
+      return false;
     });
   };
 
@@ -173,13 +251,37 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
           </FieldWrapper>
         );
       }
+      return false;
     });
     return (
       <>
         {fieldZone}
-        <StyledButton type="submit" disabled={invalid}>{t(isEditMode ? 'edit_home' : 'add_new_home')}</StyledButton>
-
+        <SubmitWrapper>
+          <StyledButton color="primary" variant="outlined" type="submit" disabled={invalid}>{t(isEditMode ? 'edit_home' : 'add_new_home')}</StyledButton>
+        </SubmitWrapper>
       </>
+    );
+  };
+
+  const ColorlibStepIcon = (props) => {
+    const classes = useColorlibStepIconStyles();
+    const {active, completed, icon} = props;
+
+    const icons = {
+      1: <LocationCityIcon />,
+      2: <EuroIcon />,
+      3: <AddBoxIcon />,
+    };
+
+    return (
+      <div
+        className={clsx(classes.root, {
+          [classes.active]: active,
+          [classes.completed]: completed,
+        })}
+      >
+        {icons[String(icon)]}
+      </div>
     );
   };
 
@@ -192,7 +294,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
       {({handleSubmit, invalid}) => {
         return (
           <form name="homeForm" id="homeForm" onSubmit={handleSubmit}>
-            <Stepper activeStep={activeStep} style={{backgroundColor: 'transparent'}}>
+            <Stepper alternativeLabel activeStep={activeStep} style={{backgroundColor: 'transparent'}} connector={<ColorlibConnector />}>
               {steps.map((label, index) => {
                 const stepProps = {};
                 const labelProps = {};
@@ -202,7 +304,9 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
                 }
                 return (
                   <Step key={label} {...stepProps}>
-                    <StepLabel {...labelProps}>{label}</StepLabel>
+                    <StepLabel StepIconComponent={ColorlibStepIcon} {...labelProps}>
+                      {label}
+                    </StepLabel>
                   </Step>
                 );
               })}
@@ -223,6 +327,15 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
       }}
     </Form>
   );
+};
+
+HomeForm.propTypes = {
+  active: PropTypes.string,
+  completed: PropTypes.string,
+  placeholder: PropTypes.string,
+  icon: PropTypes.any,
+  initialValues: PropTypes.object,
+  onSubmit: PropTypes.func,
 };
 
 export default memo(HomeForm);

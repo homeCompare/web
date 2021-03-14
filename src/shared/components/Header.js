@@ -3,14 +3,9 @@ import React, {memo} from 'react';
 
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import GithubIcon from '@material-ui/icons/GitHub';
-import PublicIcon from '@material-ui/icons/Public';
 import {useSelector} from 'react-redux';
 
-import {IconButton} from '@/shared/components/Button';
-import {isDev} from '@/shared/config';
 import {Link} from '@/shared/utils/router';
-import {gitLink, hostLink} from '@/shared/consts';
 import HeaderMenu from '@/shared/components/HeaderMenu';
 import CoverImageCatched from '@/shared/images/cover4.jpg';
 import Cover2ImageCatched from '@/shared/images/cover5.jpg';

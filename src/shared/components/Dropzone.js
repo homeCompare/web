@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React, {useState} from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
@@ -61,7 +61,6 @@ const Img = styled.img`
 const MyDropzone = ({input, placeholder}) => {
   const tempImages = useSelector((state) => state.dropzone);
   const dispatch = useDispatch();
-  const [files, setFiles] = useState([]);
 
   const {getRootProps, getInputProps} = useDropzone({
     onDrop: async (acceptedFiles) => {
@@ -71,11 +70,6 @@ const MyDropzone = ({input, placeholder}) => {
       }));
       await dispatch(actions.addTempImages([...acceptedFilesWithId]));
 
-      setFiles(
-        acceptedFilesWithId.map((file) => Object.assign(file, {
-          preview: URL.createObjectURL(file),
-        })),
-      );
       input.onChange(
         acceptedFilesWithId.map((file) => Object.assign(file, {
           preview: URL.createObjectURL(file),
