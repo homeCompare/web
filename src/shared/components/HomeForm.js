@@ -1,7 +1,8 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useState, useEffect} from 'react';
 
 import PropTypes from 'prop-types';
-import {createMuiTheme, makeStyles, withStyles, ThemeProvider} from '@material-ui/core/styles';
+import {useDispatch} from 'react-redux';
+import {makeStyles, withStyles} from '@material-ui/core/styles';
 import StepConnector from '@material-ui/core/StepConnector';
 import clsx from 'clsx';
 import {Form} from 'react-final-form';
@@ -14,6 +15,7 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import EuroIcon from '@material-ui/icons/Euro';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 
+import * as actions from '@/state/actions';
 import CustomField from '@/shared/components/CustomField';
 import {useTranslation} from '@/shared/i18n';
 import fields from '@/shared/utils/homeFields';
@@ -92,17 +94,6 @@ const StyledButton = styled(Button)`
   width: 40%;
 `;
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#FF416C',
-    },
-    secondary: {
-      main: '#f64f59',
-    },
-  },
-});
-
 const onSubmitNewHomeValidation = entries => {
   const errors = {};
 
@@ -136,6 +127,7 @@ function getSteps() {
 }
 
 const HomeForm = ({onSubmit, initialValues = {}}) => {
+  const dispatch = useDispatch();
   const isEditMode = initialValues.id;
   const {t} = useTranslation();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -145,6 +137,12 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const isStepSkipped = (step) => {
     return skipped.has(step);
   };
+
+  useEffect(() => {
+    return async () => {
+      await dispatch(actions.removeAllTempImages());
+    };
+  }, [dispatch]);
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -164,17 +162,15 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const previousButton = () => {
     if (activeStep !== 0) {
       return (
-        <ThemeProvider theme={theme}>
-          <Button
-            color="secondary"
-            type="button"
-            variant="contained"
-            onClick={handleBack}
-          >
+        <Button
+          color="secondary"
+          type="button"
+          variant="contained"
+          onClick={handleBack}
+        >
 
-            Previous
-          </Button>
-        </ThemeProvider>
+          Previous
+        </Button>
 
       );
     }
@@ -184,17 +180,15 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const nextButton = () => {
     if (activeStep < 2) {
       return (
-        <ThemeProvider theme={theme}>
-          <Button
-            style={{alignItems: 'flex-end'}}
-            color="primary"
-            variant="contained"
-            type="button"
-            onClick={handleNext}
-          >
-            Next
-          </Button>
-        </ThemeProvider>
+        <Button
+          style={{alignItems: 'flex-end'}}
+          color="primary"
+          variant="contained"
+          type="button"
+          onClick={handleNext}
+        >
+          Next
+        </Button>
       );
     }
     return null;

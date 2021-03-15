@@ -1,14 +1,15 @@
-import React, { memo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { omit } from 'lodash';
-import { v4 as uuidv4 } from 'uuid';
+import React, {memo} from 'react';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {omit} from 'lodash';
+import {v4 as uuidv4} from 'uuid';
 import {useRouter} from 'next/router';
 
-import { toBase64 } from '@/shared/utils/base64';
+import {toBase64} from '@/shared/utils/base64';
 import * as actions from '@/state/actions';
 import HomeForm from '@/shared/components/HomeForm';
 import fields from '@/shared/utils/homeFields';
-import { event } from '@/shared/utils/gtag';
+import {event} from '@/shared/utils/gtag';
 
 const AddHome = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const AddHome = () => {
   };
 
   // temp
-  const initialValues = fields.filter(({ name }) => name !== 'dropImage')
+  const initialValues = fields.filter(({name}) => name !== 'dropImage')
     .reduce((all, item) => ({
       ...(all || {}),
       [item.name]: item.initialValue,

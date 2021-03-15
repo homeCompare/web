@@ -80,7 +80,7 @@ const CustomField = field => {
           );
         }
 
-        const hasError = meta.touched && meta.error;
+        const hasError = meta.dirty && meta.error;
         return (
           <FieldComponent
             {...{...field, ...input}}
