@@ -3,18 +3,13 @@ import React, {memo} from 'react';
 
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import GithubIcon from '@material-ui/icons/GitHub';
-import PublicIcon from '@material-ui/icons/Public';
 import {useSelector} from 'react-redux';
 
-import {IconButton} from '@/shared/components/Button';
-import {isDev} from '@/shared/config';
 import {Link} from '@/shared/utils/router';
-import {gitLink, hostLink} from '@/shared/consts';
 import HeaderMenu from '@/shared/components/HeaderMenu';
 import CoverImageCatched from '@/shared/images/cover4.jpg';
 import Cover2ImageCatched from '@/shared/images/cover5.jpg';
-import HomeCompareLogoImage from '@/shared/images/homeCompare.png';
+import HomeCompareLogoImage from '@/shared/images/HomeCompare_Logo.png';
 
 const HeaderRoot = styled.header`
   height: ${({theme}) => theme.base.header.height}px;
@@ -50,12 +45,14 @@ const StyledName = styled.span`
 `;
 
 const StyledHomeIcon = styled.img`
-  width: 35px;
-  height: 35px;
+  width: 50px;
+  height: 50px;
+
   display: flex;
 `;
 
 const LogoWrapper = styled.div`
+  font-weight: bold;
   display: flex;
   align-items: center;
   margin-right: ${({theme}) => theme.size(3)};
@@ -84,7 +81,7 @@ const CoverImageWrapper = styled.div`
 export const Logo = ({className}) => (
   <LogoWrapper className={className}>
     <StyledHomeIcon src={HomeCompareLogoImage} alt="homeCompare.io" />
-    Compare.io
+    HOMECOMPARE
   </LogoWrapper>
 );
 

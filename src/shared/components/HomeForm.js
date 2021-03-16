@@ -1,20 +1,85 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useState, useEffect} from 'react';
 
+import PropTypes from 'prop-types';
+import {useDispatch} from 'react-redux';
+import {makeStyles, withStyles} from '@material-ui/core/styles';
+import StepConnector from '@material-ui/core/StepConnector';
+import clsx from 'clsx';
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import EuroIcon from '@material-ui/icons/Euro';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
+import * as actions from '@/state/actions';
 import CustomField from '@/shared/components/CustomField';
 import {useTranslation} from '@/shared/i18n';
 import fields from '@/shared/utils/homeFields';
+
+import CustomButton from './CustomButton';
+
+const useColorlibStepIconStyles = makeStyles({
+  root: {
+    backgroundColor: '#ccc',
+    zIndex: 1,
+    color: '#fff',
+    width: 50,
+    height: 50,
+    display: 'flex',
+    borderRadius: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  active: {
+    backgroundImage:
+      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+  },
+  completed: {
+    backgroundImage:
+      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+  },
+});
+
+const ColorlibConnector = withStyles({
+  alternativeLabel: {
+    top: 22,
+  },
+  active: {
+    '& $line': {
+      backgroundImage:
+        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+    },
+  },
+  completed: {
+    '& $line': {
+      backgroundImage:
+        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+    },
+  },
+  line: {
+    height: 3,
+    border: 0,
+    backgroundColor: '#eaeaf0',
+    borderRadius: 1,
+  },
+})(StepConnector);
+
+const SubmitWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+`;
 
 const ButtonZone = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 `;
 
 const FormWrapper = styled.div`
@@ -28,7 +93,23 @@ const FieldWrapper = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-  width: 100%;
+  && {
+    display: inline-block;
+	margin-top: 30px;
+	font-family: 'Heebo', Helvetica, Arial, sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	line-height: 32px;
+	color: #ffffff;
+	position: relative;
+  background: linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%);
+	border-radius: 2em;
+
+  }
+ 
+
 `;
 
 const onSubmitNewHomeValidation = entries => {
@@ -64,6 +145,8 @@ function getSteps() {
 }
 
 const HomeForm = ({onSubmit, initialValues = {}}) => {
+  const [wasClicked, setWasClicked] = useState(false);
+  const dispatch = useDispatch();
   const isEditMode = initialValues.id;
   const {t} = useTranslation();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -73,6 +156,12 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const isStepSkipped = (step) => {
     return skipped.has(step);
   };
+
+  useEffect(() => {
+    return async () => {
+      await dispatch(actions.removeAllTempImages());
+    };
+  }, [dispatch]);
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -92,14 +181,15 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const previousButton = () => {
     if (activeStep !== 0) {
       return (
-        <Button
-          color="primary"
+
+        <StyledButton
           type="button"
+          variant="contained"
           onClick={handleBack}
         >
 
-          Previous
-        </Button>
+          Prev
+        </StyledButton>
 
       );
     }
@@ -109,14 +199,15 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const nextButton = () => {
     if (activeStep < 2) {
       return (
-        <Button
-          style={{alignItems: 'flex-end'}}
-          color="secondary"
+
+        <StyledButton
+          variant="contained"
           type="button"
           onClick={handleNext}
         >
           Next
-        </Button>
+        </StyledButton>
+
       );
     }
     return null;
@@ -141,6 +232,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
           </FieldWrapper>
         );
       }
+      return false;
     });
   };
 
@@ -156,6 +248,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
           </FieldWrapper>
         );
       }
+      return false;
     });
   };
 
@@ -171,17 +264,52 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
           </FieldWrapper>
         );
       }
+      return false;
     });
     return (
       <>
         {fieldZone}
-        <StyledButton type="submit" disabled={invalid}>{t(isEditMode ? 'edit_home' : 'add_new_home')}</StyledButton>
-
+        <SubmitWrapper>
+          <CustomButton
+            type="submit"
+            checked={wasClicked}
+            disabled={invalid}
+            onClick={
+              () => {
+                setWasClicked(true);
+              }
+            }
+          >{t(isEditMode ? 'edit_home' : 'add_new_home')}
+          </CustomButton>
+        </SubmitWrapper>
       </>
     );
   };
 
+  const ColorlibStepIcon = (props) => {
+    const classes = useColorlibStepIconStyles();
+    const {active, completed, icon} = props;
+
+    const icons = {
+      1: <LocationCityIcon />,
+      2: <EuroIcon />,
+      3: <AddBoxIcon />,
+    };
+
+    return (
+      <div
+        className={clsx(classes.root, {
+          [classes.active]: active,
+          [classes.completed]: completed,
+        })}
+      >
+        {icons[String(icon)]}
+      </div>
+    );
+  };
+
   return (
+
     <Form
       onSubmit={onSubmit}
       validate={onSubmitNewHomeValidation}
@@ -190,7 +318,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
       {({handleSubmit, invalid}) => {
         return (
           <form name="homeForm" id="homeForm" onSubmit={handleSubmit}>
-            <Stepper activeStep={activeStep} style={{backgroundColor: 'transparent'}}>
+            <Stepper alternativeLabel activeStep={activeStep} style={{backgroundColor: 'transparent'}} connector={<ColorlibConnector />}>
               {steps.map((label, index) => {
                 const stepProps = {};
                 const labelProps = {};
@@ -200,7 +328,9 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
                 }
                 return (
                   <Step key={label} {...stepProps}>
-                    <StepLabel {...labelProps}>{label}</StepLabel>
+                    <StepLabel StepIconComponent={ColorlibStepIcon} {...labelProps}>
+                      {label}
+                    </StepLabel>
                   </Step>
                 );
               })}
@@ -220,7 +350,17 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
         );
       }}
     </Form>
+
   );
+};
+
+HomeForm.propTypes = {
+  active: PropTypes.string,
+  completed: PropTypes.string,
+  placeholder: PropTypes.string,
+  icon: PropTypes.any,
+  initialValues: PropTypes.object,
+  onSubmit: PropTypes.func,
 };
 
 export default memo(HomeForm);
