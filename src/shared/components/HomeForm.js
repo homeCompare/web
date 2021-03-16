@@ -93,7 +93,23 @@ const FieldWrapper = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-  width: 40%;
+  && {
+    display: inline-block;
+	margin-top: 30px;
+	font-family: 'Heebo', Helvetica, Arial, sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	line-height: 32px;
+	color: #ffffff;
+	position: relative;
+  background: linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%);
+	border-radius: 2em;
+
+  }
+ 
+
 `;
 
 const onSubmitNewHomeValidation = entries => {
@@ -165,15 +181,15 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const previousButton = () => {
     if (activeStep !== 0) {
       return (
-        <Button
-          color="secondary"
+
+        <StyledButton
           type="button"
           variant="contained"
           onClick={handleBack}
         >
 
-          Previous
-        </Button>
+          Prev
+        </StyledButton>
 
       );
     }
@@ -183,15 +199,15 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const nextButton = () => {
     if (activeStep < 2) {
       return (
-        <Button
-          style={{alignItems: 'flex-end'}}
-          color="primary"
+
+        <StyledButton
           variant="contained"
           type="button"
           onClick={handleNext}
         >
           Next
-        </Button>
+        </StyledButton>
+
       );
     }
     return null;
@@ -257,6 +273,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
           <CustomButton
             type="submit"
             checked={wasClicked}
+            disabled={invalid}
             onClick={
               () => {
                 setWasClicked(true);
@@ -292,6 +309,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   };
 
   return (
+
     <Form
       onSubmit={onSubmit}
       validate={onSubmitNewHomeValidation}
@@ -332,6 +350,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
         );
       }}
     </Form>
+
   );
 };
 

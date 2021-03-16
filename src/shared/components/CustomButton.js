@@ -51,8 +51,7 @@ from {
 const ButtonWrapper = styled.div`
 font-family: 'Roboto', sans-serif;
   font-size:21px;
-  text-transform:uppercase;
-  letter-spacing:6px;
+
   color:white;
   width:100%;
   height: 100px;
@@ -69,16 +68,18 @@ font-family: 'Roboto', sans-serif;
     
 `;
 const SpecialButton = styled.button`
+  text-transform:uppercase;
+letter-spacing: 3px;
    position:absolute;
-   font-size: 20px;
+   font-size: 16px;
   left:0;
   right:0;
   margin:0 auto;
   border: none;
   z-index:2;
-  width: ${props => (props.checked ? '95px' : '255px')};
-  height:95px;
-  background: ${props => (props.checked ? 'linear-gradient(to right, #ff7b6e 0%,#ff7b6e 100%)' : 'linear-gradient(to right, #ffb369 0%,#ff4272 100%)')}; 
+  width: ${props => (props.checked ? '95px' : '225px')};
+  height: ${props => (props.checked ? '95px' : '70px')}; 
+  background: ${props => (props.checked ? 'linear-gradient(to right, #ff7b6e 0%,#ff7b6e 100%)' : 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)')}; 
   display:block;
   border-radius:200px;
   text-align:center;
@@ -97,7 +98,7 @@ const SpecialButton = styled.button`
   z-index:-4;
   width:100%;
   height:100%;
-  background: linear-gradient(to right, #ffb369 0%,#ff4272 100%); 
+  background: linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%); 
   display:block;
   border-radius:200px;
   position:absolute;
@@ -115,7 +116,7 @@ const SpecialButton = styled.button`
   z-index:-2;
   width:100%;
   height:100%;
-  background: linear-gradient(to right, #ffb369 0%,#ff4272 100%); 
+  background: linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%); 
   display:block;
   border-radius:200px;
   position:absolute;
@@ -128,9 +129,10 @@ const SpecialButton = styled.button`
   }
 
   &:hover::before {
-    transform:scale(0.9) translateY(5px);
+    transform:scale(0.8) translateY(5px) ;
    filter:blur(15px);
   }
+
 
   &:active {
     line-height:460%;
@@ -228,11 +230,11 @@ stroke:#ffffff;
 `;
 
 const CustomButton = (props) => {
-  const {children, checked, onClick} = props;
+  const {children, checked, onClick, disabled} = props;
   return (
 
     <ButtonWrapper checked={checked} onClick={onClick}>
-      <SpecialButton type="submit" checked={checked}>
+      <SpecialButton type="submit" checked={checked} disabled={disabled}>
         {children}
       </SpecialButton>
       <LoaderWrapper checked={checked}>
@@ -265,6 +267,7 @@ CustomButton.propTypes = {
   children: PropTypes.string,
   checked: PropTypes.bool,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 
 };
 
