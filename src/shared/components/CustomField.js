@@ -86,6 +86,7 @@ const CustomField = field => {
             {...{...field, ...input}}
             label={t(field.label)}
             error={!!hasError}
+            dirty={meta.dirty}
             id="outlined-error-helper-text"
             placeholder={t(field.placeholder)}
             input={input}

@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import styled from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
@@ -58,9 +58,16 @@ const Img = styled.img`
   height: 100%;
 `;
 
-const MyDropzone = ({input, placeholder}) => {
+const MyDropzone = ({input, placeholder, dirty}) => {
   const tempImages = useSelector((state) => state.dropzone);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const clean = async () => {
+      if (!dirty) await dispatch(actions.removeAllTempImages());
+    };
+    clean();
+  }, []);
 
   const {getRootProps, getInputProps} = useDropzone({
     onDrop: async (acceptedFiles) => {
@@ -89,7 +96,7 @@ const MyDropzone = ({input, placeholder}) => {
         <p>{placeholder}</p>
       </Textarea>
       <PreviewContainer>
-        {(tempImages) ? tempImages.map((file) => (
+        {tempImages ? tempImages.map((file) => (
           <>
             <PreviewTag key={file.name}>
               <PreviewInner>
@@ -110,6 +117,7 @@ const MyDropzone = ({input, placeholder}) => {
 MyDropzone.propTypes = {
   input: PropTypes.any,
   placeholder: PropTypes.string,
+  dirty: PropTypes.bool,
 };
 
 export default MyDropzone;
