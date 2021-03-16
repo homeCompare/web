@@ -51,12 +51,11 @@ from {
 const ButtonWrapper = styled.div`
 font-family: 'Roboto', sans-serif;
   font-size:21px;
-
+  margin-top: 30px;
   color:white;
   width:100%;
   height: 100px;
   padding: 0;
-  margin: 0;
   overflow: visible;
   filter: url("#goo");
 
@@ -77,9 +76,13 @@ letter-spacing: 3px;
   margin:0 auto;
   border: none;
   z-index:2;
-  width: ${props => (props.checked ? '95px' : '225px')};
+  width: ${props => (props.checked ? '95px' : '205px')};
   height: ${props => (props.checked ? '95px' : '70px')}; 
-  background: ${props => (props.checked ? 'linear-gradient(to right, #ff7b6e 0%,#ff7b6e 100%)' : 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)')}; 
+  @media (max-width: 768px) {
+    width: ${props => (props.checked ? '95px' : '150px')};
+    height: ${props => (props.checked ? '95px' : '50px')}; 
+  }
+  background: ${props => (props.disabled ? '' : props.checked ? 'linear-gradient(to right, #ff7b6e 0%,#ff7b6e 100%)' : 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)')}; 
   display:block;
   border-radius:200px;
   text-align:center;
@@ -98,7 +101,7 @@ letter-spacing: 3px;
   z-index:-4;
   width:100%;
   height:100%;
-  background: linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%); 
+  background: ${props => (props.disabled ? '' : 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)')}; 
   display:block;
   border-radius:200px;
   position:absolute;
@@ -116,21 +119,16 @@ letter-spacing: 3px;
   z-index:-2;
   width:100%;
   height:100%;
-  background: linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%); 
+  background: ${props => (props.disabled ? '' : 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)')}; 
   display:block;
   border-radius:200px;
   position:absolute;
   left:0;
   top:0;
   opacity:0.8;
-  transform:scale(0.9) translateY(15px);
+
   filter:blur(20px);
   transition:all 0.2s ease;
-  }
-
-  &:hover::before {
-    transform:scale(0.8) translateY(5px) ;
-   filter:blur(15px);
   }
 
 

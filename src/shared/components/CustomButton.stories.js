@@ -11,7 +11,8 @@ export default {
 
 const CustomButtonStateful = () => {
   const [checked, setChecked] = useState(false);
-  return <CustomButton checked={checked} onClick={() => setChecked(!checked)}>Submit</CustomButton>;
+  const [disabled] = useState(false);
+  return <CustomButton checked={checked} disabled={disabled} onClick={() => setChecked(!checked)}>Submit</CustomButton>;
 };
 
 storiesOf('CustomButton', module).add('stateful', () => {
