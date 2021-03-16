@@ -20,6 +20,8 @@ import CustomField from '@/shared/components/CustomField';
 import {useTranslation} from '@/shared/i18n';
 import fields from '@/shared/utils/homeFields';
 
+import CustomButton from './CustomButton';
+
 const useColorlibStepIconStyles = makeStyles({
   root: {
     backgroundColor: '#ccc',
@@ -127,6 +129,7 @@ function getSteps() {
 }
 
 const HomeForm = ({onSubmit, initialValues = {}}) => {
+  const [wasClicked, setWasClicked] = useState(false);
   const dispatch = useDispatch();
   const isEditMode = initialValues.id;
   const {t} = useTranslation();
@@ -251,7 +254,16 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
       <>
         {fieldZone}
         <SubmitWrapper>
-          <StyledButton color="primary" variant="outlined" type="submit" disabled={invalid}>{t(isEditMode ? 'edit_home' : 'add_new_home')}</StyledButton>
+          <CustomButton
+            type="submit"
+            checked={wasClicked}
+            onClick={
+              () => {
+                setWasClicked(true);
+              }
+            }
+          >{t(isEditMode ? 'edit_home' : 'add_new_home')}
+          </CustomButton>
         </SubmitWrapper>
       </>
     );
