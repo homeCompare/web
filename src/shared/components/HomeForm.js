@@ -20,6 +20,7 @@ import CustomField from '@/shared/components/CustomField';
 import {useTranslation} from '@/shared/i18n';
 import fields from '@/shared/utils/homeFields';
 
+import CustomControlsButton from './CustomControlsButton';
 import CustomButton from './CustomButton';
 
 const useColorlibStepIconStyles = makeStyles({
@@ -182,14 +183,15 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
     if (activeStep !== 0) {
       return (
 
-        <StyledButton
-          type="button"
-          variant="contained"
-          onClick={handleBack}
+        <CustomControlsButton
+          onClick={(e) => {
+            e.preventDefault();
+            handleBack();
+          }}
         >
 
           Prev
-        </StyledButton>
+        </CustomControlsButton>
 
       );
     }
@@ -200,13 +202,14 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
     if (activeStep < 2) {
       return (
 
-        <StyledButton
-          variant="contained"
-          type="button"
-          onClick={handleNext}
+        <CustomControlsButton
+          onClick={(e) => {
+            e.preventDefault();
+            handleNext();
+          }}
         >
           Next
-        </StyledButton>
+        </CustomControlsButton>
 
       );
     }

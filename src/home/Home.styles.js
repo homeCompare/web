@@ -4,13 +4,13 @@ import CardContent from '@material-ui/core/CardContent';
 
 export const StyledCard = styled(Card)`
   width: 100%;
-  ${({ theme }) => theme.media('xl', `
+  ${({theme}) => theme.media('xl', `
     width: 1200px;
   `)};
 `;
 
 export const CardImage = styled.div`
-  ${({ theme }) => theme.media('md', `
+  ${({theme}) => theme.media('md', `
      width: 50%;
      float: left;
   `)};
@@ -45,7 +45,7 @@ export const CardImage = styled.div`
     border-radius: 5%;
     width:  85px;
     height: 75px;
-    ${({ theme }) => theme.media('xl', `
+    ${({theme}) => theme.media('xl', `
       width: 100px;
       height: 100px;
     `)};
@@ -86,18 +86,18 @@ export const CardImage = styled.div`
 `;
 
 export const StyledCardContent = styled(CardContent)`
- ${({ theme }) => theme.media('md', `
+ ${({theme}) => theme.media('md', `
       margin-left: 52%;
   `)};
  margin-left: 0;
   margin-top: 30px;
-  color: #67088F;
+  color: #111111;
   font-family: 'Roboto', sans-serif;
   border-bottom: 2px solid whitesmoke;
   margin-right: 20px;
   p {
     &:last-child {
-      margin-bottom: 120px;
+      margin-bottom: 92px;
     }
   }
 `;
