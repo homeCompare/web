@@ -10,7 +10,13 @@ import {v4 as uuidv4} from 'uuid';
 
 import * as actions from '@/state/actions';
 
-const ClearButton = styled(Button)`margin-bottom: 2rem;`;
+const ClearButton = styled(Button)`
+&& {
+  height: 50px;
+  margin-left: 3px;
+}
+
+`;
 
 const Textarea = styled.div`
   flex: 1;
@@ -50,6 +56,13 @@ const PreviewInner = styled.div`
   display: flex;
   min-width: 0;
   overflow: hidden;
+`;
+
+const PreviewWrapper = styled.div`
+display: flex;
+flex-direction: column;
+margin-bottom: 30px;
+
 `;
 
 const Img = styled.img`
@@ -97,7 +110,7 @@ const MyDropzone = ({input, placeholder, dirty}) => {
       </Textarea>
       <PreviewContainer>
         {tempImages ? tempImages.map((file) => (
-          <>
+          <PreviewWrapper>
             <PreviewTag key={file.name}>
               <PreviewInner>
                 <Img src={file.preview} />
@@ -106,7 +119,7 @@ const MyDropzone = ({input, placeholder, dirty}) => {
 
             </PreviewTag>
             <ClearButton variant="outlined" size="small" onClick={() => removeById(file.id)}>Remove Image</ClearButton>
-          </>
+          </PreviewWrapper>
         )) : null}
       </PreviewContainer>
 
