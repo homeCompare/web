@@ -2,9 +2,12 @@ import React from 'react';
 
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import ButtonBone from '@material-ui/core/Button';
 
-const StyledControlButton = styled.button`
-text-transform: uppercase;
+const StyledControlButton = styled(ButtonBone)`
+
+&& {
+  text-transform: uppercase;
 color: #E6EAEF;
     background-color: #3F4351;
     background-image: linear-gradient(
@@ -32,6 +35,8 @@ display: inline-block;
 0deg
 , #1c1e24, #252730);
     }
+}
+
 
 `;
 

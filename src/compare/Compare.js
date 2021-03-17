@@ -1,16 +1,17 @@
 import React, {memo, useState} from 'react';
+
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 import {snakeCase} from 'lodash';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
-import {useTranslation} from '@/shared/i18n';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import TouchAppIconIcon from '@material-ui/icons/TouchApp';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
-import HomeOptionButton from './HomeOptionButton';
+import {useTranslation} from '@/shared/i18n';
 import {reorder} from '@/shared/utils/dnd';
-import CompareCard, { HomeCompareCardULRow,HomeCompareCardUL, HomeCompareItem, HomeCompareImage } from './CompareCol';
+
+import HomeOptionButton from './HomeOptionButton';
+import CompareCard, {HomeCompareCardULRow, HomeCompareCardUL, HomeCompareItem, HomeCompareImage} from './CompareCol';
 
 const SlideRightGuider = styled.div`
   display: flex;
@@ -35,7 +36,6 @@ const DraggableItem = styled.div`
   `}
 `;
 
-
 const fieldToCompare = [
   'city',
   'street',
@@ -48,7 +48,7 @@ const fieldToCompare = [
   'buildingTax',
   'numberOfRooms',
   'floor',
-  'squarMeter',
+  'squareMeter',
   'freeText',
   'entryDate',
   'hasBlacony',
@@ -62,7 +62,7 @@ const Compare = () => {
   const {t} = useTranslation();
   const homes = useSelector((state) => state.homes);
   const [homesToCompare, setHomesToCompare] = useState();
-  
+
   const onDragEnd = result => {
     if (!result.destination) {
       return; // dropped outside the list
@@ -71,14 +71,14 @@ const Compare = () => {
     setHomesToCompare(reorder(
       homesToCompare,
       result.source.index,
-      result.destination.index
+      result.destination.index,
     ));
   };
 
   const addHomeToCompare = home => {
-    const isHomeAlreadyInCompareList = homesToCompare?.find(({ id }) => id === home.id);
+    const isHomeAlreadyInCompareList = homesToCompare?.find(({id}) => id === home.id);
     if (isHomeAlreadyInCompareList) {
-      setHomesToCompare(homesToCompare.filter(({ id }) => id !== home.id));
+      setHomesToCompare(homesToCompare.filter(({id}) => id !== home.id));
       return;
     }
 
@@ -97,7 +97,7 @@ const Compare = () => {
             key={home.id}
             onClick={() => addHomeToCompare(home)}
             {...home}
-            isActive={homesToCompare?.find(({ id }) => id === home.id)}
+            isActive={homesToCompare?.find(({id}) => id === home.id)}
           />
         ))}
       </HomesList>
@@ -121,7 +121,7 @@ const Compare = () => {
               <Droppable droppableId="droppable" direction="horizontal">
                 {(provided, snapshot) => (
                   <div
-                    style={{"display": 'flex'}}
+                    style={{display: 'flex'}}
                     ref={provided.innerRef}
                     {...provided.droppableProps}
                   >
@@ -134,7 +134,7 @@ const Compare = () => {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            <CompareCard fieldsToCompare={fieldToCompare} {...home}/>
+                            <CompareCard fieldsToCompare={fieldToCompare} {...home} />
                           </DraggableItem>
                         )}
                       </Draggable>
@@ -150,7 +150,7 @@ const Compare = () => {
             <TouchAppIconIcon />
             <ArrowRightAltIcon />
           </SlideRightGuider>
-         
+
         </CompareWrapper>
       )}
     </>
