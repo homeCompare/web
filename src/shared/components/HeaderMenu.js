@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 
-import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 import {useRouter} from 'next/router';
 import MenuIcon from '@material-ui/icons/Menu';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
+import * as actions from '@/state/actions';
 import {useTranslation} from '@/shared/i18n';
 import {Link} from '@/shared/utils/router';
 import {IconButton} from '@/shared/components/Button';
@@ -90,6 +90,7 @@ const menu = [
 
 const Menu = () => {
   const {pathname} = useRouter();
+  const dispatch = useDispatch();
   const userData = useSelector(state => state.user.data);
   if (userData) {
     menu[menu.length - 1] = {
@@ -103,26 +104,23 @@ const Menu = () => {
     };
   }
 
+  const LoginOrLogout = async (item) => {
+    if (item === '/login') await dispatch(actions.facebookLogin());
+    else await dispatch(actions.logout());
+  };
+
   // take pathame outside
   const {t} = useTranslation();
 
-  // todo: this needs refactor too much repetitve code
   return (
     <MenuUL>
       { menu.map(item => (
         <MenuLI key={item.label}>
-          <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
+          {item.to === '/login' || item.to === '/logout' ? <MenuLink href="/" active={pathname === item.to} onClick={() => LoginOrLogout(item.to)}>{t(item.label)}</MenuLink> : <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>}
         </MenuLI>
       ))}
     </MenuUL>
   );
-};
-
-Menu.propTypes = {
-  /**
-   * user data object.
-	*/
-  userData: PropTypes.node,
 };
 
 const HeaderMenu = () => {
