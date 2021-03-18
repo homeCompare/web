@@ -15,9 +15,3 @@ export const Content = styled.main`
 
   ${({theme}) => theme.defaultSizer};
 `;
-
-/**
- *   ${({theme}) => theme.media('md', `
-    flex-direction: row;
-  `)}
- */

@@ -39,11 +39,5 @@ var Content = _styledComponents["default"].main(_templateObject2(), function (_r
   var theme = _ref.theme;
   return theme.defaultSizer;
 });
-/**
- *   ${({theme}) => theme.media('md', `
-    flex-direction: row;
-  `)}
- */
-
 
 exports.Content = Content;

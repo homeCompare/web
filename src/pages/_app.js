@@ -15,6 +15,9 @@ import theme from '@/shared/style/theme';
 import * as gtag from '@/shared/utils/gtag';
 import {firebaseConfig, isDev} from '@/shared/config';
 import {useTranslation} from '@/shared/i18n';
+import {Container} from '@/shared/components/Layout/styled';
+import Header from '@/shared/components/Header';
+import Footer from '@/shared/components/Footer';
 
 export function reportWebVitals({id, name, label, value}) {
   // report prefromance to GA
@@ -57,7 +60,11 @@ const App = ({Component, pageProps, router}) => {
         <ThemeProvider theme={theme}>
           <StyleSheetManager {...isRTL ? {stylisPlugins: [rtlcss]} : {}}>
             <>
-              <Component {...pageProps} />
+              <Container>
+                <Header />
+                <Component {...pageProps} />
+                <Footer />
+              </Container>
               <GlobalCss />
             </>
           </StyleSheetManager>

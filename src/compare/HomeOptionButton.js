@@ -1,26 +1,34 @@
 import {memo} from 'react';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
 import {getHomeShortAddress} from '@/shared/utils/general';
 import Button from '@/shared/components/Button';
-import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
 const StyledButton = styled(Button)`
 	&&& {
 		position: relative;
-		width: ${({ theme }) => theme.size(18)};
-		height: ${({ theme }) => theme.size(10)};
-		margin-right: ${({ theme }) => theme.size(1)};
-		color: ${({theme}) => theme.colors.white};
+		width: ${({theme}) => theme.size(18)};
+		height: ${({theme}) => theme.size(10)};
+		margin-right: ${({theme}) => theme.size(1)};
 		flex-shrink: 0;
     flex-grow: 0;
+		color: ${({theme}) => theme.colors.white};
 		${({$backgroundImageUrl}) => $backgroundImageUrl && `
 			background-image: url(${$backgroundImageUrl});
 			background-size: cover;
 			background-position: center;
 		`}
 
+		transition: all 150ms ease-out;
+
+		${({$isActive}) => $isActive && `
+			transform: translate3d(0, -3px, 0);
+			box-shadow: rgb(0 0 0 / 8%) 0 3px 10px;
+		`}
+		
 		&::before {
 			content: "";
 			width: 100%;
@@ -34,11 +42,11 @@ const StyledButton = styled(Button)`
 		&::after {
 			content: '';
 			position: absolute;
-			width: ${({ theme }) => theme.size(1)};
-			height: ${({ theme }) => theme.size(1)};
+			width: ${({theme}) => theme.size(1)};
+			height: ${({theme}) => theme.size(1)};
 			border: 1px solid gray;
 			top: 5px;
-			background-color: ${({$isActive, theme}) => $isActive ? theme.colors.darkGrey : theme.colors.white};
+			background-color: ${({$isActive, theme}) => ($isActive ? theme.colors.darkGrey : theme.colors.white)};
 			right: 5px;
 			border-radius: 50%;
 		}
@@ -49,24 +57,23 @@ const StyledButton = styled(Button)`
 	}
 `;
 
-
 const HomeOptionButton = ({onClick, isActive, ...home}) => {
-	const thumbnail = home?.images?.[0];
-	return (
-		<StyledButton
-			$isActive={isActive}
-			onClick={onClick}
-			$backgroundImageUrl={thumbnail}
-		>
-			{!thumbnail && <BrokenImageIcon/>}
-			{getHomeShortAddress(home)}
-		</StyledButton>
-	);
+  const thumbnail = home?.images?.[0];
+  return (
+    <StyledButton
+      $isActive={isActive}
+      onClick={onClick}
+      $backgroundImageUrl={thumbnail}
+    >
+      {!thumbnail && <BrokenImageIcon />}
+      {getHomeShortAddress(home)}
+    </StyledButton>
+  );
 };
 
-
 HomeOptionButton.propTypes = {
-	onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  isActive: PropTypes.bool,
 };
 
 export default memo(HomeOptionButton);
