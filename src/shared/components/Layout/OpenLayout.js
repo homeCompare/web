@@ -2,21 +2,15 @@ import React, {memo} from 'react';
 
 import PropTypes from 'prop-types';
 
-import Header from '@/shared/components/Header';
 import Side from '@/shared/components/Side';
-import Footer from '@/shared/components/Footer';
 
-import {Container, Content} from './styled';
+import {Content} from './styled';
 
 const OpenLayout = ({className, children, hideSide}) => (
-  <Container>
-    <Header />
-    <Content className={className}>
-      {children}
-      {!hideSide && (<Side />)}
-    </Content>
-    <Footer />
-  </Container>
+  <Content className={className}>
+    {children}
+    {!hideSide && (<Side />)}
+  </Content>
 );
 
 OpenLayout.propTypes = {

@@ -92,6 +92,13 @@ Logo.propTypes = {
   className: PropTypes.string,
 };
 
+const CoverImg = memo(() => (
+  <CoverImageWrapper>
+    <CoverImage src={CoverImageCatched} key="coverImg1" alt="" />
+    <CoverImage src={Cover2ImageCatched} key="coverImg2" alt="" />
+  </CoverImageWrapper>
+));
+
 const Header = ({withCoverImage}) => {
   const userData = useSelector(state => state.user.data);
   return (
@@ -105,12 +112,7 @@ const Header = ({withCoverImage}) => {
           {userData && <StyledName>Hello,{userData.name}</StyledName>}
         </InnerWrapper>
       </HeaderRoot>
-      {withCoverImage && (
-        <CoverImageWrapper>
-          <CoverImage src={CoverImageCatched} key="coverImg1" alt="" />
-          <CoverImage src={Cover2ImageCatched} key="coverImg2" alt="" />
-        </CoverImageWrapper>
-      )}
+      {withCoverImage && <CoverImg />}
     </>
   );
 };
