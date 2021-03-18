@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "dev": "concurrently \"cross-env NODE_OPTIONS='--inspect' next dev\" \"yarn storybook\"",
+    "_dev": "cross-env NODE_OPTIONS='--inspect next dev",
+    "dev": "concurrently \"yarn _dev\" \"yarn storybook\"",
     "build": "next build && build-storybook -o ./public/sb/",
     "start": "next start",
     "build-storybook": "build-storybook -o ./public/sb/"

@@ -18,6 +18,7 @@ import {useTranslation} from '@/shared/i18n';
 import {Container} from '@/shared/components/Layout/styled';
 import Header from '@/shared/components/Header';
 import Footer from '@/shared/components/Footer';
+import SplashScreen from '@/shared/components/SplashScreen';
 
 export function reportWebVitals({id, name, label, value}) {
   // report prefromance to GA
@@ -56,7 +57,7 @@ const App = ({Component, pageProps, router}) => {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<SplashScreen />} persistor={persistor}>
         <ThemeProvider theme={theme}>
           <StyleSheetManager {...isRTL ? {stylisPlugins: [rtlcss]} : {}}>
             <>

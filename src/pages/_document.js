@@ -25,6 +25,10 @@ export default class MyDocument extends Document {
             }}
           />
           <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+
+          <style dangerouslySetInnerHTML={{__html: 'body { display: block !important }'}} />
+          {/* ^ this might fix FCP https://github.com/vercel/next.js/issues/10285#issuecomment-613627425 */}
+
         </Head>
         <body>
           <Main />

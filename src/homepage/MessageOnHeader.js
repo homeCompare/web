@@ -18,11 +18,11 @@ const Root = styled.div`
 const MessageOnHeader = () => {
   const {t} = useTranslation();
   return (
-    <Bounce direction="down" delay={800} triggerOnce>
+    <Bounce direction="down" delay={800} cascade triggerOnce>
       <Root>
         <h1>{t('homepage_h1_title')}</h1>
         <p>{t('homepage_description')}</p>
-        <AttentionSeeker delay={1500} effect="shake">
+        <AttentionSeeker effect="shake">
           <Button>{t('homepage_start_for_free_button')}</Button>
         </AttentionSeeker>
       </Root>

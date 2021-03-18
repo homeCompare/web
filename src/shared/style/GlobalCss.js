@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import {createGlobalStyle} from 'styled-components';
 import ReactImageGalleryCss from 'react-image-gallery/styles/css/image-gallery.css';
 
 import theme from './theme';
