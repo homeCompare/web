@@ -3,9 +3,8 @@ import React, {useState, useEffect} from 'react';
 import styled, {css} from 'styled-components';
 import {useRouter} from 'next/router';
 import MenuIcon from '@material-ui/icons/Menu';
-import {useSelector, useDispatch} from 'react-redux';
 
-import * as actions from '@/state/actions';
+import Auth from '@/shared/components/Login';
 import {useTranslation} from '@/shared/i18n';
 import {Link} from '@/shared/utils/router';
 import {IconButton} from '@/shared/components/Button';
@@ -65,6 +64,12 @@ const MenuWrapper = styled.div`
   ${({isOpen}) => !isOpen && 'display: none;'}
 `;
 
+const MenuContainer = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+`;
+
 const menu = [
   {
     to: '/',
@@ -82,44 +87,26 @@ const menu = [
     to: '/compare',
     label: 'menu_compare',
   },
-  {
-    to: '/login',
-    label: 'menu_login',
-  },
 ];
 
 const Menu = () => {
   const {pathname} = useRouter();
-  const dispatch = useDispatch();
-  const userData = useSelector(state => state.user.data);
-  if (userData) {
-    menu[menu.length - 1] = {
-      to: '/logout',
-      label: 'menu_logout',
-    };
-  } else {
-    menu[menu.length - 1] = {
-      to: '/login',
-      label: 'menu_login',
-    };
-  }
-
-  const LoginOrLogout = async (item) => {
-    if (item === '/login') await dispatch(actions.facebookLogin());
-    else await dispatch(actions.logout());
-  };
 
   // take pathame outside
   const {t} = useTranslation();
 
   return (
-    <MenuUL>
-      { menu.map(item => (
-        <MenuLI key={item.label}>
-          {item.to === '/login' || item.to === '/logout' ? <MenuLink href="/" active={pathname === item.to} onClick={() => LoginOrLogout(item.to)}>{t(item.label)}</MenuLink> : <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>}
-        </MenuLI>
-      ))}
-    </MenuUL>
+    <MenuContainer>
+      <MenuUL>
+        { menu.map(item => (
+          <MenuLI key={item.label}>
+            <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
+          </MenuLI>
+        ))}
+
+      </MenuUL>
+      <Auth />
+    </MenuContainer>
   );
 };
 
