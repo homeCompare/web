@@ -15,7 +15,8 @@ module.exports = function (_ref) {
     "@/editHome": path.resolve(__dirname, "../src/editHome"),
     "@/compare": path.resolve(__dirname, "../src/compare"),
     "@/shared": path.resolve(__dirname, "../src/shared"),
-    "@/state": path.resolve(__dirname, "../src/state")
+    "@/state": path.resolve(__dirname, "../src/state"),
+    "@/pages": path.resolve(__dirname, "../src/pages")
   };
   return config;
 };

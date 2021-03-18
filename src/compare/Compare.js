@@ -26,7 +26,6 @@ const CompareWrapper = styled.div`
 const HomesList = styled.div`
   display: flex;
   flex: 1;
-  overflow-x: auto;
 `;
 
 const DraggableItem = styled.div`
@@ -97,7 +96,9 @@ const Compare = () => {
             key={home.id}
             onClick={() => addHomeToCompare(home)}
             {...home}
-            isActive={homesToCompare?.find(({id}) => id === home.id)}
+
+            isActive={Boolean(homesToCompare?.find(({id}) => id === home.id))}
+
           />
         ))}
       </HomesList>

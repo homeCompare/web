@@ -1,12 +1,8 @@
-import React, { useState, memo } from 'react';
+import React, {useState, memo} from 'react';
+
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {isEmpty, snakeCase} from 'lodash';
-
-import * as actions from '@/state/actions';
-import ConfirmDialog from '@/shared/components/ConfirmDialog';
-import {getHomeShortAddress, getPriceWithCurrency} from '@/shared/utils/general';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,35 +10,19 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { useTranslation } from '@/shared/i18n';
+
+import {getHomeShortAddress, getPriceWithCurrency} from '@/shared/utils/general';
+import ConfirmDialog from '@/shared/components/ConfirmDialog';
+import * as actions from '@/state/actions';
+import {useTranslation} from '@/shared/i18n';
+
 import HomeSubCell from './HomeSubCell';
 
 const Root = styled.div`
   flex-direction: column;
   display: flex;
   flex-wrap: wrap;
-  ${({ theme }) =>
-    theme.media(
-      'lg',
-      `
-    flex-direction: row;
-  `,
-    )};
-`;
-
-const HomeCardWrapper = styled.div`
-  width: 100%;
-  margin-right: ${({ theme }) => theme.size(1)};
-  ${({ theme }) =>
-    theme.media(
-      'lg',
-      `
-    width: 282px;
-  `,
-    )} margin-bottom: ${({ theme }) => theme.size(1)};
-  &:last-child {
-    margin-bottom: 0;
-  }
+  ${({theme}) => theme.media('lg', 'flex-direction: row')};
 `;
 
 const HeaderCell = styled(TableCell)`
@@ -99,31 +79,31 @@ const HomesList = () => {
               <HeaderCell>{t('manage')}</HeaderCell>
             </TableRow>
           </TableHead>
-          
-            {Homes.map(home => {
-              const [isOpen, setIsOpen] = useState(false);
 
-              return (
+          {Homes.map(home => {
+            const [isOpen, setIsOpen] = useState(false);
+
+            return (
               <TableBody key={home.id}>
-                <StyledTableRow onClick={() => {setIsOpen(!isOpen)}}>
+                <StyledTableRow onClick={() => { setIsOpen(!isOpen); }}>
                   <TableCell>{getHomeShortAddress(home)}</TableCell>
                   <TableCell>{getPriceWithCurrency(home.price)}</TableCell>
                   <TableCell>{home.numberOfRooms}</TableCell>
                   <TableCell>{home.entryDate}</TableCell>
                   <TableCell>{home.personalRate}</TableCell>
-                  <TableCell>Delete / Edit</TableCell> {/** todo: make a pritter icon and attach fix onClick too*/}
+                  <TableCell>Delete / Edit</TableCell> {/** todo: make a pritter icon and attach fix onClick too */}
                 </StyledTableRow>
                 {isOpen && (
                   <TableRow key={`sub_${home.id}`}>
                     <TableCell colSpan={6}>
-                      <HomeSubCell t={t} home={home}/>
+                      <HomeSubCell t={t} home={home} />
                     </TableCell>
                   </TableRow>
                 )}
               </TableBody>
             );
           })}
-          
+
         </Table>
       </TableContainer>
     </Root>
