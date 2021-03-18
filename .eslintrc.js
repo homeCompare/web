@@ -38,6 +38,7 @@ module.exports = {
           ['@/compare', './src/compare/'],
           ['@/shared', './src/shared/'],
           ['@/state', './src/state/'],
+          ['@/pages', './src/pages/'],
         ],
         extensions: ['.js', '.jsx', '.json', '.jpg', '.png', '.ico'],
       },

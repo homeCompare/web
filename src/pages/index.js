@@ -6,8 +6,7 @@ import {useTranslation} from '@/shared/i18n';
 import Meta from '@/shared/components/Meta';
 import {OpenLayout} from '@/shared/components/Layout';
 import CircleWithIcon from '@/homepage/CircleWithIcon';
-
-import MessageOnHeader from './MessageOnHeader';
+import MessageOnHeader from '@/homepage/MessageOnHeader';
 
 const RootHomePage = styled(OpenLayout).attrs({
   hideSide: true,

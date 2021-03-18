@@ -1,14 +1,12 @@
-const path = require('path');
+"use strict";
 
-module.exports = ({ config }) => {
+var path = require('path');
+
+module.exports = function (_ref) {
+  var config = _ref.config;
   // a bunch of other rules here
+  config.resolve.modules = [path.resolve(__dirname, "..", "src"), "node_modules"]; // Alternately, for an alias:
 
-  config.resolve.modules = [
-    path.resolve(__dirname, "..", "src"),
-    "node_modules",
-  ]
-
-  // Alternately, for an alias:
   config.resolve.alias = {
     "@/homepage": path.resolve(__dirname, "../src/homepage"),
     "@/home": path.resolve(__dirname, "../src/home"),
@@ -20,6 +18,5 @@ module.exports = ({ config }) => {
     "@/state": path.resolve(__dirname, "../src/state"),
     "@/pages": path.resolve(__dirname, "../src/pages")
   };
-
   return config;
-}
+};
