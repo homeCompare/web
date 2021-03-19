@@ -11,11 +11,10 @@ import {v4 as uuidv4} from 'uuid';
 import * as actions from '@/state/actions';
 
 const ClearButton = styled(Button)`
-&& {
-  height: 50px;
-  margin-left: 3px;
-}
-
+  && {
+    height: 50px;
+    margin-left: 3px;
+  }
 `;
 
 const Textarea = styled.div`
@@ -59,10 +58,9 @@ const PreviewInner = styled.div`
 `;
 
 const PreviewWrapper = styled.div`
-display: flex;
-flex-direction: column;
-margin-bottom: 30px;
-
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
 `;
 
 const Img = styled.img`

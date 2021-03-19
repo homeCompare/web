@@ -1,8 +1,9 @@
 import {memo} from 'react';
+
 import styled from 'styled-components';
-import ImageGallery from 'react-image-gallery';
 import {snakeCase} from 'lodash';
 
+import ImageGallery from '@/shared/components/ImageGallery';
 import NumberAsScale from '@/shared/components/NumberAsScale';
 import ChipBoolean from '@/shared/components/ChipBoolean';
 import {getPriceWithCurrency} from '@/shared/utils/general';
@@ -66,7 +67,7 @@ const UpperWrapper = styled.div`
 `;
 
 const ChipLabel = styled.label`
-	font-weight: ${({bold}) => bold ? 'bold' : 'normal'};
+	font-weight: ${({bold}) => (bold ? 'bold' : 'normal')};
 `;
 
 const FlexWrapper = styled.div`
@@ -76,51 +77,42 @@ const FlexWrapper = styled.div`
 `;
 
 const HomeSubCell = ({home, t}) => {
-	const galleryImages = home?.images?.map((image) => {
-	return { original: image, thumbnail: image };
-  });
+  return (
+    <>
+      <HomeSubRoot>
+        <FlexWrapper>
+          <ScaleWrapper>
+            <ScaleLabel>{t(snakeCase('personalRate'))}</ScaleLabel>
+            <StyledScale number={home.personalRate} />
 
-	return (
-		<>
-			<HomeSubRoot>
-				<FlexWrapper>
-					<ScaleWrapper>
-						<ScaleLabel>{t(snakeCase('personalRate'))}</ScaleLabel>
-						<StyledScale number={home.personalRate}/>
+            <ScaleLabel>{t(snakeCase('areaRate'))}</ScaleLabel>
+            <StyledScale number={home.areaRate} />
+          </ScaleWrapper>
 
-						<ScaleLabel>{t(snakeCase('areaRate'))}</ScaleLabel>
-						<StyledScale number={home.areaRate}/>
-					</ScaleWrapper>
+          <UpperWrapper>
+            <BooleanFieldsWrapper>
+              <StyledChipBoolean label={t(snakeCase('hasAirConditioner'))} value={home.hasAirConditioner} />
+              <StyledChipBoolean label={t(snakeCase('hasBlacony'))} value={home.hasBlacony} />
+              <StyledChipBoolean label={t(snakeCase('hasGarage'))} value={home.hasGarage} />
+              <StyledChipBoolean label={t(snakeCase('isRenovated'))} value={home.isRenovated} />
+            </BooleanFieldsWrapper>
 
-					<UpperWrapper>
-						<BooleanFieldsWrapper>
-							<StyledChipBoolean label={t(snakeCase('hasAirConditioner'))} value={home.hasAirConditioner}/>
-							<StyledChipBoolean label={t(snakeCase('hasBlacony'))} value={home.hasBlacony}/>
-							<StyledChipBoolean label={t(snakeCase('hasGarage'))} value={home.hasGarage}/>
-							<StyledChipBoolean label={t(snakeCase('isRenovated'))} value={home.isRenovated}/>
-						</BooleanFieldsWrapper>
+            <ChipWrapper>
+              <Chip><ChipLabel bold>{t(snakeCase('propertyTax'))}</ChipLabel> {getPriceWithCurrency(home.propertyTax)}</Chip>
+              <Chip><ChipLabel bold>{t(snakeCase('buildingTax'))}</ChipLabel> {getPriceWithCurrency(home.buildingTax)}</Chip>
+              <Chip><ChipLabel>{t(snakeCase('floor'))}</ChipLabel> {home.floor}</Chip>
+              <Chip><ChipLabel>{t(snakeCase('squarMeter'))}</ChipLabel> {home.squarMeter}</Chip>
+            </ChipWrapper>
+          </UpperWrapper>
+        </FlexWrapper>
+      </HomeSubRoot>
+      {home.freeText && (<FreeText>{home.freeText}</FreeText>)}
 
-						<ChipWrapper>
-							<Chip><ChipLabel bold>{t(snakeCase('propertyTax'))}</ChipLabel> {getPriceWithCurrency(home.propertyTax)}</Chip>
-							<Chip><ChipLabel bold>{t(snakeCase('buildingTax'))}</ChipLabel> {getPriceWithCurrency(home.buildingTax)}</Chip>
-							<Chip><ChipLabel>{t(snakeCase('floor'))}</ChipLabel> {home.floor}</Chip>
-							<Chip><ChipLabel>{t(snakeCase('squarMeter'))}</ChipLabel> {home.squarMeter}</Chip>
-						</ChipWrapper>
-					</UpperWrapper>
-				</FlexWrapper>
-			</HomeSubRoot>
-			{home.freeText && (<FreeText>{home.freeText}</FreeText>)}
-
-			{galleryImages && (
-				<ImageGallery
-					items={galleryImages}
-					showPlayButton={false}
-					showFullscreenButton={false}
-					showThumbnails={false}
-				/>
-			)}
-		</>
-	);
-}
+      {home?.images?.length && (
+        <ImageGallery images={home.images} />
+      )}
+    </>
+  );
+};
 
 export default memo(HomeSubCell);

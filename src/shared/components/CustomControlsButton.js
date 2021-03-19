@@ -5,16 +5,13 @@ import propTypes from 'prop-types';
 import ButtonBone from '@material-ui/core/Button';
 
 const StyledControlButton = styled(ButtonBone)`
-
-&& {
-  text-transform: uppercase;
-color: #E6EAEF;
+  && {
+    text-transform: uppercase;
+    color: #E6EAEF;
     background-color: #3F4351;
-    background-image: linear-gradient(
-0deg
-, #3F4351, #484c5c);
+    background-image: linear-gradient(0deg, #3F4351, #484c5c);
     border-color: #292b34;
-display: inline-block;
+    display: inline-block;
     margin: 6px;
     margin-top: 30px;
     font-size: inherit;
@@ -31,13 +28,9 @@ display: inline-block;
     box-shadow: 0 1px 1px 0 rgb(255 255 255 / 20%) inset;
     &:hover {
       background-color: #1c1e24;
-    background-image: linear-gradient(
-0deg
-, #1c1e24, #252730);
+      background-image: linear-gradient(0deg, #1c1e24, #252730);
     }
-}
-
-
+  }
 `;
 
 const CustomControlsButton = (props) => {

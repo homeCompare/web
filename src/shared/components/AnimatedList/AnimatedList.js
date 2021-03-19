@@ -9,12 +9,12 @@ import ListItem from './UI/ListItem/ListItem';
 const StyledFlipper = styled(Flipper)`
   && {
     width: 400px;
-  margin: 2rem auto;
+    margin: 2rem auto;
   }
 `;
 
 const List = styled.ul`
-    list-style-type: none;
+  list-style-type: none;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -25,7 +25,6 @@ const List = styled.ul`
   li + li {
     margin-top: 1rem;
   }
-
 `;
 
 const AnimatedList = () => {
@@ -33,10 +32,7 @@ const AnimatedList = () => {
   const createCardFlipId = index => `listItem-${index}`;
   const [focused, setFocused] = useState(null);
 
-  const clicked = (index) => {
-    if (focused === index) setFocused(null);
-    else setFocused(index);
-  };
+  const clicked = index => focused !== index && setFocused(index);
   return (
     <StyledFlipper
       flipKey={focused}

@@ -9,9 +9,12 @@ export default {
   component: CustomControlsButton,
 };
 
-const Template = ({children, ...args}) => <CustomControlsButton {...args} onClick={action('click')}>{children}</CustomControlsButton>;
+const Template = ({args: {children, ...restOfArgs}}) => (
+  <CustomControlsButton {...restOfArgs}>{children}</CustomControlsButton>
+);
 
 export const Primary = Template.bind({});
 Primary.args = {
   children: 'Next',
+  onClick: action('click'),
 };
