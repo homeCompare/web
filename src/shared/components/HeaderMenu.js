@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 
-import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 import {useRouter} from 'next/router';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import Auth from '@/shared/components/Login';
 import {useTranslation} from '@/shared/i18n';
 import {Link} from '@/shared/utils/router';
 import {IconButton} from '@/shared/components/Button';
@@ -64,6 +64,12 @@ const MenuWrapper = styled.div`
   ${({isOpen}) => !isOpen && 'display: none;'}
 `;
 
+const MenuContainer = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+`;
+
 const menu = [
   {
     to: '/',
@@ -81,55 +87,27 @@ const menu = [
     to: '/compare',
     label: 'menu_compare',
   },
-  {
-    to: '/login',
-    label: 'menu_login',
-  },
-  {
-    to: '/logout',
-    label: 'menu_logout',
-  },
 ];
 
-const Menu = ({userData}) => {
+const Menu = () => {
   const {pathname} = useRouter();
+
   // take pathame outside
   const {t} = useTranslation();
 
-  // todo: this needs refactor too much repetitve code
   return (
-    <MenuUL>
-      {userData !== undefined
-        ? menu.map((item) => {
-          if (item.to !== '/login') {
-            return (
-              <MenuLI key={item.label}>
-                <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
-              </MenuLI>
+    <MenuContainer>
+      <MenuUL>
+        { menu.map(item => (
+          <MenuLI key={item.label}>
+            <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
+          </MenuLI>
+        ))}
 
-            );
-          }
-          return null;
-        })
-        : menu.map((item) => {
-          if (item.to !== '/logout') {
-            return (
-              <MenuLI key={item.label}>
-                <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
-              </MenuLI>
-            );
-          }
-          return null;
-        })}
-    </MenuUL>
+      </MenuUL>
+      <Auth />
+    </MenuContainer>
   );
-};
-
-Menu.propTypes = {
-  /**
-   * user data object.
-	*/
-  userData: PropTypes.node,
 };
 
 const HeaderMenu = () => {

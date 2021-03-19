@@ -95,7 +95,7 @@ export default [{
   placeholder: '3 out of 3',
   initialValue: '3 out of 3',
 }, {
-  name: 'squarMeter',
+  name: 'squareMeter',
   label: 'square_meter',
   type: 'number',
   placeholder: '80',

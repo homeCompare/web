@@ -53,7 +53,7 @@ font-family: 'Roboto', sans-serif;
   font-size:21px;
   margin-top: 30px;
   color:white;
-  width:100%;
+  width: 200px;
   height: 100px;
   padding: 0;
   overflow: visible;
@@ -248,6 +248,7 @@ const CustomButton = (props) => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
+        style={{pointerEvents: 'none'}}
       >
         <defs>
           <filter id="goo">
