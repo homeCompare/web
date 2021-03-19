@@ -1,13 +1,23 @@
-import styled, {keyframes, css} from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import {Flipped} from 'react-flip-toolkit';
 
 export const FadeInAnim = keyframes`
   0% {
     opacity: 0;
     transform: translateY(20px);
   }
+  79%{
+    opacity: 0;
+  }
   100% {
     opacity: 1;
   }
+`;
+export const AnimatedInFlipped = styled(Flipped)`
+
+ & > div {
+  animation: ${FadeInAnim} 0.4s forwards;
+ }
 `;
 
 export const StyledExpandedListItem = styled.div`
@@ -39,7 +49,7 @@ export const AdditionalContent = styled.div`
   border-radius: 3px;
   background-color: gray;
   height: 5rem;
-  animation: ${FadeInAnim} 0.4s forwards;
+  animation: ${FadeInAnim} 0.8s forwards;
   }
   & > div:nth-of-type(2) {
     animation-delay: 0.15s;

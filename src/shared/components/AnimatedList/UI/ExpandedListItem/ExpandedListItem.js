@@ -5,18 +5,13 @@ import PropTypes from 'prop-types';
 
 import {Description} from '../ListItem/ListItem.styled';
 
-import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent} from './ExpandedListItem.styled';
+import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped} from './ExpandedListItem.styled';
 
 const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
   return (
-    <Flipped
+    <AnimatedInFlipped
       flipId={createCardFlipId(index)}
       stagger="card"
-      onStart={el => {
-        setTimeout(() => {
-          el.classList.add('animated-in');
-        }, 400);
-      }}
     >
       <StyledExpandedListItem onClick={() => onClick(index)}>
         <Flipped inverseFlipId={createCardFlipId(index)}>
@@ -47,7 +42,7 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
           </ExpandedListItemContent>
         </Flipped>
       </StyledExpandedListItem>
-    </Flipped>
+    </AnimatedInFlipped>
   );
 };
 
