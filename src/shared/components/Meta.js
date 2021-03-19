@@ -1,4 +1,5 @@
 import React, {memo} from 'react';
+
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import {useTheme} from 'styled-components';
@@ -10,7 +11,7 @@ import logoPng from '@/shared/images/homeCompare.png';
 // import {siteUrl, supportedLanguages} from '../config';
 // import {useTranslation} from '../i18n';
 
-const Meta = ({ title }) => {
+const Meta = ({title}) => {
   const theme = useTheme();
   // const {i18n} = useTranslation();
   // const router = useRouter();
@@ -39,5 +40,5 @@ const Meta = ({ title }) => {
 Meta.propTypes = {
   title: PropTypes.string,
 };
-
+Meta.whyDidYouRender = false;
 export default memo(Meta);

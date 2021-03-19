@@ -17,6 +17,7 @@ const Root = styled.div`
 
 const MessageOnHeader = () => {
   const {t} = useTranslation();
+
   return (
     <Bounce direction="down" delay={800} cascade triggerOnce>
       <Root>
@@ -29,5 +30,7 @@ const MessageOnHeader = () => {
     </Bounce>
   );
 };
+
+MessageOnHeader.whyDidYouRender = false;
 
 export default memo(MessageOnHeader);

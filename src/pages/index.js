@@ -112,4 +112,6 @@ const IndexPage = () => {
   );
 };
 
+IndexPage.whyDidYouRender = false;
+
 export default memo(IndexPage);
