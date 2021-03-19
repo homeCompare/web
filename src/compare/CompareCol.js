@@ -1,13 +1,13 @@
 import React, {memo} from 'react';
+
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {toPairs, omit, isEmpty, isBoolean} from 'lodash';
-import ImageGallery from 'react-image-gallery';
-import {getPriceWithCurrency} from '@/shared/utils/general';
-
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
+
+import {getPriceWithCurrency} from '@/shared/utils/general';
+import ImageGallery from '@/shared/components/ImageGallery';
 
 export const HomeCompareCardUL = styled.ul`
   display: flex;
@@ -68,7 +68,7 @@ export const HomeCompareItem = styled.li`
   flex-direction: column;
   display: flex;
   justify-content: center;
-  font-weight: ${({$isBold}) => $isBold ? 'bold' : 'inherit'};
+  font-weight: ${({$isBold}) => ($isBold ? 'bold' : 'inherit')};
   svg {
     margin: auto;
   }
@@ -76,43 +76,28 @@ export const HomeCompareItem = styled.li`
 
 const priceFields = ['price', 'propertyTax', 'buildingTax'];
 
-const CompareCard = ({fieldsToCompare, ...home}) => {
-  const nonTextFieldToExclude = ['images'];
+const CompareCard = ({fieldsToCompare, ...home}) => (
+  <HomeCompareCardUL>
+    <HomeCompareImage>
+      {home?.images?.length ? (
+        <ImageGallery images={home.images} />
+      ) : (
+        <StyledBrokenImageIcon />
+      )}
+    </HomeCompareImage>
 
-  const galleryImages = home?.images?.map((image) => {
-    return { original: image, thumbnail: image };
-  });
-
-  // const pairsModifyedHome = toPairs(omit(home, nonTextFieldToExclude));
-  // console.log('pairsModifyedHome', pairsModifyedHome);
-  return (
-    <HomeCompareCardUL>
-      <HomeCompareImage>
-        {!isEmpty(galleryImages) ? (
-          <ImageGallery
-            items={galleryImages}
-            showPlayButton={false}
-            showFullscreenButton={false}
-            showThumbnails={false}
-          />
-        ) : (
-          <StyledBrokenImageIcon />
-        )}
-      </HomeCompareImage>
-
-      {fieldsToCompare.map(key => {
-        const value = home[key];
-        if (key.includes('is') || key.includes('has')) {
-          const BooleanIconComponent = value ? CheckCircleOutlineIcon : RadioButtonUncheckedIcon;
-          return (<HomeCompareItem key={key}><BooleanIconComponent /></HomeCompareItem>);
-        }
-        if (priceFields.includes(key)) {
-          return (<HomeCompareItem key={key}>{getPriceWithCurrency(value)}</HomeCompareItem>);
-        }
-        return (<HomeCompareItem key={key}>{value}</HomeCompareItem>);
-      })}
-    </HomeCompareCardUL>
-  );
-};
+    {fieldsToCompare.map(key => {
+      const value = home[key];
+      if (key.includes('is') || key.includes('has')) {
+        const BooleanIconComponent = value ? CheckCircleOutlineIcon : RadioButtonUncheckedIcon;
+        return (<HomeCompareItem key={key}><BooleanIconComponent /></HomeCompareItem>);
+      }
+      if (priceFields.includes(key)) {
+        return (<HomeCompareItem key={key}>{getPriceWithCurrency(value)}</HomeCompareItem>);
+      }
+      return (<HomeCompareItem key={key}>{value}</HomeCompareItem>);
+    })}
+  </HomeCompareCardUL>
+);
 
 export default memo(CompareCard);

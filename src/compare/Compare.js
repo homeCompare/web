@@ -47,7 +47,7 @@ const fieldToCompare = [
   'buildingTax',
   'numberOfRooms',
   'floor',
-  'squarMeter',
+  'squareMeter',
   'freeText',
   'entryDate',
   'hasBlacony',

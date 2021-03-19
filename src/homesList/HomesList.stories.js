@@ -1,18 +1,18 @@
 import React from 'react';
 
-import HomePageComponent from '@/pages/index';
+import ListPage from '@/pages/list';
 import Footer from '@/shared/components/Footer';
 import Header from '@/shared/components/Header';
 
 export default {
-  title: 'Pages/Homepage',
-  component: HomePageComponent,
+  title: 'Pages/List',
+  component: ListPage,
 };
 
 const Template = () => (
   <>
     <Header />
-    <HomePageComponent />
+    <ListPage />
     <Footer />
   </>
 );
