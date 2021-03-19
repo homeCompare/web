@@ -6,14 +6,14 @@ export const StyledCard = styled(Card)`
   width: 100%;
   ${({theme}) => theme.media('xl', `
     width: 1200px;
-  `)};
+  `)}
 `;
 
 export const CardImage = styled.div`
   ${({theme}) => theme.media('md', `
      width: 50%;
      float: left;
-  `)};
+  `)}
   .image-gallery-content {
     margin-left: 20px;
     margin-top: 15px;
@@ -48,7 +48,7 @@ export const CardImage = styled.div`
     ${({theme}) => theme.media('xl', `
       width: 100px;
       height: 100px;
-    `)};
+    `)}
   }
   .image-gallery-thumbnail.active, .image-gallery-thumbnail:hover, .image-gallery-thumbnail:focus {
     border: none;
@@ -73,16 +73,13 @@ export const CardImage = styled.div`
   }
   .image-gallery-slides {
     border-radius: 1%;
-      max-height: 350px;
-      margin-right: 20px;
-      margin-bottom: 15px;
-  
-    
+    max-height: 350px;
+    margin-right: 20px;
+    margin-bottom: 15px;
   }
   .image-gallery-thumbnail-inner {
-   width: 50px;
+     width: 50px;
   }
- 
 `;
 
 export const StyledCardContent = styled(CardContent)`
