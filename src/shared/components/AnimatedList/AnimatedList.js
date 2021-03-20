@@ -8,7 +8,7 @@ import ListItem from './UI/ListItem/ListItem';
 
 const StyledFlipper = styled(Flipper)`
   && {
-    width: 400px;
+    width: 80%;
     margin: 2rem auto;
   }
 `;
@@ -27,12 +27,16 @@ const List = styled.ul`
   }
 `;
 
-const AnimatedList = () => {
-  const listData = [...Array(7).keys()];
+export const AnimatedList = (homes) => {
+  const listData = homes.homes || [];
+  console.log(listData);
   const createCardFlipId = index => `listItem-${index}`;
   const [focused, setFocused] = useState(null);
 
-  const clicked = index => focused !== index && setFocused(index);
+  const clicked = index => {
+    if (focused === index) setFocused(null);
+    else setFocused(index);
+  };
   return (
     <StyledFlipper
       flipKey={focused}
@@ -45,7 +49,7 @@ const AnimatedList = () => {
       decisionData={focused}
     >
       <List>
-        {listData.map(index => {
+        {listData.map((listObj, index) => {
           return (
             <li key={index}>
               {index === focused ? (
@@ -53,7 +57,7 @@ const AnimatedList = () => {
                   index={focused}
                   onClick={clicked}
                   createCardFlipId={createCardFlipId}
-                  listData={listData}
+                  listData={listObj}
                 />
               ) : (
                 <ListItem
@@ -61,7 +65,7 @@ const AnimatedList = () => {
                   key={index}
                   onClick={clicked}
                   createCardFlipId={createCardFlipId}
-                  listData={listData}
+                  listData={listObj}
                 />
               )}
             </li>

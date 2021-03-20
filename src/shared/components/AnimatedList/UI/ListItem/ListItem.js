@@ -23,19 +23,26 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
               shouldFlip={shouldFlip(index)}
               delayUntil={createCardFlipId(index)}
             >
-              <Avatar />
+              <Avatar>
+                {listData.images?.length && (
+                  <img src={listData.images[0]} style={{height: '100%', width: '100%', display: 'block', borderRadius: '100px'}} />
+                )}
+              </Avatar>
             </Flipped>
             <Description>
-              {listData.slice(0, 3).map(i => (
-                <Flipped
-                  flipId={`description-${index}-${i}`}
-                  stagger="card-content"
-                  shouldFlip={shouldFlip(index)}
-                  delayUntil={createCardFlipId(index)}
-                >
-                  <div />
-                </Flipped>
-              ))}
+              {
+                Object.keys(listData).slice(0, 3).map(i => (
+                  <Flipped
+                    flipId={`description-${index}-${i}`}
+                    stagger="card-content"
+                    shouldFlip={shouldFlip(index)}
+                    delayUntil={createCardFlipId(index)}
+
+                  >
+                    <h1>{listData[i]}</h1>
+                  </Flipped>
+                ))
+              }
             </Description>
           </ListItemContent>
         </Flipped>

@@ -70,18 +70,15 @@ const SpecialButton = styled.button`
   text-transform:uppercase;
 letter-spacing: 3px;
    position:absolute;
-   font-size: 16px;
+   font-size: 22px;
   left:0;
   right:0;
   margin:0 auto;
   border: none;
   z-index:2;
-  width: ${props => (props.checked ? '95px' : '205px')};
-  height: ${props => (props.checked ? '95px' : '70px')}; 
-  @media (max-width: 768px) {
-    width: ${props => (props.checked ? '95px' : '150px')};
-    height: ${props => (props.checked ? '95px' : '50px')}; 
-  }
+  width: ${props => (props.checked ? '95px' : '325px')};
+  height: ${props => (props.checked ? '95px' : '95px')}; 
+
   background: ${props => (props.disabled ? '' : props.checked ? 'linear-gradient(to right, #ff7b6e 0%,#ff7b6e 100%)' : 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)')}; 
   display:block;
   border-radius:200px;

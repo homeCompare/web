@@ -15,6 +15,7 @@ import {getHomeShortAddress, getPriceWithCurrency} from '@/shared/utils/general'
 import ConfirmDialog from '@/shared/components/ConfirmDialog';
 import * as actions from '@/state/actions';
 import {useTranslation} from '@/shared/i18n';
+import {AnimatedList} from '@/shared/components/AnimatedList/AnimatedList';
 
 import HomeSubCell from './HomeSubCell';
 
@@ -59,53 +60,7 @@ const HomesList = () => {
 
   return (
     <Root>
-      <ConfirmDialog
-        title="confirm_delete_title"
-        content="confirm_delete_content"
-        open={Boolean(confirmRemoveHomeId)}
-        handleConfirm={onConfirmedRemoveButtonClick}
-        handleClose={() => setConfirmRemoveHomeId(null)}
-      />
-
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <HeaderCell>{t('address')}</HeaderCell>
-              <HeaderCell>{t('price')}</HeaderCell>
-              <HeaderCell>{t(snakeCase('numberOfRooms'))}</HeaderCell>
-              <HeaderCell>{t(snakeCase('entryDate'))}</HeaderCell>
-              <HeaderCell>{t(snakeCase('personalRate'))}</HeaderCell>
-              <HeaderCell>{t('manage')}</HeaderCell>
-            </TableRow>
-          </TableHead>
-
-          {Homes.map(home => {
-            const [isOpen, setIsOpen] = useState(false);
-
-            return (
-              <TableBody key={home.id}>
-                <StyledTableRow onClick={() => { setIsOpen(!isOpen); }}>
-                  <TableCell>{getHomeShortAddress(home)}</TableCell>
-                  <TableCell>{getPriceWithCurrency(home.price)}</TableCell>
-                  <TableCell>{home.numberOfRooms}</TableCell>
-                  <TableCell>{home.entryDate}</TableCell>
-                  <TableCell>{home.personalRate}</TableCell>
-                  <TableCell>Delete / Edit</TableCell> {/** todo: make a pritter icon and attach fix onClick too */}
-                </StyledTableRow>
-                {isOpen && (
-                  <TableRow key={`sub_${home.id}`}>
-                    <TableCell colSpan={6}>
-                      <HomeSubCell t={t} home={home} />
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            );
-          })}
-
-        </Table>
-      </TableContainer>
+      <AnimatedList homes={Homes} />
     </Root>
   );
 };

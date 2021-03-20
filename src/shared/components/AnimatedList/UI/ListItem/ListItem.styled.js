@@ -14,11 +14,14 @@ export const ListItemContent = styled.div`
 `;
 
 export const Avatar = styled.div`
- width: 4rem;
-  height: 4rem;
+ width: 6rem;
+  height: 6rem;
   border-radius: 100px;
   background-color: grey;
   margin-right: 2rem;
+  img {
+  background-size: cover;
+  }
 `;
 export const Description = styled.div`
   display: flex;
@@ -28,7 +31,7 @@ export const Description = styled.div`
     background-color: grey;
   width: 14rem;
   border-radius: 6px;
-  height: 0.5rem;
+  height: 1.2rem;
   }
 
   & > div:nth-of-type(2) {
