@@ -23,14 +23,15 @@ border-radius: 100px;
 `;
 
 export const Avatar = styled.div`
- width: 7rem;
-  height: 7rem;
+ width: 6rem;
+  height: 6rem;
   border-radius: 100px;
   background-color: grey;
   margin-right: 15px;
-  img {
+  ${StyledImage} {
     background-size: cover;
   }
+
 `;
 export const Description = styled.div`
   flex-wrap: wrap;
@@ -63,7 +64,8 @@ export const Description = styled.div`
 `;
 
 export const ExtendedDescription = styled(Description)`
-margin-left: 20%;
+margin-left: 15%;
+
 `;
 
 export const StyledCardContainer = styled.div`

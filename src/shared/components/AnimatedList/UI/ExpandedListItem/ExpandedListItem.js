@@ -35,16 +35,21 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
               </Flipped>
 
               <ExtendedDescription>
-                { Object.keys(listData).slice(0, 8).map(i => (
-                  <Flipped
-                    flipId={`description-${index}-${i}`}
-                    stagger="card-content"
-                    delayUntil={createCardFlipId(index)}
-                  >
-                    <h3 style={{flex: '1 0 35%'}}>{`${i}: ${listData[i]}`}</h3>
+                { Object.keys(listData).slice(0, 18).map(i => {
+                  if (i !== 'freeText' && i !== 'entryDate' && i !== 'personalRate') {
+                    return (
+                      <Flipped
+                        flipId={`description-${index}-${i}`}
+                        stagger="card-content"
+                        delayUntil={createCardFlipId(index)}
+                      >
 
-                  </Flipped>
-                ))}
+                        <h3 style={{flex: '1 0 30%'}}>{`${i} : ${listData[i]}`}</h3>
+
+                      </Flipped>
+                    );
+                  } return null;
+                })}
               </ExtendedDescription>
             </ExpandedListItemContent>
             <AdditionalContent>

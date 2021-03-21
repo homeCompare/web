@@ -55,6 +55,7 @@ export const AdditionalContent = styled.div`
   }
   & > div:nth-of-type(2) {
     animation-delay: 0.15s;
+    border-radius: 0;
   }
   & > div:nth-of-type(3) {
     animation-delay: 0.3s;
@@ -82,7 +83,6 @@ export const StyledCardImage = styled.div`
   }
   .image-gallery-slide .image-gallery-image {
     object-fit: cover;
-    border-radius: 2.5%;
   }
   .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
     width: 48px;
