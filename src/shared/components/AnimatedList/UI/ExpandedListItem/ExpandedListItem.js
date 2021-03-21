@@ -102,7 +102,7 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                   </StyledImageContainer>
                   {listData.freeText ? (
                     <StyledFreeTextArea>
-                      <h3>{listData.freeText}</h3>
+                      <h4>{listData.freeText}</h4>
                     </StyledFreeTextArea>
                   ) : null }
                 </>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledListItem = styled.div`
   width: 100%;
   cursor: pointer;
-  background-color: #d0d0d0;
+  background-color: whitesmoke;
   overflow: hidden;
 `;
 export const ListItemContent = styled.div`
@@ -64,7 +64,7 @@ export const Description = styled.div`
 `;
 
 export const ExtendedDescription = styled(Description)`
-
+ width: 80%
 `;
 
 export const StyledCardContainer = styled.div`

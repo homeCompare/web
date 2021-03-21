@@ -12,7 +12,7 @@ import {StyledListItem, ListItemContent, Avatar, Description, StyledImage} from 
 
 const shouldFlip = index => (prev, current) => index === prev || index === current;
 
-const StyledTag = styled.h1`
+const StyledTag = styled.h3`
 && {
   margin-bottom: 0;
   margin-right: 20px;

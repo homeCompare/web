@@ -20,7 +20,7 @@ export const AnimatedInFlipped = styled(Flipped)`
 
 export const StyledExpandedListItem = styled.div`
   cursor: pointer;
-  background-color: #d0d0d0;
+  background-color: whitesmoke;
   padding-bottom: 2rem;
 `;
 export const ExpandedListItemContent = styled.div`
@@ -49,13 +49,18 @@ export const AdditionalContent = styled.div`
   & > div {
     opacity: 0;
   border-radius: 5%;
-  background-color: gray;
+  background-color: ${({theme}) => theme.colors.lightGrey};
   height: 5rem;
   animation: ${FadeInAnim} 0.4s forwards;
   }
   & > div:nth-of-type(2) {
     animation-delay: 0.15s;
-    border-radius: 0;
+    border-radius: 25px;
+    overflow: hidden;
+    h4 {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
   }
   & > div:nth-of-type(3) {
     animation-delay: 0.3s;
