@@ -15,7 +15,7 @@ const Home = ({homeId}) => {
     <StyledCard>
       {images?.length && (
         <CardImage>
-          <ImageGallery images={images} />
+          <ImageGallery images={images} showThumbnails />
         </CardImage>
       )}
 

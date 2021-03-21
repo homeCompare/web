@@ -29,7 +29,6 @@ const List = styled.ul`
 
 export const AnimatedList = (homes) => {
   const listData = homes.homes || [];
-  console.log(listData);
   const createCardFlipId = index => `listItem-${index}`;
   const [focused, setFocused] = useState(null);
 

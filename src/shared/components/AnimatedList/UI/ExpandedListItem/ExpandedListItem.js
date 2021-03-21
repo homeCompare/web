@@ -5,12 +5,11 @@ import PropTypes from 'prop-types';
 
 import ImageGallery from '@/shared/components/ImageGallery';
 
-import {Description} from '../ListItem/ListItem.styled';
+import {StyledImage, ExtendedDescription} from '../ListItem/ListItem.styled';
 
-import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage} from './ExpandedListItem.styled';
+import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea} from './ExpandedListItem.styled';
 
 const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
-  console.log(Object.keys(listData).slice(0, 3));
   return (
     <AnimatedInFlipped
       flipId={createCardFlipId(index)}
@@ -30,34 +29,39 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
               >
                 <ExpandedAvatar>
                   {listData.images?.length && (
-                    <img src={listData.images[0]} style={{height: '100%', width: '100%', display: 'block', borderRadius: '100px'}} />
+                    <StyledImage alt="home" src={listData.images[0]} />
                   )}
                 </ExpandedAvatar>
               </Flipped>
 
-              <Description>
-                { Object.keys(listData).slice(0, 3).map(i => (
+              <ExtendedDescription>
+                { Object.keys(listData).slice(0, 8).map(i => (
                   <Flipped
                     flipId={`description-${index}-${i}`}
                     stagger="card-content"
                     delayUntil={createCardFlipId(index)}
                   >
-
-                    <h1>{`${i}: ${listData[i]}`}</h1>
+                    <h3 style={{flex: '1 0 35%'}}>{`${i}: ${listData[i]}`}</h3>
 
                   </Flipped>
                 ))}
-              </Description>
+              </ExtendedDescription>
             </ExpandedListItemContent>
             <AdditionalContent>
 
               {listData.images?.length && (
-
-                <div style={{width: '100%', height: '100%'}}>
-                  <StyledCardImage>
-                    <ImageGallery images={listData.images} />
-                  </StyledCardImage>
-                </div>
+                <>
+                  <StyledImageContainer>
+                    <StyledCardImage>
+                      <ImageGallery images={listData.images} />
+                    </StyledCardImage>
+                  </StyledImageContainer>
+                  {listData.freeText ? (
+                    <StyledFreeTextArea>
+                      <h3>{listData.freeText}</h3>
+                    </StyledFreeTextArea>
+                  ) : null }
+                </>
 
               )}
             </AdditionalContent>

@@ -59,7 +59,7 @@ const HomesList = () => {
   };
 
   return (
-    <Root>
+    <Root style={{overflow: 'auto'}}>
       <AnimatedList homes={Homes} />
     </Root>
   );

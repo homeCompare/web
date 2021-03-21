@@ -3,7 +3,7 @@ import React from 'react';
 import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 
-import {StyledListItem, ListItemContent, Avatar, Description} from './ListItem.styled';
+import {StyledListItem, ListItemContent, Avatar, Description, StyledImage} from './ListItem.styled';
 
 const shouldFlip = index => (prev, current) => index === prev || index === current;
 
@@ -25,13 +25,13 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
             >
               <Avatar>
                 {listData.images?.length && (
-                  <img src={listData.images[0]} style={{height: '100%', width: '100%', display: 'block', borderRadius: '100px'}} />
+                  <StyledImage src={listData.images[0]} alt="home" />
                 )}
               </Avatar>
             </Flipped>
             <Description>
               {
-                Object.keys(listData).slice(0, 3).map(i => (
+                ['city', 'street', 'price'].map(i => (
                   <Flipped
                     flipId={`description-${index}-${i}`}
                     stagger="card-content"

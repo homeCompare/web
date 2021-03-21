@@ -13,6 +13,14 @@ export const ListItemContent = styled.div`
   padding: 1rem;
 `;
 
+export const StyledImage = styled.img`
+height: 100%; 
+width: 100%; 
+display: block; 
+border-radius: 100px;
+
+`;
+
 export const Avatar = styled.div`
  width: 6rem;
   height: 6rem;
@@ -20,13 +28,17 @@ export const Avatar = styled.div`
   background-color: grey;
   margin-right: 2rem;
   img {
-  background-size: cover;
+    background-size: cover;
   }
 `;
 export const Description = styled.div`
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  h1 {
+    margin-right: 20px;
+  }
   & > div {
     background-color: grey;
   width: 14rem;
@@ -49,4 +61,20 @@ export const Description = styled.div`
   
 
 
+`;
+
+export const ExtendedDescription = styled(Description)`
+margin-left: 20%;
+`;
+
+export const StyledCardContainer = styled.div`
+width: 90%; 
+height: 100%; 
+margin-left: 5%;
+`;
+
+export const StyledFreeTextArea = styled.div`
+width: 90%;
+ height: 200px;
+ margin-left: 5%;
 `;
