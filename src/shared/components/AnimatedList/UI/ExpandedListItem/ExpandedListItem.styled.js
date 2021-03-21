@@ -33,8 +33,8 @@ export const ExpandedListItemContent = styled.div`
 export const ExpandedAvatar = styled.div`
   border-radius: 100px;
   background-color: grey;
-  width: 10rem;
-  height: 10rem;
+  width: 12rem;
+  height: 12rem;
   margin-right: 0;
   margin-bottom: 1rem;
   img {
@@ -48,7 +48,7 @@ export const AdditionalContent = styled.div`
   margin-top: 2rem;
   & > div {
     opacity: 0;
-  border-radius: 3px;
+  border-radius: 5%;
   background-color: gray;
   height: 5rem;
   animation: ${FadeInAnim} 0.4s forwards;
@@ -65,8 +65,7 @@ export const AdditionalContent = styled.div`
 `;
 
 export const StyledCardImage = styled.div`
-
-
+  
 
 
   .image-gallery-left-nav {
@@ -83,6 +82,7 @@ export const StyledCardImage = styled.div`
   }
   .image-gallery-slide .image-gallery-image {
     object-fit: cover;
+    border-radius: 2.5%;
   }
   .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
     width: 48px;
@@ -92,6 +92,7 @@ export const StyledCardImage = styled.div`
   .image-gallery-slides {
     max-height: 800px;
     margin-bottom: 5px;
+    border-radius: 2.5%;
   }
 `;
 
