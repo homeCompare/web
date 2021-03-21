@@ -2,12 +2,28 @@ import React from 'react';
 
 import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
+import CloseIcon from '@material-ui/icons/Close';
+import {useDispatch} from 'react-redux';
+import styled from 'styled-components';
 
-import {StyledListItem, ListItemContent, Avatar, Description} from './ListItem.styled';
+import * as actions from '@/state/actions';
+
+import {StyledListItem, ListItemContent, Avatar, Description, StyledImage} from './ListItem.styled';
 
 const shouldFlip = index => (prev, current) => index === prev || index === current;
 
+const StyledTag = styled.h1`
+&& {
+  margin-bottom: 0;
+  margin-right: 20px;
+}`;
+
 const ListItem = ({index, onClick, createCardFlipId, listData}) => {
+  const dispatch = useDispatch();
+
+  const onConfirmedRemoveButtonClick = (homeId) => {
+    dispatch(actions.removeHomeById(homeId));
+  };
   return (
     <Flipped
       flipId={createCardFlipId(index)}
@@ -23,19 +39,31 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
               shouldFlip={shouldFlip(index)}
               delayUntil={createCardFlipId(index)}
             >
-              <Avatar />
+              <Avatar>
+                {listData.images?.length && (
+                  <StyledImage src={listData.images[0]} alt="home" />
+                )}
+              </Avatar>
             </Flipped>
             <Description>
-              {listData.slice(0, 3).map(i => (
-                <Flipped
-                  flipId={`description-${index}-${i}`}
-                  stagger="card-content"
-                  shouldFlip={shouldFlip(index)}
-                  delayUntil={createCardFlipId(index)}
-                >
-                  <div />
-                </Flipped>
-              ))}
+              <div>
+                {
+                  ['city', 'street', 'price'].map(i => (
+                    <Flipped
+                      flipId={`description-${index}-${i}`}
+                      stagger="card-content"
+                      shouldFlip={shouldFlip(index)}
+                      delayUntil={createCardFlipId(index)}
+
+                    >
+                      <StyledTag>{listData[i]}</StyledTag>
+
+                    </Flipped>
+                  ))
+                }
+              </div>
+              <CloseIcon onClick={() => onConfirmedRemoveButtonClick(listData.id)} />
+
             </Description>
           </ListItemContent>
         </Flipped>

@@ -73,6 +73,8 @@ const ColorlibConnector = withStyles({
 const SubmitWrapper = styled.div`
   display: flex;
   justify-content: center;
+  transform: scale(0.55);
+  margin-right: 80px;
 
 `;
 

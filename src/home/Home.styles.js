@@ -63,7 +63,6 @@ export const CardImage = styled.div`
     margin-left: 12px;
   }
   .image-gallery-thumbnails {
-    padding-top: 12px;
     padding-bottom: 18px;
   }
   .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
@@ -75,7 +74,7 @@ export const CardImage = styled.div`
     border-radius: 1%;
     max-height: 350px;
     margin-right: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
   .image-gallery-thumbnail-inner {
      width: 50px;
