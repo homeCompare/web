@@ -2,6 +2,10 @@ import React from 'react';
 
 import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
+import BuildIcon from '@material-ui/icons/Build';
+import DriveEtaIcon from '@material-ui/icons/DriveEta';
+import BusinessIcon from '@material-ui/icons/Business';
 
 import ImageGallery from '@/shared/components/ImageGallery';
 
@@ -10,6 +14,7 @@ import {StyledImage, ExtendedDescription} from '../ListItem/ListItem.styled';
 import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea} from './ExpandedListItem.styled';
 
 const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
+  console.log(listData);
   return (
     <AnimatedInFlipped
       flipId={createCardFlipId(index)}
@@ -43,8 +48,42 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                         stagger="card-content"
                         delayUntil={createCardFlipId(index)}
                       >
+                        <>
+                          <h3 style={{flex: '1 0 50%'}}>{
+                            (i === 'hasAirConditioner')
+                              ? (
+                                <div style={{display: 'flex', flexDirection: 'row'}}>
+                                  <h3 style={{marginRight: '10px'}}>Air Conditioner</h3>
+                                  <AcUnitIcon />
+                                </div>
+                              )
 
-                        <h3 style={{flex: '1 0 30%'}}>{`${i} : ${listData[i]}`}</h3>
+                              : (i === 'isRenovated')
+                                ? (
+                                  <div style={{display: 'flex', flexDirection: 'row'}}>
+                                    <h3 style={{marginRight: '10px'}}>Renovated</h3>
+                                    <BuildIcon />
+                                  </div>
+                                )
+
+                                : (i === 'hasGarage') ? (
+                                  <div style={{display: 'flex', flexDirection: 'row'}}>
+                                    <h3 style={{marginRight: '10px'}}>Garage</h3>
+                                    <DriveEtaIcon />
+                                  </div>
+                                )
+                                  : (i === 'hasBalcony') ? (
+                                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                                      <h3 style={{marginRight: '10px'}}>Balcony</h3>
+                                      <BusinessIcon />
+                                    </div>
+                                  )
+                                    : `${i[0].toUpperCase() + i.slice(1, i.length)}`
+                          }
+                          </h3>
+                          <h3>{listData[i]}
+                          </h3>
+                        </>
 
                       </Flipped>
                     );

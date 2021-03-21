@@ -64,7 +64,6 @@ export const Description = styled.div`
 `;
 
 export const ExtendedDescription = styled(Description)`
-margin-left: 15%;
 
 `;
 
