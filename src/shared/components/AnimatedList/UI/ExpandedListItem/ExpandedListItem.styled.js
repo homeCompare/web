@@ -20,6 +20,15 @@ export const AnimatedInFlipped = styled(Flipped)`
 
 export const StyledHomeField = styled.h3`
  flex: 1 0 50%;
+ ${({theme}) => theme.media('xs', `
+    font-size: 12px;
+     `)}
+ ${({theme}) => theme.media('md', `
+    font-size: 12px;
+     `)}
+ ${({theme}) => theme.media('lg', `
+    font-size: 16px;
+     `)}
 `;
 
 export const StyledExpandedListItem = styled.div`
@@ -83,7 +92,12 @@ export const StyledCardImage = styled.div`
   .image-gallery-image {
     object-fit: cover;
     width: 100%;
+    ${({theme}) => theme.media('xs', `
+    height: 400px;
+     `)}
+    ${({theme}) => theme.media('md', `
     height: 800px;
+     `)}
     max-height: 800px;
   }
   .image-gallery-slide .image-gallery-image {
@@ -122,9 +136,15 @@ export const SectionsWrapper = styled.div`
 && {
   margin-left: 5%;
  display: flex;
- flex-direction: row;
- align-items: flex-start;
  justify-content: center;
+ ${({theme}) => theme.media('xs', `
+    flex-direction: column;
+    align-items: center;
+     `)}
+ ${({theme}) => theme.media('md', `
+    flex-direction: row;
+    align-items: flex-start;
+     `)}
  button {
    border: none;
    background-color: whitesmoke;
@@ -149,8 +169,13 @@ export const Section = styled.div`
 `;
 
 export const InnerSection = styled.div`
+${({theme}) => theme.media('md', `
+     width: 100px;
+     `)}
+       ${({theme}) => theme.media('lg', `
+       width: 250px;
+     `)}
   display: flex;
-  width: 250px;
   margin-top: 40px;
 `;
 
@@ -158,8 +183,17 @@ export const SectionCard = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: whitesmoke;
   border-radius: 25px;
-  width: 250px;
-  margin-right: 25px;
+  ${({theme}) => theme.media('xs', `
+    width: 200px;
+     `)}
+  ${({theme}) => theme.media('md', `
+     width: 140px;
+     margin-right: 25px;
+     `)}
+  ${({theme}) => theme.media('lg', `
+       width: 250px;
+     `)}
+
   h3 {
     margin: 10px;
   }

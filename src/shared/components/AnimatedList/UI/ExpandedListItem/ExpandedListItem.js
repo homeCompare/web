@@ -16,7 +16,6 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
   const [showLocation, setShowLocation] = useState(false);
   const [showPricing, setShowPricing] = useState(false);
   const [showFeatures, setShowFeatures] = useState(false);
-  console.log(listData);
   return (
     <AnimatedInFlipped
       flipId={createCardFlipId(index)}
@@ -61,8 +60,8 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                                 `${i[0].toUpperCase() + i.slice(1, i.length)}`
                               }
                               </StyledHomeField>
-                              <h3>{listData[i]}
-                              </h3>
+                              <StyledHomeField>{listData[i]}
+                              </StyledHomeField>
                             </InnerSection>
 
                           </Flipped>
@@ -89,8 +88,8 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                                 `${i[0].toUpperCase() + i.slice(1, i.length)}`
                               }
                               </StyledHomeField>
-                              <h3>{listData[i]}
-                              </h3>
+                              <StyledHomeField>{listData[i]}
+                              </StyledHomeField>
                             </InnerSection>
 
                           </Flipped>
@@ -117,8 +116,8 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                                 `${i[0].toUpperCase() + i.slice(1, i.length)}`
                               }
                               </StyledHomeField>
-                              <h3>{listData[i]}
-                              </h3>
+                              <StyledHomeField>{listData[i]}
+                              </StyledHomeField>
                             </InnerSection>
 
                           </Flipped>
