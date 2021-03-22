@@ -111,7 +111,7 @@ export default [{
   type: 'date',
   initialValue: halfYearFromNowString,
 }, {
-  name: 'hasBlacony',
+  name: 'hasBalcony',
   label: 'has_balcony',
   type: 'switch',
   initialValue: false,

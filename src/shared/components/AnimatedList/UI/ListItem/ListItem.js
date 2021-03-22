@@ -8,15 +8,9 @@ import styled from 'styled-components';
 
 import * as actions from '@/state/actions';
 
-import {StyledListItem, ListItemContent, Avatar, Description, StyledImage} from './ListItem.styled';
+import {StyledListItem, ListItemContent, Avatar, Description, StyledImage, StyledTag} from './ListItem.styled';
 
 const shouldFlip = index => (prev, current) => index === prev || index === current;
-
-const StyledTag = styled.h1`
-&& {
-  margin-bottom: 0;
-  margin-right: 20px;
-}`;
 
 const ListItem = ({index, onClick, createCardFlipId, listData}) => {
   const dispatch = useDispatch();
@@ -30,6 +24,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
       stagger="card"
       shouldInvert={shouldFlip(index)}
     >
+
       <StyledListItem onClick={() => onClick(index)}>
         <Flipped inverseFlipId={createCardFlipId(index)}>
           <ListItemContent>

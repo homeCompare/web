@@ -18,16 +18,31 @@ export const AnimatedInFlipped = styled(Flipped)`
  }
 `;
 
+export const StyledHomeField = styled.h3`
+ flex: 1 0 50%;
+ ${({theme}) => theme.media('xs', `
+    font-size: 12px;
+     `)}
+ ${({theme}) => theme.media('md', `
+    font-size: 12px;
+     `)}
+ ${({theme}) => theme.media('lg', `
+    font-size: 16px;
+     `)}
+`;
+
 export const StyledExpandedListItem = styled.div`
   cursor: pointer;
-  background-color: #d0d0d0;
+  background-color: whitesmoke;
   padding-bottom: 2rem;
+  border-radius: 25px;
 `;
 export const ExpandedListItemContent = styled.div`
  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 `;
 
 export const ExpandedAvatar = styled.div`
@@ -43,19 +58,23 @@ export const ExpandedAvatar = styled.div`
 `;
 
 export const AdditionalContent = styled.div`
-
   width: 100%;
   margin-top: 2rem;
   & > div {
     opacity: 0;
-  border-radius: 5%;
-  background-color: gray;
+  border-radius: 25px;
+  background-color: whitesmoke;
   height: 5rem;
   animation: ${FadeInAnim} 0.4s forwards;
   }
   & > div:nth-of-type(2) {
     animation-delay: 0.15s;
-    border-radius: 0;
+    border-radius: 25px;
+    overflow: hidden;
+    h4 {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
   }
   & > div:nth-of-type(3) {
     animation-delay: 0.3s;
@@ -66,19 +85,19 @@ export const AdditionalContent = styled.div`
 `;
 
 export const StyledCardImage = styled.div`
-  
+   border-radius: 25px;
 
 
-  .image-gallery-left-nav {
-    padding-left: 10px;
-  }
-  .image-gallery-right-nav {
-    padding-right: 25px;
-  }
+
   .image-gallery-image {
     object-fit: cover;
     width: 100%;
+    ${({theme}) => theme.media('xs', `
+    height: 400px;
+     `)}
+    ${({theme}) => theme.media('md', `
     height: 800px;
+     `)}
     max-height: 800px;
   }
   .image-gallery-slide .image-gallery-image {
@@ -92,7 +111,7 @@ export const StyledCardImage = styled.div`
   .image-gallery-slides {
     max-height: 800px;
     margin-bottom: 5px;
-    border-radius: 2.5%;
+    border-radius: 25px;
   }
 `;
 
@@ -110,4 +129,72 @@ export const StyledFreeTextArea = styled.div`
   height: 200px;
   margin-left: 5%;
 }
+`;
+
+export const SectionsWrapper = styled.div`
+
+&& {
+  margin-left: 5%;
+ display: flex;
+ justify-content: center;
+ ${({theme}) => theme.media('xs', `
+    flex-direction: column;
+    align-items: center;
+     `)}
+ ${({theme}) => theme.media('md', `
+    flex-direction: row;
+    align-items: flex-start;
+     `)}
+ button {
+   border: none;
+   background-color: whitesmoke;
+   font-weight: 700;
+   font-size: 20px;
+   margin-right: 5px;
+ }
+}
+ 
+`;
+
+export const Section = styled.div`
+
+  margin-top: 50px;
+  margin-bottom: 50px;
+  & > div:nth-of-type(1) {
+    margin-left: 25%;
+  }
+  & > div:nth-of-type(2) {
+    margin-left: 0%;
+  }
+`;
+
+export const InnerSection = styled.div`
+${({theme}) => theme.media('md', `
+     width: 100px;
+     `)}
+       ${({theme}) => theme.media('lg', `
+       width: 250px;
+     `)}
+  display: flex;
+  margin-top: 40px;
+`;
+
+export const SectionCard = styled.div`
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: whitesmoke;
+  border-radius: 25px;
+  ${({theme}) => theme.media('xs', `
+    width: 200px;
+     `)}
+  ${({theme}) => theme.media('md', `
+     width: 140px;
+     margin-right: 25px;
+     `)}
+  ${({theme}) => theme.media('lg', `
+       width: 250px;
+     `)}
+
+  h3 {
+    margin: 10px;
+  }
 `;
