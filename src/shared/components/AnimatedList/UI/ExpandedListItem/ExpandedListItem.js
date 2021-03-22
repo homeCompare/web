@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
+import EuroIcon from '@material-ui/icons/Euro';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import AddIcon from '@material-ui/icons/Add';
 
 import ImageGallery from '@/shared/components/ImageGallery';
 
 import {StyledImage, ExtendedDescription} from '../ListItem/ListItem.styled';
 
-import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea, StyledHomeField} from './ExpandedListItem.styled';
+import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea, StyledHomeField, SectionsWrapper, Section, InnerSection} from './ExpandedListItem.styled';
 
 const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
+  const [showLocation, setShowLocation] = useState(false);
+  const [showPricing, setShowPricing] = useState(false);
+  const [showFeatures, setShowFeatures] = useState(false);
   console.log(listData);
   return (
     <AnimatedInFlipped
@@ -34,31 +40,90 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                   )}
                 </ExpandedAvatar>
               </Flipped>
-
-              <ExtendedDescription>
-                { Object.keys(listData).slice(0, 18).map(i => {
-                  if (i !== 'freeText' && i !== 'entryDate' && i !== 'personalRate') {
-                    return (
-                      <Flipped
-                        flipId={`description-${index}-${i}`}
-                        stagger="card-content"
-                        delayUntil={createCardFlipId(index)}
-                      >
-                        <>
-                          <StyledHomeField>{
-                            `${i[0].toUpperCase() + i.slice(1, i.length)}`
-                          }
-                          </StyledHomeField>
-                          <h3>{listData[i]}
-                          </h3>
-                        </>
-
-                      </Flipped>
-                    );
-                  } return null;
-                })}
-              </ExtendedDescription>
             </ExpandedListItemContent>
+            <ExtendedDescription>
+              <SectionsWrapper>
+                <Section>
+                  <div style={{display: 'flex'}}>
+                    <button type="button" onClick={() => setShowLocation(!showLocation)}>Location</button><LocationCityIcon />
+                  </div>
+                  { Object.keys(listData).slice(0, 5).map(i => {
+                    if (i !== 'freeText' && i !== 'entryDate' && i !== 'personalRate' && showLocation) {
+                      return (
+                        <Flipped
+                          flipId={`description-${index}-${i}`}
+                          stagger="card-content"
+                          delayUntil={createCardFlipId(index)}
+                        >
+                          <InnerSection>
+                            <StyledHomeField>{
+                              `${i[0].toUpperCase() + i.slice(1, i.length)}`
+                            }
+                            </StyledHomeField>
+                            <h3>{listData[i]}
+                            </h3>
+                          </InnerSection>
+
+                        </Flipped>
+                      );
+                    } return null;
+                  })}
+                </Section>
+                <Section>
+                  <div style={{display: 'flex'}}>
+                    <button type="button" onClick={() => setShowPricing(!showPricing)}>Pricing</button><EuroIcon />
+                  </div>
+                  { Object.keys(listData).slice(5, 10).map(i => {
+                    if (i !== 'freeText' && i !== 'entryDate' && i !== 'personalRate' && showPricing) {
+                      return (
+                        <Flipped
+                          flipId={`description-${index}-${i}`}
+                          stagger="card-content"
+                          delayUntil={createCardFlipId(index)}
+                        >
+                          <InnerSection>
+                            <StyledHomeField>{
+                              `${i[0].toUpperCase() + i.slice(1, i.length)}`
+                            }
+                            </StyledHomeField>
+                            <h3>{listData[i]}
+                            </h3>
+                          </InnerSection>
+
+                        </Flipped>
+                      );
+                    } return null;
+                  })}
+                </Section>
+                <Section>
+                  <div style={{display: 'flex'}}>
+                    <button type="button" onClick={() => setShowFeatures(!showFeatures)}>Features</button><AddIcon />
+                  </div>
+                  { Object.keys(listData).slice(10, 18).map(i => {
+                    if (i !== 'freeText' && i !== 'entryDate' && i !== 'personalRate' && showFeatures) {
+                      return (
+                        <Flipped
+                          flipId={`description-${index}-${i}`}
+                          stagger="card-content"
+                          delayUntil={createCardFlipId(index)}
+                        >
+                          <InnerSection>
+                            <StyledHomeField>{
+                              `${i[0].toUpperCase() + i.slice(1, i.length)}`
+                            }
+                            </StyledHomeField>
+                            <h3>{listData[i]}
+                            </h3>
+                          </InnerSection>
+
+                        </Flipped>
+                      );
+                    } return null;
+                  })}
+                </Section>
+              </SectionsWrapper>
+            </ExtendedDescription>
+
             <AdditionalContent>
 
               {listData.images?.length && (

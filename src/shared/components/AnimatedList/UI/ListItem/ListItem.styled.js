@@ -87,8 +87,8 @@ export const Description = styled.div`
 
 `;
 
-export const ExtendedDescription = styled(Description)`
- width: 80%
+export const ExtendedDescription = styled.div`
+ width: 100%;
 `;
 
 export const StyledCardContainer = styled.div`

@@ -116,3 +116,31 @@ export const StyledFreeTextArea = styled.div`
   margin-left: 5%;
 }
 `;
+
+export const SectionsWrapper = styled.div`
+
+&& {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ button {
+   border: none;
+   background-color: whitesmoke;
+   font-weight: 700;
+   font-size: 20px;
+ }
+}
+ 
+`;
+
+export const Section = styled.div`
+  margin-top: 50px;
+  margin-bottom: 50px;
+`;
+
+export const InnerSection = styled.div`
+  display: flex;
+  width: 200px;
+  margin-top: 40px;
+`;
