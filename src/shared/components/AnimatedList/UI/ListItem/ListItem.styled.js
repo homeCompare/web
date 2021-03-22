@@ -1,13 +1,33 @@
 import styled from 'styled-components';
 
 export const StyledListItem = styled.div`
-  width: 100%;
+${({theme}) => theme.media('xs', `
+    width: 430px;
+    transform: scale(0.54);
+  `)}
+${({theme}) => theme.media('md', `
+     width: 100%;
+     transform: scale(1);
+  `)}
+
   cursor: pointer;
   background-color: whitesmoke;
   overflow: hidden;
   border-radius: 25px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
+
+export const StyledTag = styled.h3`
+&& {
+  ${({theme}) => theme.media('xs', `
+    font-size: 16px;
+  `)}
+  ${({theme}) => theme.media('md', `
+    font-size: 20px;
+  `)}
+  margin-bottom: 0;
+  margin-right: 20px;
+}`;
 
 export const ListItemContent = styled.div`
  display: flex;

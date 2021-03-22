@@ -18,6 +18,10 @@ export const AnimatedInFlipped = styled(Flipped)`
  }
 `;
 
+export const StyledHomeField = styled.h3`
+ flex: 1 0 50%;
+`;
+
 export const StyledExpandedListItem = styled.div`
   cursor: pointer;
   background-color: whitesmoke;
@@ -45,13 +49,12 @@ export const ExpandedAvatar = styled.div`
 `;
 
 export const AdditionalContent = styled.div`
-
   width: 100%;
   margin-top: 2rem;
   & > div {
     opacity: 0;
   border-radius: 25px;
-  background-color: ${({theme}) => theme.colors.lightGrey};
+  background-color: whitesmoke;
   height: 5rem;
   animation: ${FadeInAnim} 0.4s forwards;
   }
