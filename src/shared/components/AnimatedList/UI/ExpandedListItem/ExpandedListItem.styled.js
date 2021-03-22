@@ -120,27 +120,47 @@ export const StyledFreeTextArea = styled.div`
 export const SectionsWrapper = styled.div`
 
 && {
+  margin-left: 5%;
  display: flex;
- flex-direction: column;
- align-items: center;
+ flex-direction: row;
+ align-items: flex-start;
  justify-content: center;
  button {
    border: none;
    background-color: whitesmoke;
    font-weight: 700;
    font-size: 20px;
+   margin-right: 5px;
  }
 }
  
 `;
 
 export const Section = styled.div`
+
   margin-top: 50px;
   margin-bottom: 50px;
+  & > div:nth-of-type(1) {
+    margin-left: 25%;
+  }
+  & > div:nth-of-type(2) {
+    margin-left: 0%;
+  }
 `;
 
 export const InnerSection = styled.div`
   display: flex;
-  width: 200px;
+  width: 250px;
   margin-top: 40px;
+`;
+
+export const SectionCard = styled.div`
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: whitesmoke;
+  border-radius: 25px;
+  width: 250px;
+  margin-right: 25px;
+  h3 {
+    margin: 10px;
+  }
 `;
