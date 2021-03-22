@@ -5,7 +5,10 @@ export const StyledListItem = styled.div`
   cursor: pointer;
   background-color: whitesmoke;
   overflow: hidden;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
+
 export const ListItemContent = styled.div`
  display: flex;
   flex-direction: row;
@@ -23,17 +26,18 @@ border-radius: 100px;
 `;
 
 export const Avatar = styled.div`
- width: 6rem;
+
+ width: 7rem;
   height: 6rem;
   border-radius: 100px;
   background-color: grey;
-  margin-right: 15px;
   ${StyledImage} {
     background-size: cover;
   }
 
 `;
 export const Description = styled.div`
+  margin-left: 15px;
   flex-wrap: wrap;
   display: flex;
   align-items: center;

@@ -39,7 +39,7 @@ export const AnimatedList = (homes) => {
   return (
     <StyledFlipper
       flipKey={focused}
-      spring="gentle"
+      spring={false}
       staggerConfig={{
         card: {
           reverse: focused !== null,

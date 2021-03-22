@@ -22,12 +22,14 @@ export const StyledExpandedListItem = styled.div`
   cursor: pointer;
   background-color: whitesmoke;
   padding-bottom: 2rem;
+  border-radius: 25px;
 `;
 export const ExpandedListItemContent = styled.div`
  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 `;
 
 export const ExpandedAvatar = styled.div`
@@ -48,7 +50,7 @@ export const AdditionalContent = styled.div`
   margin-top: 2rem;
   & > div {
     opacity: 0;
-  border-radius: 5%;
+  border-radius: 25px;
   background-color: ${({theme}) => theme.colors.lightGrey};
   height: 5rem;
   animation: ${FadeInAnim} 0.4s forwards;
@@ -71,15 +73,10 @@ export const AdditionalContent = styled.div`
 `;
 
 export const StyledCardImage = styled.div`
-  
+   border-radius: 25px;
 
 
-  .image-gallery-left-nav {
-    padding-left: 10px;
-  }
-  .image-gallery-right-nav {
-    padding-right: 25px;
-  }
+
   .image-gallery-image {
     object-fit: cover;
     width: 100%;
@@ -97,7 +94,7 @@ export const StyledCardImage = styled.div`
   .image-gallery-slides {
     max-height: 800px;
     margin-bottom: 5px;
-    border-radius: 2.5%;
+    border-radius: 25px;
   }
 `;
 

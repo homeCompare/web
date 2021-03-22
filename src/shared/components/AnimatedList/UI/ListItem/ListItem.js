@@ -30,6 +30,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
       stagger="card"
       shouldInvert={shouldFlip(index)}
     >
+
       <StyledListItem onClick={() => onClick(index)}>
         <Flipped inverseFlipId={createCardFlipId(index)}>
           <ListItemContent>
