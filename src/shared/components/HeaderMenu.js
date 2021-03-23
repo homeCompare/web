@@ -105,7 +105,7 @@ const Menu = ({children}) => {
               <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
             </MenuLI>
           ))}
-          <MenuLI><MenuLink href="/">{children}</MenuLink></MenuLI>
+          {children ? <MenuLI><MenuLink href="/">{children}</MenuLink></MenuLI> : null}
         </MenuUL>
 
       </MenuContainer>
