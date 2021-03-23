@@ -1,18 +1,31 @@
 import {useState} from 'react';
 
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import {Flipped} from 'react-flip-toolkit';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 
 import {SectionCard, InnerSection, Section, StyledHomeField} from '../ExpandedListItem/ExpandedListItem.styled';
 
-const Sections = ({sectionIcon, object, index, startProp, endProp, createCardFlipId, sectionName, features}) => {
+const IconWrapper = styled.div`
+display: flex;
+margin-top: 5px;
+justify-content: flex-start;
+`;
+const ButtonWrapper = styled.div`
+display: flex;
+margin-bottom: 20px;
+`;
+
+const Sections = ({sectionIcon,
+  object, index, startProp, endProp, createCardFlipId, sectionName, features}) => {
   const [showSection, setShowSection] = useState(false);
   return (
     <Section>
-      <div style={{display: 'flex', marginBottom: '20px'}}>
+      <ButtonWrapper>
         <button type="button" onClick={() => setShowSection(!showSection)}>{sectionName}</button>{sectionIcon}
-      </div>
+      </ButtonWrapper>
       <SectionCard>
         { Object.keys(object).slice(startProp, endProp).map(i => {
           if (i !== 'freeText' && i !== 'entryDate' && showSection) {
@@ -32,8 +45,8 @@ const Sections = ({sectionIcon, object, index, startProp, endProp, createCardFli
                   {!features ? <StyledHomeField>{object[i]}</StyledHomeField> : null}
                   {
                     features ? ((object[i]) === true)
-                      ? <div style={{display: 'flex', marginTop: '5px', justifyContent: 'flex-start'}}><CheckIcon /></div> : (object[i] === false)
-                        ? <div style={{display: 'flex', marginTop: '5px', justifyContent: 'flex-start'}}><CloseIcon /></div> : <StyledHomeField>{object[i]}</StyledHomeField>
+                      ? <IconWrapper><CheckIcon /></IconWrapper> : (object[i] === false)
+                        ? <IconWrapper><CloseIcon /></IconWrapper> : <StyledHomeField>{object[i]}</StyledHomeField>
                       : null
                   }
                 </InnerSection>
@@ -45,6 +58,17 @@ const Sections = ({sectionIcon, object, index, startProp, endProp, createCardFli
       </SectionCard>
     </Section>
   );
+};
+
+Sections.propTypes = {
+  sectionIcon: PropTypes.object,
+  object: PropTypes.object,
+  index: PropTypes.number,
+  startProp: PropTypes.number,
+  endProp: PropTypes.number,
+  createCardFlipId: PropTypes.func,
+  sectionName: PropTypes.string,
+  features: PropTypes.bool,
 };
 
 export default Sections;
