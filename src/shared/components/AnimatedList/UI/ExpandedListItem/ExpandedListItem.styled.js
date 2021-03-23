@@ -19,15 +19,17 @@ export const AnimatedInFlipped = styled(Flipped)`
 `;
 
 export const StyledHomeField = styled.h3`
+ margin-left: 20px;
+ margin-top: 10px;
  flex: 1 0 50%;
  ${({theme}) => theme.media('xs', `
-    font-size: 12px;
+    font-size: 10px;
      `)}
  ${({theme}) => theme.media('md', `
-    font-size: 12px;
+    font-size: 10px;
      `)}
  ${({theme}) => theme.media('lg', `
-    font-size: 16px;
+    font-size: 13px;
      `)}
 `;
 
@@ -151,6 +153,9 @@ export const SectionsWrapper = styled.div`
    font-weight: 700;
    font-size: 20px;
    margin-right: 5px;
+   &:hover {
+     color: grey;
+   }
  }
 }
  
@@ -175,11 +180,14 @@ ${({theme}) => theme.media('md', `
        ${({theme}) => theme.media('lg', `
        width: 250px;
      `)}
-  display: flex;
-  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 50% 100px auto;
+  margin: 5%;
+
 `;
 
 export const SectionCard = styled.div`
+
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: whitesmoke;
   border-radius: 25px;
@@ -195,6 +203,8 @@ export const SectionCard = styled.div`
      `)}
 
   h3 {
-    margin: 10px;
+    margin-left: 10px;
   }
+
+
 `;

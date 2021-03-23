@@ -108,8 +108,8 @@ const MyDropzone = ({input, placeholder, dirty}) => {
       </Textarea>
       <PreviewContainer>
         {tempImages ? tempImages.map((file) => (
-          <PreviewWrapper>
-            <PreviewTag key={file.name}>
+          <PreviewWrapper key={file.name}>
+            <PreviewTag>
               <PreviewInner>
                 <Img src={file.preview} />
 

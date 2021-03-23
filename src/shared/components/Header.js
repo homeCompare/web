@@ -41,7 +41,12 @@ const StyledName = styled.span`
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 20px;
+  ${({theme}) => theme.media('xs', `
+    font-size: 10px;
+  `)}
+  ${({theme}) => theme.media('md', `
+    font-size: 20px;
+  `)}
 `;
 
 const StyledHomeIcon = styled.img`
@@ -55,7 +60,13 @@ const LogoWrapper = styled.div`
   font-weight: bold;
   display: flex;
   align-items: center;
-  margin-right: ${({theme}) => theme.size(3)};
+  ${({theme}) => theme.media('xs', `
+    margin-right: 0px;
+  `)}
+  ${({theme}) => theme.media('md', `
+    margin-right: 40px;
+  `)}
+
 `;
 
 const StyledLogoLink = styled(Link)`

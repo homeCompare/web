@@ -49,7 +49,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
                       stagger="card-content"
                       shouldFlip={shouldFlip(index)}
                       delayUntil={createCardFlipId(index)}
-
+                      key={i}
                     >
                       <StyledTag>{listData[i]}</StyledTag>
 
@@ -71,7 +71,7 @@ ListItem.propTypes = {
   index: PropTypes.number,
   onClick: PropTypes.func,
   createCardFlipId: PropTypes.func,
-  listData: PropTypes.array,
+  listData: PropTypes.object,
 
 };
 

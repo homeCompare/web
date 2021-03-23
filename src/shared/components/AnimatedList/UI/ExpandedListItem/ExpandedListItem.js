@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 
 import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
+import CheckIcon from '@material-ui/icons/Check';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
+import CloseIcon from '@material-ui/icons/Close';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 
 import ImageGallery from '@/shared/components/ImageGallery';
@@ -43,12 +45,12 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
             <ExtendedDescription>
               <SectionsWrapper>
                 <Section>
-                  <div style={{display: 'flex'}}>
+                  <div style={{display: 'flex', marginBottom: '20px'}}>
                     <button type="button" onClick={() => setShowLocation(!showLocation)}>Location</button><LocationCityIcon />
                   </div>
                   <SectionCard>
-                    { Object.keys(listData).slice(0, 5).map(i => {
-                      if (i !== 'freeText' && i !== 'entryDate' && i !== 'personalRate' && showLocation) {
+                    { Object.keys(listData).slice(0, 6).map(i => {
+                      if (i !== 'freeText' && i !== 'entryDate' && showLocation) {
                         return (
                           <Flipped
                             flipId={`description-${index}-${i}`}
@@ -56,12 +58,14 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                             delayUntil={createCardFlipId(index)}
                           >
                             <InnerSection>
+
                               <StyledHomeField>{
                                 `${i[0].toUpperCase() + i.slice(1, i.length)}`
                               }
                               </StyledHomeField>
-                              <StyledHomeField>{listData[i]}
-                              </StyledHomeField>
+
+                              <StyledHomeField>{listData[i]}</StyledHomeField>
+
                             </InnerSection>
 
                           </Flipped>
@@ -71,12 +75,12 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                   </SectionCard>
                 </Section>
                 <Section>
-                  <div style={{display: 'flex'}}>
+                  <div style={{display: 'flex', marginBottom: '20px'}}>
                     <button type="button" onClick={() => setShowPricing(!showPricing)}>Pricing</button><MonetizationOnIcon />
                   </div>
                   <SectionCard>
-                    { Object.keys(listData).slice(5, 10).map(i => {
-                      if (i !== 'freeText' && i !== 'entryDate' && i !== 'personalRate' && showPricing) {
+                    { Object.keys(listData).slice(6, 9).map(i => {
+                      if (i !== 'freeText' && i !== 'entryDate' && showPricing) {
                         return (
                           <Flipped
                             flipId={`description-${index}-${i}`}
@@ -99,12 +103,12 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                   </SectionCard>
                 </Section>
                 <Section>
-                  <div style={{display: 'flex'}}>
+                  <div style={{display: 'flex', marginBottom: '20px'}}>
                     <button type="button" onClick={() => setShowFeatures(!showFeatures)}>Features</button><AddBoxIcon />
                   </div>
                   <SectionCard>
-                    { Object.keys(listData).slice(10, 18).map(i => {
-                      if (i !== 'freeText' && i !== 'entryDate' && i !== 'personalRate' && showFeatures) {
+                    { Object.keys(listData).slice(9, 18).map(i => {
+                      if (i !== 'freeText' && i !== 'entryDate' && showFeatures) {
                         return (
                           <Flipped
                             flipId={`description-${index}-${i}`}
@@ -116,8 +120,10 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                                 `${i[0].toUpperCase() + i.slice(1, i.length)}`
                               }
                               </StyledHomeField>
-                              <StyledHomeField>{listData[i]}
-                              </StyledHomeField>
+                              {((listData[i]) === true)
+                                ? <div style={{display: 'flex', marginTop: '5px', justifyContent: 'flex-start'}}><CheckIcon /></div> : (listData[i] === false)
+                                  ? <div style={{display: 'flex', marginTop: '5px', justifyContent: 'flex-start'}}><CloseIcon /></div> : <StyledHomeField>{listData[i]}</StyledHomeField>}
+
                             </InnerSection>
 
                           </Flipped>
@@ -160,7 +166,7 @@ ExpandedListItem.propTypes = {
   index: PropTypes.number,
   onClick: PropTypes.func,
   createCardFlipId: PropTypes.func,
-  listData: PropTypes.array,
+  listData: PropTypes.object,
 
 };
 
