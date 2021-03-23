@@ -33,7 +33,7 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
     sectionName: 'Features',
   }];
   const RenderSections = () => {
-    _.times(3, (i) => {
+    return _.times(3, (i) => {
       return (
         <Sections
           sectionIcon={propArray[i].sectionIcon}
