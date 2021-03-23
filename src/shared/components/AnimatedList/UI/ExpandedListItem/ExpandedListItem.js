@@ -12,7 +12,7 @@ import ImageGallery from '@/shared/components/ImageGallery';
 
 import {StyledImage, ExtendedDescription} from '../ListItem/ListItem.styled';
 
-import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea, StyledHomeField, SectionsWrapper, Section, InnerSection, SectionCard, InnerGridLeft, InnerGridRight} from './ExpandedListItem.styled';
+import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea, StyledHomeField, SectionsWrapper, Section, InnerSection, SectionCard} from './ExpandedListItem.styled';
 
 const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
   const [showLocation, setShowLocation] = useState(false);
@@ -58,16 +58,14 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                             delayUntil={createCardFlipId(index)}
                           >
                             <InnerSection>
-                              <InnerGridLeft>
-                                <StyledHomeField>{
-                                  `${i[0].toUpperCase() + i.slice(1, i.length)}`
-                                }
-                                </StyledHomeField>
-                              </InnerGridLeft>
-                              <InnerGridRight>
-                                <StyledHomeField>{listData[i]}
-                                </StyledHomeField>
-                              </InnerGridRight>
+
+                              <StyledHomeField>{
+                                `${i[0].toUpperCase() + i.slice(1, i.length)}`
+                              }
+                              </StyledHomeField>
+
+                              <StyledHomeField>{listData[i]}</StyledHomeField>
+
                             </InnerSection>
 
                           </Flipped>
@@ -90,16 +88,12 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                             delayUntil={createCardFlipId(index)}
                           >
                             <InnerSection>
-                              <InnerGridLeft>
-                                <StyledHomeField>{
-                                  `${i[0].toUpperCase() + i.slice(1, i.length)}`
-                                }
-                                </StyledHomeField>
-                              </InnerGridLeft>
-                              <InnerGridRight>
-                                <StyledHomeField>{listData[i]}
-                                </StyledHomeField>
-                              </InnerGridRight>
+                              <StyledHomeField>{
+                                `${i[0].toUpperCase() + i.slice(1, i.length)}`
+                              }
+                              </StyledHomeField>
+                              <StyledHomeField>{listData[i]}
+                              </StyledHomeField>
                             </InnerSection>
 
                           </Flipped>
@@ -122,18 +116,14 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                             delayUntil={createCardFlipId(index)}
                           >
                             <InnerSection>
-                              <InnerGridLeft>
-                                <StyledHomeField>{
-                                  `${i[0].toUpperCase() + i.slice(1, i.length)}`
-                                }
-                                </StyledHomeField>
-                              </InnerGridLeft>
-                              <InnerGridRight>
-                                <StyledHomeField>{((listData[i]) === true)
-                                  ? <CheckIcon /> : (listData[i] === false)
-                                    ? <CloseIcon /> : listData[i]}
-                                </StyledHomeField>
-                              </InnerGridRight>
+                              <StyledHomeField>{
+                                `${i[0].toUpperCase() + i.slice(1, i.length)}`
+                              }
+                              </StyledHomeField>
+                              {((listData[i]) === true)
+                                ? <div style={{display: 'flex', marginTop: '5px', justifyContent: 'flex-start'}}><CheckIcon /></div> : (listData[i] === false)
+                                  ? <div style={{display: 'flex', marginTop: '5px', justifyContent: 'flex-start'}}><CloseIcon /></div> : <StyledHomeField>{listData[i]}</StyledHomeField>}
+
                             </InnerSection>
 
                           </Flipped>

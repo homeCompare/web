@@ -20,6 +20,7 @@ export const AnimatedInFlipped = styled(Flipped)`
 
 export const StyledHomeField = styled.h3`
  margin-left: 20px;
+ margin-top: 10px;
  flex: 1 0 50%;
  ${({theme}) => theme.media('xs', `
     font-size: 10px;
@@ -179,7 +180,9 @@ ${({theme}) => theme.media('md', `
        ${({theme}) => theme.media('lg', `
        width: 250px;
      `)}
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 100px auto;
+  margin: 5%;
 
 `;
 
@@ -204,16 +207,4 @@ export const SectionCard = styled.div`
   }
 
 
-`;
-export const InnerGridLeft = styled.div`
-display: flex;
-border-right: 3px solid black;
-width: 50%;
-padding-top: 20px;
-`;
-
-export const InnerGridRight = styled.div`
-display: flex;
-width: 50%;
-padding-top: 20px;
 `;

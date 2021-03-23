@@ -8,8 +8,16 @@ import ListItem from './UI/ListItem/ListItem';
 
 const StyledFlipper = styled(Flipper)`
   && {
-    width: 80%;
-    margin: 2rem auto;
+    ${({theme}) => theme.media('xs', `
+     width: 100%;
+     margin-left: 8%;
+         `)}
+      ${({theme}) => theme.media('md', `
+     width: 80%;
+     margin: 2rem auto;
+    `)}
+   
+ 
   }
 `;
 
@@ -19,6 +27,8 @@ const List = styled.ul`
   flex-direction: column;
   height: 100vh;
   padding: 0;
+  width: 100%;
+
   li {
     width: 100%;
   }
