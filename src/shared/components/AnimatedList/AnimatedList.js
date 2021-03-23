@@ -14,7 +14,7 @@ const StyledFlipper = styled(Flipper)`
          `)}
       ${({theme}) => theme.media('md', `
      width: 80%;
-     margin: 2rem auto;
+     margin: 32px auto;
     `)}
    
  
@@ -33,7 +33,7 @@ const List = styled.ul`
     width: 100%;
   }
   li + li {
-    margin-top: 1rem;
+    margin-top: 16px;
   }
 `;
 

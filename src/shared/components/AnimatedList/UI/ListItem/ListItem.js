@@ -4,7 +4,6 @@ import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Close';
 import {useDispatch} from 'react-redux';
-import styled from 'styled-components';
 
 import * as actions from '@/state/actions';
 

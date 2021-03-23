@@ -44,9 +44,12 @@ const Sections = ({sectionIcon,
 
                   {!features ? <StyledHomeField>{object[i]}</StyledHomeField> : null}
                   {
-                    features ? ((object[i]) === true)
-                      ? <IconWrapper><CheckIcon /></IconWrapper> : (object[i] === false)
-                        ? <IconWrapper><CloseIcon /></IconWrapper> : <StyledHomeField>{object[i]}</StyledHomeField>
+                    features
+                      ? ((object[i]) === true)
+                        ? <IconWrapper><CheckIcon /></IconWrapper>
+                        : (object[i] === false)
+                          ? <IconWrapper><CloseIcon /></IconWrapper>
+                          : <StyledHomeField>{object[i]}</StyledHomeField>
                       : null
                   }
                 </InnerSection>
