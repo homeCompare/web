@@ -4,6 +4,7 @@ import styled, {css} from 'styled-components';
 import {useRouter} from 'next/router';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import useViewport from '@/shared/hooks/useViewport';
 import Auth from '@/shared/components/Login';
 import {useTranslation} from '@/shared/i18n';
 import {Link} from '@/shared/utils/router';
@@ -89,29 +90,33 @@ const menu = [
   },
 ];
 
-const Menu = () => {
+const Menu = ({children}) => {
   const {pathname} = useRouter();
 
   // take pathame outside
   const {t} = useTranslation();
 
   return (
-    <MenuContainer>
-      <MenuUL>
-        { menu.map(item => (
-          <MenuLI key={item.label}>
-            <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
-          </MenuLI>
-        ))}
+    <>
+      <MenuContainer>
+        <MenuUL>
+          { menu.map(item => (
+            <MenuLI key={item.label}>
+              <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
+            </MenuLI>
+          ))}
+          <MenuLI><MenuLink href="/">{children}</MenuLink></MenuLI>
+        </MenuUL>
 
-      </MenuUL>
-      <Auth />
-    </MenuContainer>
+      </MenuContainer>
+    </>
   );
 };
 
 const HeaderMenu = () => {
+  const {width} = useViewport();
   const [isOpen, setIsOpen] = useState(false);
+  const vp = 640;
 
   useEffect(() => {
     const onScroll = () => {
@@ -128,18 +133,29 @@ const HeaderMenu = () => {
 
   return (
     <>
-      <HideOnMedium>
-        <IconButton onClick={() => setIsOpen(!isOpen)}>
-          <MenuIcon />
-          <MenuWrapper isOpen={isOpen}>
+      {(width > vp) ? (
+        <>
+          <ShowOnMedium>
             <Menu />
-          </MenuWrapper>
-        </IconButton>
-      </HideOnMedium>
-      <ShowOnMedium>
-        <Menu />
-      </ShowOnMedium>
+          </ShowOnMedium>
+          <Auth />
+        </>
+      )
+        : (
+          <HideOnMedium>
+            <IconButton onClick={() => setIsOpen(!isOpen)}>
+              <MenuIcon />
+              <MenuWrapper isOpen={isOpen}>
+                <Menu>
+                  <Auth mobile />
+                </Menu>
+              </MenuWrapper>
+            </IconButton>
+
+          </HideOnMedium>
+        )}
     </>
+
   );
 };
 

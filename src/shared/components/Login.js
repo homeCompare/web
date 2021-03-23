@@ -1,5 +1,6 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
@@ -14,9 +15,10 @@ const LoginWrapper = styled.div`
   margin-top: 2px;
 `;
 
-const Auth = () => {
+const Auth = ({mobile}) => {
   const dispatch = useDispatch();
-  const userData = useSelector(state => state.user.data);
+  const userData = useSelector(state => state.user?.data);
+  let LoginComp = null;
 
   const Login = async () => {
     await dispatch(actions.facebookLogin());
@@ -24,13 +26,25 @@ const Auth = () => {
   const Logout = () => {
     dispatch(actions.logout());
   };
+  if (mobile && !userData) {
+    LoginComp = <div onClick={Login}>Login</div>;
+  } else if (mobile && userData) {
+    LoginComp = <div onClick={Logout}>Logout</div>;
+  } else if (!mobile && !userData) {
+    LoginComp = <PersonOutlineIcon fontSize="large" onClick={Login} />;
+  } else if (!mobile && userData) {
+    LoginComp = <ExitToAppIcon fontSize="large" onClick={Logout} />;
+  }
 
   return (
     <LoginWrapper>
-      {!userData ? <PersonOutlineIcon fontSize="large" onClick={Login} />
-        : <ExitToAppIcon fontSize="large" onClick={Logout} />}
+      {LoginComp}
     </LoginWrapper>
   );
+};
+
+Auth.propTypes = {
+  mobile: PropTypes.bool,
 };
 
 export default Auth;

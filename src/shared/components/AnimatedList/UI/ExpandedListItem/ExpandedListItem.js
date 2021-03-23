@@ -176,7 +176,7 @@ ExpandedListItem.propTypes = {
   index: PropTypes.number,
   onClick: PropTypes.func,
   createCardFlipId: PropTypes.func,
-  listData: PropTypes.array,
+  listData: PropTypes.object,
 
 };
 

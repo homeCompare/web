@@ -57,14 +57,15 @@ export const AnimatedList = (homes) => {
                   onClick={clicked}
                   createCardFlipId={createCardFlipId}
                   listData={listObj}
+                  key={listObj.id}
                 />
               ) : (
                 <ListItem
                   index={index}
-                  key={index}
                   onClick={clicked}
                   createCardFlipId={createCardFlipId}
                   listData={listObj}
+                  key={listObj.id}
                 />
               )}
             </li>
