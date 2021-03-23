@@ -1,23 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
-import CheckIcon from '@material-ui/icons/Check';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
-import CloseIcon from '@material-ui/icons/Close';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 
 import ImageGallery from '@/shared/components/ImageGallery';
 
+import Sections from '../Section/Section';
 import {StyledImage, ExtendedDescription} from '../ListItem/ListItem.styled';
 
-import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea, StyledHomeField, SectionsWrapper, Section, InnerSection, SectionCard} from './ExpandedListItem.styled';
+import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea, SectionsWrapper} from './ExpandedListItem.styled';
 
 const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
-  const [showLocation, setShowLocation] = useState(false);
-  const [showPricing, setShowPricing] = useState(false);
-  const [showFeatures, setShowFeatures] = useState(false);
   return (
     <AnimatedInFlipped
       flipId={createCardFlipId(index)}
@@ -44,94 +40,34 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
             </ExpandedListItemContent>
             <ExtendedDescription>
               <SectionsWrapper>
-                <Section>
-                  <div style={{display: 'flex', marginBottom: '20px'}}>
-                    <button type="button" onClick={() => setShowLocation(!showLocation)}>Location</button><LocationCityIcon />
-                  </div>
-                  <SectionCard>
-                    { Object.keys(listData).slice(0, 6).map(i => {
-                      if (i !== 'freeText' && i !== 'entryDate' && showLocation) {
-                        return (
-                          <Flipped
-                            flipId={`description-${index}-${i}`}
-                            stagger="card-content"
-                            delayUntil={createCardFlipId(index)}
-                          >
-                            <InnerSection>
-
-                              <StyledHomeField>{
-                                `${i[0].toUpperCase() + i.slice(1, i.length)}`
-                              }
-                              </StyledHomeField>
-
-                              <StyledHomeField>{listData[i]}</StyledHomeField>
-
-                            </InnerSection>
-
-                          </Flipped>
-                        );
-                      } return null;
-                    })}
-                  </SectionCard>
-                </Section>
-                <Section>
-                  <div style={{display: 'flex', marginBottom: '20px'}}>
-                    <button type="button" onClick={() => setShowPricing(!showPricing)}>Pricing</button><MonetizationOnIcon />
-                  </div>
-                  <SectionCard>
-                    { Object.keys(listData).slice(6, 9).map(i => {
-                      if (i !== 'freeText' && i !== 'entryDate' && showPricing) {
-                        return (
-                          <Flipped
-                            flipId={`description-${index}-${i}`}
-                            stagger="card-content"
-                            delayUntil={createCardFlipId(index)}
-                          >
-                            <InnerSection>
-                              <StyledHomeField>{
-                                `${i[0].toUpperCase() + i.slice(1, i.length)}`
-                              }
-                              </StyledHomeField>
-                              <StyledHomeField>{listData[i]}
-                              </StyledHomeField>
-                            </InnerSection>
-
-                          </Flipped>
-                        );
-                      } return null;
-                    })}
-                  </SectionCard>
-                </Section>
-                <Section>
-                  <div style={{display: 'flex', marginBottom: '20px'}}>
-                    <button type="button" onClick={() => setShowFeatures(!showFeatures)}>Features</button><AddBoxIcon />
-                  </div>
-                  <SectionCard>
-                    { Object.keys(listData).slice(9, 18).map(i => {
-                      if (i !== 'freeText' && i !== 'entryDate' && showFeatures) {
-                        return (
-                          <Flipped
-                            flipId={`description-${index}-${i}`}
-                            stagger="card-content"
-                            delayUntil={createCardFlipId(index)}
-                          >
-                            <InnerSection>
-                              <StyledHomeField>{
-                                `${i[0].toUpperCase() + i.slice(1, i.length)}`
-                              }
-                              </StyledHomeField>
-                              {((listData[i]) === true)
-                                ? <div style={{display: 'flex', marginTop: '5px', justifyContent: 'flex-start'}}><CheckIcon /></div> : (listData[i] === false)
-                                  ? <div style={{display: 'flex', marginTop: '5px', justifyContent: 'flex-start'}}><CloseIcon /></div> : <StyledHomeField>{listData[i]}</StyledHomeField>}
-
-                            </InnerSection>
-
-                          </Flipped>
-                        );
-                      } return null;
-                    })}
-                  </SectionCard>
-                </Section>
+                <Sections
+                  sectionIcon={<LocationCityIcon />}
+                  object={listData}
+                  index={index}
+                  startProp={0}
+                  endProp={6}
+                  createCardFlipId={createCardFlipId}
+                  sectionName="Location"
+                />
+                <Sections
+                  sectionIcon={<MonetizationOnIcon />}
+                  object={listData}
+                  index={index}
+                  startProp={6}
+                  endProp={9}
+                  createCardFlipId={createCardFlipId}
+                  sectionName="Pricing"
+                />
+                <Sections
+                  sectionIcon={<AddBoxIcon />}
+                  object={listData}
+                  index={index}
+                  startProp={9}
+                  endProp={18}
+                  createCardFlipId={createCardFlipId}
+                  sectionName="Features"
+                  features
+                />
               </SectionsWrapper>
             </ExtendedDescription>
 
