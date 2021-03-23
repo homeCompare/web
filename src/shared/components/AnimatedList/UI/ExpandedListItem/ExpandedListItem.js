@@ -1,5 +1,6 @@
 import React from 'react';
 
+import _ from 'lodash';
 import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
@@ -14,6 +15,38 @@ import {StyledImage, ExtendedDescription} from '../ListItem/ListItem.styled';
 import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea, SectionsWrapper} from './ExpandedListItem.styled';
 
 const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
+  const propArray = [{
+    sectionIcon: <LocationCityIcon />,
+    startProp: 0,
+    endProp: 6,
+    sectionName: 'Location',
+  },
+  {
+    sectionIcon: <MonetizationOnIcon />,
+    startProp: 6,
+    endProp: 9,
+    sectionName: 'Pricing',
+  }, {
+    sectionIcon: <AddBoxIcon />,
+    startProp: 9,
+    endProp: 18,
+    sectionName: 'Features',
+  }];
+  const RenderSections = () => {
+    _.times(3, (i) => {
+      return (
+        <Sections
+          sectionIcon={propArray[i].sectionIcon}
+          object={listData}
+          index={index}
+          startProp={propArray[i].startProp}
+          endProp={propArray[i].endProp}
+          createCardFlipId={createCardFlipId}
+          sectionName={propArray[i].sectionName}
+        />
+      );
+    });
+  };
   return (
     <AnimatedInFlipped
       flipId={createCardFlipId(index)}
@@ -40,34 +73,7 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
             </ExpandedListItemContent>
             <ExtendedDescription>
               <SectionsWrapper>
-                <Sections
-                  sectionIcon={<LocationCityIcon />}
-                  object={listData}
-                  index={index}
-                  startProp={0}
-                  endProp={6}
-                  createCardFlipId={createCardFlipId}
-                  sectionName="Location"
-                />
-                <Sections
-                  sectionIcon={<MonetizationOnIcon />}
-                  object={listData}
-                  index={index}
-                  startProp={6}
-                  endProp={9}
-                  createCardFlipId={createCardFlipId}
-                  sectionName="Pricing"
-                />
-                <Sections
-                  sectionIcon={<AddBoxIcon />}
-                  object={listData}
-                  index={index}
-                  startProp={9}
-                  endProp={18}
-                  createCardFlipId={createCardFlipId}
-                  sectionName="Features"
-                  features
-                />
+                <RenderSections />
               </SectionsWrapper>
             </ExtendedDescription>
 
@@ -97,12 +103,11 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
 
   );
 };
-
 ExpandedListItem.propTypes = {
   index: PropTypes.number,
-  onClick: PropTypes.func,
   createCardFlipId: PropTypes.func,
   listData: PropTypes.object,
+  onClick: PropTypes.func,
 
 };
 

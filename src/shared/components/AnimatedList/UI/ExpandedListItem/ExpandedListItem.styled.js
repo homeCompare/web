@@ -36,11 +36,11 @@ export const StyledHomeField = styled.h3`
 export const StyledExpandedListItem = styled.div`
   cursor: pointer;
   background-color: whitesmoke;
-  padding-bottom: 2rem;
+  padding-bottom: 32px;
   border-radius: 25px;
 `;
 export const ExpandedListItemContent = styled.div`
- padding: 2rem;
+ padding: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,10 +50,10 @@ export const ExpandedListItemContent = styled.div`
 export const ExpandedAvatar = styled.div`
   border-radius: 100px;
   background-color: grey;
-  width: 12rem;
-  height: 12rem;
+  width: 192px;
+  height: 192px;
   margin-right: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   img {
   background-size: cover;
   }
@@ -61,12 +61,12 @@ export const ExpandedAvatar = styled.div`
 
 export const AdditionalContent = styled.div`
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 32px;
   & > div {
     opacity: 0;
   border-radius: 25px;
   background-color: whitesmoke;
-  height: 5rem;
+  height: 80px;
   animation: ${FadeInAnim} 0.4s forwards;
   }
   & > div:nth-of-type(2) {
@@ -82,7 +82,7 @@ export const AdditionalContent = styled.div`
     animation-delay: 0.3s;
   }
   & > div + div {
-    margin-top: 1rem;
+    margin-top: 16px;
   }
 `;
 
