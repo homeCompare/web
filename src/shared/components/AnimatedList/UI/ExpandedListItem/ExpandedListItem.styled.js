@@ -163,12 +163,7 @@ export const SectionsWrapper = styled.div`
 export const Section = styled.div`
   margin-top: 50px;
   margin-bottom: 50px;
-  & > div:nth-of-type(1) {
-    margin-left: 25%;
-  }
-  & > div:nth-of-type(2) {
-    margin-left: 0%;
-  }
+
 `;
 
 export const InnerSection = styled.div`
@@ -200,6 +195,7 @@ backdrop-filter: blur(5px);
      `)}
   ${({theme}) => theme.media('lg', `
        width: 250px;
+       height: 420px;
      `)}
 
   h3 {
