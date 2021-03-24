@@ -29,15 +29,15 @@ export const StyledHomeField = styled.h3`
     font-size: 10px;
      `)}
  ${({theme}) => theme.media('lg', `
-    font-size: 13px;
+    font-size: 14px;
      `)}
 `;
 
 export const StyledExpandedListItem = styled.div`
   cursor: pointer;
-  background-color: whitesmoke;
   padding-bottom: 32px;
   border-radius: 25px;
+  background-image: url('https://i.postimg.cc/Pq2fJrXw/bg00.jpg');
 `;
 export const ExpandedListItemContent = styled.div`
  padding: 32px;
@@ -147,9 +147,8 @@ export const SectionsWrapper = styled.div`
     flex-direction: row;
     align-items: flex-start;
      `)}
- button {
+ span {
    border: none;
-   background-color: whitesmoke;
    font-weight: 700;
    font-size: 20px;
    margin-right: 5px;
@@ -162,7 +161,6 @@ export const SectionsWrapper = styled.div`
 `;
 
 export const Section = styled.div`
-
   margin-top: 50px;
   margin-bottom: 50px;
   & > div:nth-of-type(1) {
@@ -174,6 +172,7 @@ export const Section = styled.div`
 `;
 
 export const InnerSection = styled.div`
+
 ${({theme}) => theme.media('md', `
      width: 100px;
      `)}
@@ -187,9 +186,10 @@ ${({theme}) => theme.media('md', `
 `;
 
 export const SectionCard = styled.div`
-
+backdrop-filter: blur(5px);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: whitesmoke;
+  background-color: transparent;
+  color: whitesmoke;
   border-radius: 25px;
   ${({theme}) => theme.media('xs', `
     width: 200px;
@@ -203,6 +203,7 @@ export const SectionCard = styled.div`
      `)}
 
   h3 {
+  
     margin-left: 10px;
   }
 
