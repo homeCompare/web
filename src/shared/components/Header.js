@@ -27,11 +27,8 @@ const HeaderRoot = styled.header`
 const InnerWrapper = styled.div`
   flex-direction: row;
   display: flex;
-  padding-top: 0;
-  padding-bottom: 0;
   height: 100%;
   align-items: center;
-
   ${({theme}) => theme.defaultSizer}
   padding: 0 20px;
 `;
@@ -52,7 +49,6 @@ const StyledName = styled.span`
 const StyledHomeIcon = styled.img`
   width: 50px;
   height: 50px;
-
   display: flex;
 `;
 
@@ -66,7 +62,6 @@ const LogoWrapper = styled.div`
   ${({theme}) => theme.media('md', `
     margin-right: 40px;
   `)}
-
 `;
 
 const StyledLogoLink = styled(Link)`
@@ -80,7 +75,7 @@ const CoverImage = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
-  box-shadow: 0px 7px 10px 5px rgba(0,0,0, 0.12);
+  box-shadow: 0 7px 10px 5px rgba(0, 0, 0, 0.12);
 `;
 
 const CoverImageWrapper = styled.div`
@@ -111,7 +106,7 @@ const CoverImg = memo(() => (
 ));
 
 const Header = ({withCoverImage}) => {
-  const userData = useSelector(state => state.user.data);
+  const userData = useSelector(state => state.user?.data);
   return (
     <>
       <HeaderRoot>

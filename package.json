@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "_dev": "cross-env NODE_OPTIONS='--inspect next dev",
+    "_dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "dev": "concurrently \"yarn _dev\" \"yarn storybook\"",
     "build": "next build && build-storybook -o ./public/sb/",
     "start": "next start",
-    "build-storybook": "build-storybook -o ./public/sb/"
+    "build-storybook": "build-storybook -o ./public/sb/",
+    "_stylelint": "stylelint \"src/**/*.js\" --max-warnings 0 --cache --cache-location .next/stylelint-cache"
   },
   "repository": {
     "type": "git",
@@ -80,6 +81,10 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "redux-devtools-extension": "^2.13.8",
-    "storybook-addon-next-router": "^2.0.4"
+    "storybook-addon-next-router": "^2.0.4",
+    "stylelint": "^13.8.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0"
   }
 }
