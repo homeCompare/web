@@ -8,7 +8,7 @@ export const MenuUL = styled.ul`
   flex-direction: column;
   left: 0;
   top: ${({theme}) => theme.base.header.height + 10}px;
-  width: 100%;
+  width: 180px;
   margin: 0;
   list-style-type: none;
   background: white;
