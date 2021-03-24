@@ -16,6 +16,9 @@ justify-content: flex-start;
 const ButtonWrapper = styled.div`
 display: flex;
 margin-bottom: 20px;
+ span {
+   color: #111;
+ }
 `;
 
 const Sections = ({sectionIcon,
@@ -24,7 +27,7 @@ const Sections = ({sectionIcon,
   return (
     <Section>
       <ButtonWrapper>
-        <button type="button" onClick={() => setShowSection(!showSection)}>{sectionName}</button>{sectionIcon}
+        <span type="button" onClick={() => setShowSection(!showSection)}>{sectionName}</span>{sectionIcon}
       </ButtonWrapper>
       <SectionCard>
         { Object.keys(object).slice(startProp, endProp).map(i => {
