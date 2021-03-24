@@ -125,14 +125,6 @@ margin-left: 5%;
   }
 `;
 
-export const StyledFreeTextArea = styled.div`
-&& {
-  width: 90%;
-  height: 200px;
-  margin-left: 5%;
-}
-`;
-
 export const SectionsWrapper = styled.div`
 
 && {
