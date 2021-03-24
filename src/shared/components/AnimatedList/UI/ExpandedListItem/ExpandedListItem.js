@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import CardActionArea from '@material-ui/core/CardActionArea';
 
 import ImageGallery from '@/shared/components/ImageGallery';
 
@@ -20,17 +25,20 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
     startProp: 0,
     endProp: 6,
     sectionName: 'Location',
+    features: true,
   },
   {
     sectionIcon: <MonetizationOnIcon />,
     startProp: 6,
     endProp: 9,
     sectionName: 'Pricing',
+    features: true,
   }, {
     sectionIcon: <AddBoxIcon />,
     startProp: 9,
     endProp: 18,
     sectionName: 'Features',
+    features: true,
   }];
   const RenderSections = () => {
     return _.times(3, (i) => {
@@ -43,6 +51,7 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
           endProp={propArray[i].endProp}
           createCardFlipId={createCardFlipId}
           sectionName={propArray[i].sectionName}
+          features={propArray[i].features}
         />
       );
     });
@@ -86,14 +95,36 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                       <ImageGallery images={listData.images} />
                     </StyledCardImage>
                   </StyledImageContainer>
-                  {listData.freeText ? (
-                    <StyledFreeTextArea>
-                      <h4>{listData.freeText}</h4>
-                    </StyledFreeTextArea>
-                  ) : null }
+
                 </>
 
               )}
+              {listData.freeText ? (
+                <Card style={{maxWidth: '90%', maxHeight: '100%', marginLeft: '5%', borderRadius: '12.5px', height: '300px'}}>
+                  <CardActionArea style={{backgroundColor: '#444'}}>
+                    <div style={{display: 'flex', flexDirection: 'row', height: '300px'}}>
+                      <CardMedia
+                        style={{width: '250px'}}
+                        component="img"
+                        alt="Contemplative Reptile"
+                        width="250"
+                        height="300"
+                        image={listData.images[0]}
+                        title="Contemplative Reptile"
+                      />
+
+                      <CardContent style={{color: 'white'}}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          Description
+                        </Typography>
+                        <Typography variant="body2" color="white" component="p">
+                          {listData.freeText}
+                        </Typography>
+                      </CardContent>
+                    </div>
+                  </CardActionArea>
+                </Card>
+              ) : null }
             </AdditionalContent>
           </div>
         </Flipped>
