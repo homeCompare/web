@@ -29,18 +29,18 @@ export const StyledHomeField = styled.h3`
     font-size: 10px;
      `)}
  ${({theme}) => theme.media('lg', `
-    font-size: 13px;
+    font-size: 14px;
      `)}
 `;
 
 export const StyledExpandedListItem = styled.div`
   cursor: pointer;
-  background-color: whitesmoke;
-  padding-bottom: 2rem;
+  padding-bottom: 32px;
   border-radius: 25px;
+  background-image: url('https://i.postimg.cc/Pq2fJrXw/bg00.jpg');
 `;
 export const ExpandedListItemContent = styled.div`
- padding: 2rem;
+ padding: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,10 +50,10 @@ export const ExpandedListItemContent = styled.div`
 export const ExpandedAvatar = styled.div`
   border-radius: 100px;
   background-color: grey;
-  width: 12rem;
-  height: 12rem;
+  width: 192px;
+  height: 192px;
   margin-right: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   img {
   background-size: cover;
   }
@@ -61,12 +61,12 @@ export const ExpandedAvatar = styled.div`
 
 export const AdditionalContent = styled.div`
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 32px;
   & > div {
     opacity: 0;
   border-radius: 25px;
   background-color: whitesmoke;
-  height: 5rem;
+  height: 80px;
   animation: ${FadeInAnim} 0.4s forwards;
   }
   & > div:nth-of-type(2) {
@@ -82,7 +82,7 @@ export const AdditionalContent = styled.div`
     animation-delay: 0.3s;
   }
   & > div + div {
-    margin-top: 1rem;
+    margin-top: 16px;
   }
 `;
 
@@ -125,14 +125,6 @@ margin-left: 5%;
   }
 `;
 
-export const StyledFreeTextArea = styled.div`
-&& {
-  width: 90%;
-  height: 200px;
-  margin-left: 5%;
-}
-`;
-
 export const SectionsWrapper = styled.div`
 
 && {
@@ -147,9 +139,8 @@ export const SectionsWrapper = styled.div`
     flex-direction: row;
     align-items: flex-start;
      `)}
- button {
+ span {
    border: none;
-   background-color: whitesmoke;
    font-weight: 700;
    font-size: 20px;
    margin-right: 5px;
@@ -162,18 +153,13 @@ export const SectionsWrapper = styled.div`
 `;
 
 export const Section = styled.div`
-
   margin-top: 50px;
   margin-bottom: 50px;
-  & > div:nth-of-type(1) {
-    margin-left: 25%;
-  }
-  & > div:nth-of-type(2) {
-    margin-left: 0%;
-  }
+
 `;
 
 export const InnerSection = styled.div`
+
 ${({theme}) => theme.media('md', `
      width: 100px;
      `)}
@@ -187,9 +173,10 @@ ${({theme}) => theme.media('md', `
 `;
 
 export const SectionCard = styled.div`
-
+backdrop-filter: blur(5px);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: whitesmoke;
+  background-color: transparent;
+  color: whitesmoke;
   border-radius: 25px;
   ${({theme}) => theme.media('xs', `
     width: 200px;
@@ -200,9 +187,11 @@ export const SectionCard = styled.div`
      `)}
   ${({theme}) => theme.media('lg', `
        width: 250px;
+       height: 420px;
      `)}
 
   h3 {
+  
     margin-left: 10px;
   }
 

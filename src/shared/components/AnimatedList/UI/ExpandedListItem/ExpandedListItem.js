@@ -1,5 +1,6 @@
 import React from 'react';
 
+import _ from 'lodash';
 import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
@@ -10,22 +11,56 @@ import ImageGallery from '@/shared/components/ImageGallery';
 
 import Sections from '../Section/Section';
 import {StyledImage, ExtendedDescription} from '../ListItem/ListItem.styled';
+import FreeTextCard from '../FreeTextCard/FreeTextCard';
 
-import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, StyledFreeTextArea, SectionsWrapper} from './ExpandedListItem.styled';
+import {StyledExpandedListItem, ExpandedListItemContent, ExpandedAvatar, AdditionalContent, AnimatedInFlipped, StyledCardImage, StyledImageContainer, SectionsWrapper} from './ExpandedListItem.styled';
 
 const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
+  const propArray = [{
+    sectionIcon: <LocationCityIcon />,
+    startProp: 0,
+    endProp: 6,
+    sectionName: 'Location',
+    features: true,
+  },
+  {
+    sectionIcon: <MonetizationOnIcon />,
+    startProp: 6,
+    endProp: 9,
+    sectionName: 'Pricing',
+    features: true,
+  }, {
+    sectionIcon: <AddBoxIcon />,
+    startProp: 9,
+    endProp: 18,
+    sectionName: 'Features',
+    features: true,
+  }];
+  const RenderSections = () => {
+    return _.times(3, (i) => {
+      return (
+        <Sections
+          sectionIcon={propArray[i].sectionIcon}
+          object={listData}
+          index={index}
+          startProp={propArray[i].startProp}
+          endProp={propArray[i].endProp}
+          createCardFlipId={createCardFlipId}
+          sectionName={propArray[i].sectionName}
+          features={propArray[i].features}
+        />
+      );
+    });
+  };
   return (
     <AnimatedInFlipped
       flipId={createCardFlipId(index)}
       stagger="card"
     >
       <StyledExpandedListItem>
-
         <Flipped inverseFlipId={createCardFlipId(index)}>
           <div>
-
             <ExpandedListItemContent onClick={() => onClick(index)}>
-
               <Flipped
                 flipId={`avatar-${index}`}
                 stagger="card-content"
@@ -40,39 +75,10 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
             </ExpandedListItemContent>
             <ExtendedDescription>
               <SectionsWrapper>
-                <Sections
-                  sectionIcon={<LocationCityIcon />}
-                  object={listData}
-                  index={index}
-                  startProp={0}
-                  endProp={6}
-                  createCardFlipId={createCardFlipId}
-                  sectionName="Location"
-                />
-                <Sections
-                  sectionIcon={<MonetizationOnIcon />}
-                  object={listData}
-                  index={index}
-                  startProp={6}
-                  endProp={9}
-                  createCardFlipId={createCardFlipId}
-                  sectionName="Pricing"
-                />
-                <Sections
-                  sectionIcon={<AddBoxIcon />}
-                  object={listData}
-                  index={index}
-                  startProp={9}
-                  endProp={18}
-                  createCardFlipId={createCardFlipId}
-                  sectionName="Features"
-                  features
-                />
+                <RenderSections />
               </SectionsWrapper>
             </ExtendedDescription>
-
             <AdditionalContent>
-
               {listData.images?.length && (
                 <>
                   <StyledImageContainer>
@@ -80,29 +86,24 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                       <ImageGallery images={listData.images} />
                     </StyledCardImage>
                   </StyledImageContainer>
-                  {listData.freeText ? (
-                    <StyledFreeTextArea>
-                      <h4>{listData.freeText}</h4>
-                    </StyledFreeTextArea>
-                  ) : null }
-                </>
 
+                </>
               )}
+              {listData.freeText ? (
+                <FreeTextCard image={listData.images[0]} text={listData.freeText} />
+              ) : null }
             </AdditionalContent>
           </div>
         </Flipped>
-
       </StyledExpandedListItem>
     </AnimatedInFlipped>
-
   );
 };
-
 ExpandedListItem.propTypes = {
   index: PropTypes.number,
-  onClick: PropTypes.func,
   createCardFlipId: PropTypes.func,
   listData: PropTypes.object,
+  onClick: PropTypes.func,
 
 };
 

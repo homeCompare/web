@@ -34,7 +34,7 @@ export const ListItemContent = styled.div`
   flex-direction: row;
  
   align-items: center;
-  padding: 1rem;
+  padding: 16px;
 `;
 
 export const StyledImage = styled.img`
@@ -47,8 +47,8 @@ border-radius: 100px;
 
 export const Avatar = styled.div`
 
- width: 7rem;
-  height: 6rem;
+ width: 112px;
+  height: 96px;
   border-radius: 100px;
   background-color: grey;
   ${StyledImage} {
@@ -71,14 +71,14 @@ export const Description = styled.div`
   }
 
   & > div:nth-of-type(2) {
-    width: 11rem;
+    width: 176px;
   }
 
   & > div:nth-of-type(3) {
-    width: 8rem;
+    width: 128px;
   }
   & > div + div {
-    margin-top: 1rem;
+    margin-top: 16px;
   }
   
 

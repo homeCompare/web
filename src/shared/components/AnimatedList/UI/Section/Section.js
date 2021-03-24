@@ -1,8 +1,5 @@
-import {useState} from 'react';
-
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {Flipped} from 'react-flip-toolkit';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -15,26 +12,28 @@ justify-content: flex-start;
 `;
 const ButtonWrapper = styled.div`
 display: flex;
+justify-content: center;
 margin-bottom: 20px;
+padding-top: 10px;
+ span {
+   color: #111;
+ 
+ }
 `;
 
 const Sections = ({sectionIcon,
-  object, index, startProp, endProp, createCardFlipId, sectionName, features}) => {
-  const [showSection, setShowSection] = useState(false);
+  object, startProp, endProp, sectionName, features}) => {
   return (
     <Section>
-      <ButtonWrapper>
-        <button type="button" onClick={() => setShowSection(!showSection)}>{sectionName}</button>{sectionIcon}
-      </ButtonWrapper>
+
       <SectionCard>
+        <ButtonWrapper>
+          <span type="button">{sectionName}</span>{sectionIcon}
+        </ButtonWrapper>
         { Object.keys(object).slice(startProp, endProp).map(i => {
-          if (i !== 'freeText' && i !== 'entryDate' && showSection) {
+          if (i !== 'freeText' && i !== 'entryDate') {
             return (
-              <Flipped
-                flipId={`description-${index}-${i}`}
-                stagger="card-content"
-                delayUntil={createCardFlipId(index)}
-              >
+              <>
                 <InnerSection>
 
                   <StyledHomeField>{
@@ -44,14 +43,17 @@ const Sections = ({sectionIcon,
 
                   {!features ? <StyledHomeField>{object[i]}</StyledHomeField> : null}
                   {
-                    features ? ((object[i]) === true)
-                      ? <IconWrapper><CheckIcon /></IconWrapper> : (object[i] === false)
-                        ? <IconWrapper><CloseIcon /></IconWrapper> : <StyledHomeField>{object[i]}</StyledHomeField>
+                    features
+                      ? ((object[i]) === true)
+                        ? <IconWrapper><CheckIcon /></IconWrapper>
+                        : (object[i] === false)
+                          ? <IconWrapper><CloseIcon /></IconWrapper>
+                          : <StyledHomeField>{object[i]}</StyledHomeField>
                       : null
                   }
                 </InnerSection>
 
-              </Flipped>
+              </>
             );
           } return null;
         })}
@@ -63,10 +65,8 @@ const Sections = ({sectionIcon,
 Sections.propTypes = {
   sectionIcon: PropTypes.object,
   object: PropTypes.object,
-  index: PropTypes.number,
   startProp: PropTypes.number,
   endProp: PropTypes.number,
-  createCardFlipId: PropTypes.func,
   sectionName: PropTypes.string,
   features: PropTypes.bool,
 };
