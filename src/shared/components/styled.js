@@ -9,12 +9,10 @@ export const HideOnMedium = styled.div`
   flex: 1;
   height: inherit;
   justify-content: flex-end;
-
 `;
 
 export const ShowOnMedium = styled.div`
   height: inherit;
-    display: flex;
-    flex: 1;
-
+  display: flex;
+  flex: 1;
 `;
