@@ -1,7 +1,7 @@
 import React, {memo, useState, useEffect} from 'react';
 
 import PropTypes from 'prop-types';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import StepConnector from '@material-ui/core/StepConnector';
 import clsx from 'clsx';
@@ -17,7 +17,6 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import * as actions from '@/state/actions';
 import CustomField from '@/shared/components/CustomField';
 import {useTranslation} from '@/shared/i18n';
-import {home, rent} from '@/shared/utils/homeFields';
 
 import CustomControlsButton from './CustomControlsButton';
 import CustomButton from './CustomButton';
@@ -98,11 +97,7 @@ function getSteps() {
   return ['Location', 'Pricing', 'Features'];
 }
 
-const HomeForm = ({onSubmit, initialValues = {}}) => {
-  const formType = useSelector(state => state.form);
-  let type = null;
-  if (formType.home) type = home;
-  else type = rent;
+const HomeForm = ({onSubmit, initialValues = {}, fields}) => {
   const [wasClicked, setWasClicked] = useState(false);
   const dispatch = useDispatch();
   const isEditMode = initialValues.id;
@@ -124,7 +119,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
   const onSubmitNewHomeValidation = (entries) => {
     const errors = {};
 
-    type.forEach(field => {
+    fields.forEach(field => {
       if (!field.validation) {
         return;
       }
@@ -205,7 +200,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
     if (activeStep !== 0) {
       return null;
     }
-    return type.map((field, index) => {
+    return fields.map((field, index) => {
       if (index < 5) {
         if (field.type === 'dropZone') {
           return (
@@ -228,7 +223,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
     if (activeStep !== 1) {
       return null;
     }
-    return type.map((field, index) => {
+    return fields.map((field, index) => {
       if (index >= 5 && index < 10) {
         return (
           <FieldWrapper key={field.name}>
@@ -244,7 +239,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
     if (activeStep !== 2) {
       return null;
     }
-    const fieldZone = type.map((field, index) => {
+    const fieldZone = fields.map((field, index) => {
       if (index >= 10 && index < 20) {
         return (
           <FieldWrapper key={field.name}>
@@ -338,7 +333,6 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
         );
       }}
     </Form>
-
   );
 };
 

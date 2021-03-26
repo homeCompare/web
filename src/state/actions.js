@@ -36,6 +36,3 @@ export const setCurrency = makeActionCreator('SET_CURRENCY');
 export const addTempImages = makeActionCreator('ADD_TEMP_IMAGES');
 export const removeImageById = makeActionCreator('REMOVE_IMAGE_BY_ID');
 export const removeAllTempImages = makeActionCreator('REMOVE_ALL_TEMP_IMAGES');
-
-// FORM ACTIONS
-export const setFormType = makeActionCreator('SET_FORM_TYPE');

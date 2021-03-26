@@ -13,7 +13,7 @@ let store;
 const rootReducer = composeReducers(combineReducers(reducers));
 
 const persistedReducer = persistReducer({
-  key: 'root',
+  key: 'root2',
   storage,
   blacklist: ['_persist'],
 },

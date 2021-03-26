@@ -2,7 +2,7 @@ import moment from 'moment';
 
 const halfYearFromNowString = moment().add(6, 'months').format('yyyy-MM-DD');
 
-const SharedFields = [
+const sharedFields = [
   {
     name: 'city',
     label: 'city',
@@ -117,8 +117,8 @@ const SharedFields = [
   },
 ];
 
-export const home = [
-  ...SharedFields,
+export const buyFields = [
+  ...sharedFields,
   {
     name: 'price',
     label: 'price',
@@ -140,8 +140,8 @@ export const home = [
   },
 ];
 
-export const rent = [
-  ...SharedFields,
+export const rentFields = [
+  ...sharedFields,
   {
     name: 'rent',
     label: 'Rent',

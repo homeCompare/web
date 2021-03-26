@@ -5,7 +5,6 @@ import * as actions from './actions';
 
 const EMPTY_ARRAY = [];
 const userDefaultState = {loading: false, data: null, loaded: false};
-const formDefaultState = {home: true, rent: false};
 
 export const user = composeReducers(
   makeAsyncReducer(actions.facebookLogin, (currentState, {payload: userData}) => ({
@@ -39,11 +38,3 @@ export const dropzone = composeReducers(
 );
 
 export const currency = makeReducer(actions.setCurrency, {defaultState: 'EUR'});
-
-export const form = composeReducers(
-  makeReducer(actions.setFormType, (currentState) => ({
-    ...(currentState || formDefaultState),
-    home: !currentState.home,
-    rent: !currentState.rent,
-  })),
-);
