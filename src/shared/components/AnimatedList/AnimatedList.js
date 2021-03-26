@@ -41,7 +41,6 @@ export const AnimatedList = (homes) => {
   const listData = homes.homes || [];
   const createCardFlipId = index => `listItem-${index}`;
   const [focused, setFocused] = useState(null);
-
   const clicked = index => {
     if (focused === index) setFocused(null);
     else setFocused(index);

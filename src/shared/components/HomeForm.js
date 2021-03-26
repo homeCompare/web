@@ -1,13 +1,12 @@
 import React, {memo, useState, useEffect} from 'react';
 
 import PropTypes from 'prop-types';
-import {useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import StepConnector from '@material-ui/core/StepConnector';
 import clsx from 'clsx';
 import {Form} from 'react-final-form';
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -18,7 +17,7 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import * as actions from '@/state/actions';
 import CustomField from '@/shared/components/CustomField';
 import {useTranslation} from '@/shared/i18n';
-import fields from '@/shared/utils/homeFields';
+import {home, rent} from '@/shared/utils/homeFields';
 
 import CustomControlsButton from './CustomControlsButton';
 import CustomButton from './CustomButton';
@@ -95,59 +94,15 @@ const FieldWrapper = styled.div`
   margin: ${({theme}) => theme.size(1)} 0;
 `;
 
-const StyledButton = styled(Button)`
-  && {
-    display: inline-block;
-	margin-top: 30px;
-	font-family: 'Heebo', Helvetica, Arial, sans-serif;
-	font-weight: 500;
-	font-size: 16px;
-	letter-spacing: 0.07em;
-	text-transform: uppercase;
-	line-height: 32px;
-	color: #ffffff;
-	position: relative;
-  background: linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%);
-	border-radius: 2em;
-
-  }
- 
-
-`;
-
-const onSubmitNewHomeValidation = entries => {
-  const errors = {};
-
-  fields.forEach(field => {
-    if (!field.validation) {
-      return;
-    }
-
-    // checking numbers only fields.
-    // eslint-disable-next-line no-restricted-globals
-    if (entries[field.name] && field.validation?.numberOnly && isNaN(entries[field.name])) {
-      errors[field.name] = 'error_numbers_only';
-    }
-
-    // checking required fields.
-    if (field.validation?.required && !entries[field.name]) {
-      errors[field.name] = 'error_field_required';
-    }
-  });
-
-  const isFormHasErrors = Object.keys(errors).length;
-  if (!isFormHasErrors) {
-    return null;
-  }
-
-  return errors;
-};
-
 function getSteps() {
   return ['Location', 'Pricing', 'Features'];
 }
 
 const HomeForm = ({onSubmit, initialValues = {}}) => {
+  const formType = useSelector(state => state.form);
+  let type = null;
+  if (formType.home) type = home;
+  else type = rent;
   const [wasClicked, setWasClicked] = useState(false);
   const dispatch = useDispatch();
   const isEditMode = initialValues.id;
@@ -165,6 +120,34 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
       await dispatch(actions.removeAllTempImages());
     };
   }, [dispatch]);
+
+  const onSubmitNewHomeValidation = (entries) => {
+    const errors = {};
+
+    type.forEach(field => {
+      if (!field.validation) {
+        return;
+      }
+
+      // checking numbers only fields.
+      // eslint-disable-next-line no-restricted-globals
+      if (entries[field.name] && field.validation?.numberOnly && isNaN(entries[field.name])) {
+        errors[field.name] = 'error_numbers_only';
+      }
+
+      // checking required fields.
+      if (field.validation?.required && !entries[field.name]) {
+        errors[field.name] = 'error_field_required';
+      }
+    });
+
+    const isFormHasErrors = Object.keys(errors).length;
+    if (!isFormHasErrors) {
+      return null;
+    }
+
+    return errors;
+  };
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -222,7 +205,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
     if (activeStep !== 0) {
       return null;
     }
-    return fields.map((field, index) => {
+    return type.map((field, index) => {
       if (index < 5) {
         if (field.type === 'dropZone') {
           return (
@@ -245,7 +228,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
     if (activeStep !== 1) {
       return null;
     }
-    return fields.map((field, index) => {
+    return type.map((field, index) => {
       if (index >= 5 && index < 10) {
         return (
           <FieldWrapper key={field.name}>
@@ -261,7 +244,7 @@ const HomeForm = ({onSubmit, initialValues = {}}) => {
     if (activeStep !== 2) {
       return null;
     }
-    const fieldZone = fields.map((field, index) => {
+    const fieldZone = type.map((field, index) => {
       if (index >= 10 && index < 20) {
         return (
           <FieldWrapper key={field.name}>
