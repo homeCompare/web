@@ -31,9 +31,9 @@ const Auth = ({mobile}) => {
   } else if (mobile && userData) {
     LoginComp = <div onClick={Logout}>Logout</div>;
   } else if (!mobile && !userData) {
-    LoginComp = <PersonOutlineIcon fontSize="large" onClick={Login} />;
+    LoginComp = <PersonOutlineIcon style={{cursor: 'pointer'}} fontSize="large" onClick={Login} />;
   } else if (!mobile && userData) {
-    LoginComp = <ExitToAppIcon fontSize="large" onClick={Logout} />;
+    LoginComp = <ExitToAppIcon style={{cursor: 'pointer'}} fontSize="large" onClick={Logout} />;
   }
 
   return (

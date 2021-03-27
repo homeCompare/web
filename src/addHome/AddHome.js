@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {omit} from 'lodash';
 import {v4 as uuidv4} from 'uuid';
 import {useRouter} from 'next/router';
+import styled from 'styled-components';
 
 import Switch from '@/shared/components/Switch';
 import {toBase64} from '@/shared/utils/base64';
@@ -11,6 +12,14 @@ import * as actions from '@/state/actions';
 import HomeForm from '@/shared/components/HomeForm';
 import {buyFields, rentFields} from '@/shared/utils/homeFields';
 import {event} from '@/shared/utils/gtag';
+
+const StyledSwitch = styled(Switch)`
+  &&& {
+    margin-bottom: 16px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+`;
 
 const AddHome = () => {
   const dispatch = useDispatch();
@@ -46,7 +55,9 @@ const AddHome = () => {
   // temp Add shouldn't have initialValues on production.
   return (
     <>
-      <Switch onChange={() => setIsRent(!isRent)} />
+      <div style={{display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center'}}>
+        <h3>Buy</h3><StyledSwitch onChange={() => setIsRent(!isRent)} /><h3>Rent</h3>
+      </div>
       <HomeForm
         onSubmit={onSubmit}
         initialValues={initialValues}
