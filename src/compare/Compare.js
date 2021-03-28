@@ -104,7 +104,7 @@ const Compare = () => {
 
   return (
     <>
-      <CustomSwitch onChange={() => setIsRent(!isRent)} />
+      <CustomSwitch onChange={() => { setIsRent(!isRent); setHomesToCompare([]); }} />
       <p>{t('compare_page_paragraph')}</p>
 
       <HomesList>
