@@ -13,7 +13,6 @@ const shouldFlip = index => (prev, current) => index === prev || index === curre
 
 const ListItem = ({index, onClick, createCardFlipId, listData}) => {
   const dispatch = useDispatch();
-
   const onConfirmedRemoveButtonClick = (homeId) => {
     dispatch(actions.removeHomeById(homeId));
   };
