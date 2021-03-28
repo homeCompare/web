@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 
@@ -22,8 +22,6 @@ const List = styled.ul`
 `;
 
 const ListType = ({list, createCardFlipId, focused, clicked}) => {
-  console.log(list);
-
   return (
     <List>
       {list.map((listObj) => {
