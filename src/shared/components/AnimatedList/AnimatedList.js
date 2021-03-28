@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 
+import _ from 'lodash';
 import {Flipper} from 'react-flip-toolkit';
 import styled from 'styled-components';
 
@@ -30,6 +31,29 @@ export const AnimatedList = (homes) => {
   };
   const rentList = listData.filter(listObj => listObj.type === 'rent');
   const buyList = listData.filter(listObj => listObj.type === 'buy');
+  const propArray = [{
+    list: rentList,
+    listName: 'Rent Homes',
+  }, {
+    list: buyList,
+    listName: 'Buy Homes',
+  }];
+
+  const RenderLists = () => {
+    return _.times(2, (i) => {
+      return (
+        <>
+          <h4>{propArray[i].listName}</h4>
+          <ListType
+            list={propArray[i].list}
+            clicked={clicked}
+            createCardFlipId={createCardFlipId}
+            focused={focused}
+          />
+        </>
+      );
+    });
+  };
 
   return (
     <StyledFlipper
@@ -42,20 +66,8 @@ export const AnimatedList = (homes) => {
       }}
       decisionData={focused}
     >
-      <h4>Rent Homes</h4>
-      <ListType
-        list={rentList}
-        clicked={clicked}
-        createCardFlipId={createCardFlipId}
-        focused={focused}
-      />
-      <h4>Buy Homes</h4>
-      <ListType
-        list={buyList}
-        clicked={clicked}
-        createCardFlipId={createCardFlipId}
-        focused={focused}
-      />
+
+      <RenderLists />
 
     </StyledFlipper>
   );

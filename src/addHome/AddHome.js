@@ -56,7 +56,7 @@ const AddHome = () => {
   // temp Add shouldn't have initialValues on production.
   return (
     <>
-      <div style={{display: 'flex', alignItems: 'flex-start', textAlign: 'center', justifyContent: 'flex-start'}}>
+      <div style={{display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center'}}>
         <CustomSwitch onChange={() => setIsRent(!isRent)} />
       </div>
       <HomeForm
