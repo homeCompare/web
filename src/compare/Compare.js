@@ -7,6 +7,7 @@ import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import TouchAppIconIcon from '@material-ui/icons/TouchApp';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
+import CustomSwitch from '@/shared/components/CustomSwitch/CustomSwitch';
 import {useTranslation} from '@/shared/i18n';
 import {reorder} from '@/shared/utils/dnd';
 
@@ -34,17 +35,13 @@ const DraggableItem = styled.div`
     color: ${theme.colors.white};
   `}
 `;
-
-const fieldToCompare = [
+const sharedCompareFields = [
   'city',
   'street',
   'blockNumber',
   'houseNumber',
   'areaRate',
   'personalRate',
-  'price',
-  'propertyTax',
-  'buildingTax',
   'numberOfRooms',
   'floor',
   'squareMeter',
@@ -57,10 +54,28 @@ const fieldToCompare = [
   'id',
 ];
 
+const buyFields = [
+  ...sharedCompareFields,
+  'price',
+  'propertyTax',
+  'buildingTax',
+];
+
+const rentFields = [
+  ...sharedCompareFields,
+  'rent',
+];
+
 const Compare = () => {
   const {t} = useTranslation();
   const homes = useSelector((state) => state.homes);
   const [homesToCompare, setHomesToCompare] = useState();
+
+  const [isRent, setIsRent] = useState(false);
+  const rentList = homes?.filter(home => home.type === 'rent');
+  const buyList = homes?.filter(home => home.type === 'buy');
+  const list = isRent ? rentList : buyList;
+  const fieldToCompare = isRent ? buyFields : rentFields;
 
   const onDragEnd = result => {
     if (!result.destination) {
@@ -89,9 +104,11 @@ const Compare = () => {
 
   return (
     <>
+      <CustomSwitch onChange={() => setIsRent(!isRent)} />
       <p>{t('compare_page_paragraph')}</p>
+
       <HomesList>
-        {homes?.map(home => (
+        {list?.map(home => (
           <HomeOptionButton
             key={home.id}
             onClick={() => addHomeToCompare(home)}

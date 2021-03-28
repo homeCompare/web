@@ -3,8 +3,7 @@ import React, {useState} from 'react';
 import {Flipper} from 'react-flip-toolkit';
 import styled from 'styled-components';
 
-import ExpandedListItem from './UI/ExpandedListItem/ExpandedListItem';
-import ListItem from './UI/ListItem/ListItem';
+import ListType from './UI/List/List';
 
 const StyledFlipper = styled(Flipper)`
   && {
@@ -21,30 +20,17 @@ const StyledFlipper = styled(Flipper)`
   }
 `;
 
-const List = styled.ul`
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  padding: 0;
-  width: 100%;
-
-  li {
-    width: 100%;
-  }
-  li + li {
-    margin-top: 16px;
-  }
-`;
-
 export const AnimatedList = (homes) => {
-  const listData = homes.homes || [];
   const createCardFlipId = index => `listItem-${index}`;
+  const listData = homes.homes || [];
   const [focused, setFocused] = useState(null);
   const clicked = index => {
     if (focused === index) setFocused(null);
     else setFocused(index);
   };
+  const rentList = listData.filter(listObj => listObj.type === 'rent');
+  const buyList = listData.filter(listObj => listObj.type === 'buy');
+
   return (
     <StyledFlipper
       flipKey={focused}
@@ -56,31 +42,21 @@ export const AnimatedList = (homes) => {
       }}
       decisionData={focused}
     >
-      <List>
-        {listData.map((listObj, index) => {
-          return (
-            <li key={index}>
-              {index === focused ? (
-                <ExpandedListItem
-                  index={focused}
-                  onClick={clicked}
-                  createCardFlipId={createCardFlipId}
-                  listData={listObj}
-                  key={listObj.id}
-                />
-              ) : (
-                <ListItem
-                  index={index}
-                  onClick={clicked}
-                  createCardFlipId={createCardFlipId}
-                  listData={listObj}
-                  key={listObj.id}
-                />
-              )}
-            </li>
-          );
-        })}
-      </List>
+      <h4>Rent Homes</h4>
+      <ListType
+        list={rentList}
+        clicked={clicked}
+        createCardFlipId={createCardFlipId}
+        focused={focused}
+      />
+      <h4>Buy Homes</h4>
+      <ListType
+        list={buyList}
+        clicked={clicked}
+        createCardFlipId={createCardFlipId}
+        focused={focused}
+      />
+
     </StyledFlipper>
   );
 };
