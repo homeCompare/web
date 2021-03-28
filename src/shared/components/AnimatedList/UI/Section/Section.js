@@ -31,7 +31,7 @@ const Sections = ({sectionIcon,
           <span type="button">{sectionName}</span>{sectionIcon}
         </ButtonWrapper>
         { Object.keys(object).slice(startProp, endProp).map(i => {
-          if (i !== 'freeText' && i !== 'entryDate') {
+          if (i !== 'freeText' && i !== 'entryDate' && i !== 'images' && i !== 'id' && i !== 'personalRate' && i !== 'type') {
             return (
               <>
                 <InnerSection>

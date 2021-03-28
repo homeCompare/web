@@ -36,7 +36,7 @@ const SwitchInput = React.forwardRef((props, ref) => {
 
   return (
     <>
-      {props.label} <StyledSwitchInput ref={ref} checked={checked} onChange={onChange} />
+      {props.label} <StyledSwitchInput {...props} ref={ref} checked={checked} onChange={onChange} />
     </>
   );
 });
