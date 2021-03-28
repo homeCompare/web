@@ -72,8 +72,8 @@ const Compare = () => {
   const [homesToCompare, setHomesToCompare] = useState();
 
   const [isRent, setIsRent] = useState(false);
-  const rentList = homes.filter(home => home.type === 'rent');
-  const buyList = homes.filter(home => home.type === 'buy');
+  const rentList = homes?.filter(home => home.type === 'rent');
+  const buyList = homes?.filter(home => home.type === 'buy');
   const list = isRent ? rentList : buyList;
   const fieldToCompare = isRent ? buyFields : rentFields;
 
