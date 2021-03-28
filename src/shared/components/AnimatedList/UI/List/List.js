@@ -10,8 +10,9 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   height: 50vh;
-  padding: 0;
+  padding: 20px;
   width: 100%;
+  overflow: auto;
 
   li {
     width: 100%;

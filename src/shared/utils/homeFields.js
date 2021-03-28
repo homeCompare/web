@@ -143,8 +143,8 @@ export const buyFields = [
 export const rentFields = [
   ...sharedFields,
   {
-    name: 'rent',
-    label: 'Rent',
+    name: 'monthlyPayment',
+    label: 'Monthly_Payment',
     type: 'number',
     placeholder: '300',
     initialValue: '400',

@@ -41,9 +41,9 @@ export const AnimatedList = (homes) => {
 
   const RenderLists = () => {
     return _.times(2, (i) => {
-      return (
+      return propArray[i].list.length ? (
         <>
-          <h4>{propArray[i].listName}</h4>
+          <h3>{propArray[i].listName}</h3>
           <ListType
             list={propArray[i].list}
             clicked={clicked}
@@ -51,7 +51,7 @@ export const AnimatedList = (homes) => {
             focused={focused}
           />
         </>
-      );
+      ) : null;
     });
   };
 

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const StyledListItem = styled.li`
   list-style: none;
   padding: 0;
-  margin: 0 32px;
+  margin: 0;
 `;
 const StyledTitle = styled.h4`
   font-size: 16px;
