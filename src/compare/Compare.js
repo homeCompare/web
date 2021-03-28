@@ -75,7 +75,7 @@ const Compare = () => {
   const rentList = homes?.filter(home => home.type === 'rent');
   const buyList = homes?.filter(home => home.type === 'buy');
   const list = isRent ? rentList : buyList;
-  const fieldToCompare = isRent ? buyFields : rentFields;
+  const fieldToCompare = isRent ? rentFields : buyFields;
 
   const onDragEnd = result => {
     if (!result.destination) {
