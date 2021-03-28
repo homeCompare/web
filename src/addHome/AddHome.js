@@ -6,6 +6,7 @@ import {v4 as uuidv4} from 'uuid';
 import {useRouter} from 'next/router';
 import styled from 'styled-components';
 
+import CustomSwitch from '@/shared/components/CustomSwitch/CustomSwitch';
 import Switch from '@/shared/components/Switch';
 import {toBase64} from '@/shared/utils/base64';
 import * as actions from '@/state/actions';
@@ -55,8 +56,8 @@ const AddHome = () => {
   // temp Add shouldn't have initialValues on production.
   return (
     <>
-      <div style={{display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center'}}>
-        <h3>Buy</h3><StyledSwitch onChange={() => setIsRent(!isRent)} /><h3>Rent</h3>
+      <div style={{display: 'flex', alignItems: 'flex-start', textAlign: 'center', justifyContent: 'flex-start'}}>
+        <CustomSwitch onChange={() => setIsRent(!isRent)} />
       </div>
       <HomeForm
         onSubmit={onSubmit}
