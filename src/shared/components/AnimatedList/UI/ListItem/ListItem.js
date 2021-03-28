@@ -42,7 +42,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
             <Description>
               <div>
                 {
-                  ['city', 'street', 'price'].map(i => (
+                  ['city', 'street', 'price', 'rent', 'entryDate'].map(i => (
                     <Flipped
                       flipId={`description-${index}-${i}`}
                       stagger="card-content"

@@ -125,7 +125,7 @@ const CustomSwitch = (props) => {
     <StyledListItem>
       <StyledTitle>Rent or Buy</StyledTitle>
       <StyledInput id="cb5" type="checkbox" checked={checked} onChange={onChange} />
-      <StyledLabel htmlFor="cb5" data-tg-off="Rent" data-tg-on="Buy" />
+      <StyledLabel htmlFor="cb5" data-tg-off="Buy" data-tg-on="Rent" />
     </StyledListItem>
   );
 };

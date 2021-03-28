@@ -224,7 +224,7 @@ const HomeForm = ({onSubmit, initialValues = {}, fields}) => {
       return null;
     }
     return fields.map((field, index) => {
-      if (index >= 5 && index < 10) {
+      if (index >= 16 && index < 20) {
         return (
           <FieldWrapper key={field.name}>
             <CustomField {...field} />
@@ -240,7 +240,7 @@ const HomeForm = ({onSubmit, initialValues = {}, fields}) => {
       return null;
     }
     const fieldZone = fields.map((field, index) => {
-      if (index >= 10 && index < 20) {
+      if (index >= 5 && index < 16) {
         return (
           <FieldWrapper key={field.name}>
             <CustomField {...field} />
