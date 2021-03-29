@@ -15,10 +15,10 @@ display: flex;
 justify-content: center;
 margin-bottom: 20px;
 padding-top: 10px;
- span {
-   color: #111;
- 
- }
+
+span {
+  color: #111;
+}
 `;
 
 const Sections = ({sectionIcon,

@@ -90,7 +90,7 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                 </>
               )}
               {listData.freeText ? (
-                <FreeTextCard image={listData.images[0]} text={listData.freeText} />
+                <FreeTextCard image={listData.images ? listData.images[0] : null} text={listData.freeText} />
               ) : null }
             </AdditionalContent>
           </div>

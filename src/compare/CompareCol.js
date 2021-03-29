@@ -51,9 +51,11 @@ export const HomeCompareImage = styled.li`
     width: 40px;
     opacity: 0.7;
   }
+
   .image-gallery-slide .image-gallery-image {
     object-fit: cover;
   }
+
   .image-gallery-image {
     height: 200px;
     object-fit: cover;
@@ -69,6 +71,7 @@ export const HomeCompareItem = styled.li`
   display: flex;
   justify-content: center;
   font-weight: ${({$isBold}) => ($isBold ? 'bold' : 'inherit')};
+
   svg {
     margin: auto;
   }

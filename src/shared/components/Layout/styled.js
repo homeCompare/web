@@ -13,5 +13,5 @@ export const Content = styled.main`
   display: flex;
   flex-direction: column;
 
-  ${({theme}) => theme.defaultSizer};
+  ${({theme}) => theme.defaultSizer}
 `;

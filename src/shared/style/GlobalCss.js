@@ -5,28 +5,36 @@ import theme from './theme';
 
 const GlobalStyle = createGlobalStyle`
   html {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
     background-color: ${theme.base.backgroundColor};
   }
 
-  body, button, input, textarea {
+  body,
+  button,
+  input,
+  textarea {
     font-size: ${theme.size(1)};
     font-family: 'Roboto', "Helvetica Neue", Helvetica, sans-serif;
     color: ${theme.base.textColor};
   }
 
-
-
-  h1, h2, h3, h4, button, body {
+  h1,
+  h2,
+  h3,
+  h4,
+  button,
+  body {
     padding: 0;
     margin: 0;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     margin-bottom: ${theme.size(1)};
   }
 
@@ -34,7 +42,8 @@ const GlobalStyle = createGlobalStyle`
     line-height: 21px;
   }
 
-  button, a {
+  button,
+  a {
     cursor: pointer;
     color: inherit;
     text-transform: capitalize;

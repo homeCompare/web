@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import ExpandedListItem from '../ExpandedListItem/ExpandedListItem';
 import ListItem from '../ListItem/ListItem';
@@ -9,7 +10,7 @@ const List = styled.ul`
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  height: 50vh;
+  height: 100vh;
   padding: 20px;
   width: 100%;
   overflow: auto;
@@ -17,6 +18,7 @@ const List = styled.ul`
   li {
     width: 100%;
   }
+
   li + li {
     margin-top: 16px;
   }
@@ -50,6 +52,13 @@ const ListType = ({list, createCardFlipId, focused, clicked}) => {
       })}
     </List>
   );
+};
+
+ListType.propTypes = {
+  list: PropTypes.array,
+  createCardFlipId: PropTypes.func,
+  focused: PropTypes.bool,
+  clicked: PropTypes.func,
 };
 
 export default ListType;

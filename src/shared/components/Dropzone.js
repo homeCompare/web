@@ -25,12 +25,12 @@ const Textarea = styled.div`
   padding: 20px;
   border-width: 2px;
   border-radius: 2px;
-  border-color: #eeeeee;
+  border-color: #eee;
   border-style: dashed;
   background-color: #fafafa;
   color: #bdbdbd;
   outline: none;
-  transition: border .24s ease-in-out;
+  transition: border 0.24s ease-in-out;
 `;
 
 const PreviewContainer = styled.div`

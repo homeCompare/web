@@ -11,7 +11,7 @@ const Root = styled.div`
   flex-direction: column;
   display: flex;
   flex-wrap: wrap;
-  ${({theme}) => theme.media('lg', 'flex-direction: row')};
+  ${({theme}) => theme.media('lg', 'flex-direction: row')}
 `;
 
 const HomesList = () => {

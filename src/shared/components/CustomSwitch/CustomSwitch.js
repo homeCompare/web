@@ -27,11 +27,12 @@ const StyledInput = styled.input`
   & *::before,
   & + ${StyledLabel} {
     box-sizing: border-box;
+
     &::selection {
       background: none;
     }
   }
- 
+
   & + ${StyledLabel} {
     outline: 0;
     display: block;
@@ -49,7 +50,7 @@ const StyledInput = styled.input`
       width: 50%;
       height: 100%;
     }
- 
+
     &::after {
       left: 0;
     }
@@ -70,6 +71,7 @@ const StyledInput = styled.input`
     transition: all 0.2s ease;
     font-family: sans-serif;
     perspective: 100px;
+
     &::after,
     &::before {
       display: inline-block;
@@ -86,6 +88,7 @@ const StyledInput = styled.input`
       backface-visibility: hidden;
       border-radius: 4px;
     }
+
     &::after {
       content: attr(data-tg-on);
       background: #444;

@@ -8,53 +8,53 @@ import {getHomeShortAddress} from '@/shared/utils/general';
 import Button from '@/shared/components/Button';
 
 const StyledButton = styled(Button)`
-	&&& {
-		position: relative;
-		width: ${({theme}) => theme.size(18)};
-		height: ${({theme}) => theme.size(10)};
-		margin-right: ${({theme}) => theme.size(1)};
-		flex-shrink: 0;
+  &&& {
+    position: relative;
+    width: ${({theme}) => theme.size(18)};
+    height: ${({theme}) => theme.size(10)};
+    margin-right: ${({theme}) => theme.size(1)};
+    flex-shrink: 0;
     flex-grow: 0;
-		color: ${({theme}) => theme.colors.white};
-		${({$backgroundImageUrl}) => $backgroundImageUrl && `
+    color: ${({theme}) => theme.colors.white};
+    ${({$backgroundImageUrl}) => $backgroundImageUrl && `
 			background-image: url(${$backgroundImageUrl});
 			background-size: cover;
 			background-position: center;
 		`}
 
-		transition: all 150ms ease-out;
+    transition: all 150ms ease-out;
 
-		${({$isActive}) => $isActive && `
+    ${({$isActive}) => $isActive && `
 			transform: translate3d(0, -3px, 0);
 			box-shadow: rgb(0 0 0 / 8%) 0 3px 10px;
 		`}
-		
-		&::before {
-			content: "";
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0,0,0,0.2);
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
 
-		&::after {
-			content: '';
-			position: absolute;
-			width: ${({theme}) => theme.size(1)};
-			height: ${({theme}) => theme.size(1)};
-			border: 1px solid gray;
-			top: 5px;
-			background-color: ${({$isActive, theme}) => ($isActive ? theme.colors.darkGrey : theme.colors.white)};
-			right: 5px;
-			border-radius: 50%;
-		}
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
 
-		.MuiButton-label {
-			z-index: 2;
-		}
-	}
+    &::after {
+      content: '';
+      position: absolute;
+      width: ${({theme}) => theme.size(1)};
+      height: ${({theme}) => theme.size(1)};
+      border: 1px solid gray;
+      top: 5px;
+      background-color: ${({$isActive, theme}) => ($isActive ? theme.colors.darkGrey : theme.colors.white)};
+      right: 5px;
+      border-radius: 50%;
+    }
+
+    .MuiButton-label {
+      z-index: 2;
+    }
+  }
 `;
 
 const HomeOptionButton = ({onClick, isActive, ...home}) => {

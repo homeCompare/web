@@ -6,17 +6,17 @@ import PropTypes from 'prop-types';
 import Card from './Card';
 
 export const CardsWrapper = styled.ul`
-	width: 100%;
-	height: 200px;
-	list-style-type: none;
-	display: flex;
-	padding: 0;
-	margin: 0;
-	background: fff;
+  width: 100%;
+  height: 200px;
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  background: fff;
 
-	& > li {
-		transition: all 0.5s ease-in-out;
-	}
+  & > li {
+    transition: all 0.5s ease-in-out;
+  }
 `;
 
 const CardsSliding = ({data}) => (

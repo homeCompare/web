@@ -6,6 +6,7 @@ const colors = {
   veryLightGrey: '#fafafa',
   thinGrey: '#ccc',
   coolBlack: '#444',
+  coolWhite: '#f5f5f5',
 };
 
 const base = {

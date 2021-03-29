@@ -30,6 +30,7 @@ const InnerWrapper = styled.div`
   height: 100%;
   align-items: center;
   ${({theme}) => theme.defaultSizer}
+
   padding: 0 20px;
 `;
 

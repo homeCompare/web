@@ -56,6 +56,7 @@ const MenuLink = styled(Link)`
   ${({active}) => active && menuLinkHoverCss}
 
   transition: all 0.5s ease;
+
   &:hover {
     ${menuLinkHoverCss}
   }

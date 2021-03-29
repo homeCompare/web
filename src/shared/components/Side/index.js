@@ -7,6 +7,7 @@ const Root = styled.div`
   ${({theme}) => theme.media('md', `
     margin-left: ${theme.size(1)};
   `)}
+
   text-align: center;
 `;
 
