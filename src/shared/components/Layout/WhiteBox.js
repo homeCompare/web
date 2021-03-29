@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const ContentInnerWrapper = styled.section`
   width: 100%;
   flex: 1;
+  z-index: 100;
   margin-top: -200px;
   background-color: ${({theme}) => theme.base.backgroundColor};
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);

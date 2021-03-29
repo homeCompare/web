@@ -83,7 +83,6 @@ const CoverImage = styled(Image)`
 const CoverImageWrapper = styled.div`
   display: flex;
   overflow: hidden;
-  min-height: 300px;
 `;
 
 export const Logo = ({className}) => (
