@@ -19,9 +19,7 @@ const Wrapper = styled.aside`
 
 const Side = () => (
   <Wrapper>
-    <Root>
-      side part
-    </Root>
+    <Root />
   </Wrapper>
 );
 

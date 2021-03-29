@@ -88,12 +88,12 @@ const StyledInput = styled.input`
     }
     &::after {
       content: attr(data-tg-on);
-      background: #02C66F;
+      background: #444;
       transform: rotateY(-180deg);
     }
 
     &::before {
-      background: #FF3A19;
+      background: ${({theme}) => theme.colors.coolBlack};
       content: attr(data-tg-off);
     }
 
@@ -110,7 +110,7 @@ const StyledInput = styled.input`
     &::after {
       transform: rotateY(0);
       left: 0;
-      background: #7FC6A6;
+      background: ${({theme}) => theme.colors.lightGrey};
     }
 
     &:active::after {
