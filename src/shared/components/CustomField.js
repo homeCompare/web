@@ -14,9 +14,10 @@ import {useTranslation} from '@/shared/i18n';
 
 const StyledTextInput = styled(TextInput)`
   width: 100%;
-   input {
-     padding: 30 30px;
-   }
+
+  input {
+    padding: 30 30px;
+  }
 `;
 
 const StyledSlider = styled(Slider)`

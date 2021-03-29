@@ -14,10 +14,11 @@ const StyledSlider = styled(SliderBone)`
   }
 
   .MuiSlider-thumb.MuiSlider-active {
-    box-shadow: 0px 0px 0px 14px rgba(0, 0, 0, 0.16)
+    box-shadow: 0 0 0 14px rgba(0, 0, 0, 0.16);
   }
+
   .MuiSlider-thumb:hover {
-    box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.16);
   }
 `;
 

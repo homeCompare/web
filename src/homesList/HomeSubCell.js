@@ -9,71 +9,71 @@ import ChipBoolean from '@/shared/components/ChipBoolean';
 import {getPriceWithCurrency} from '@/shared/utils/general';
 
 const HomeSubRoot = styled.div`
-	padding: 0 ${({theme}) => theme.size(1)};
-	display: flex;
-	flex: 1;
+  padding: 0 ${({theme}) => theme.size(1)};
+  display: flex;
+  flex: 1;
 `;
 
 const ScaleWrapper = styled.div`
-	width: 50%;
-	display: flex;
-	flex-direction: column;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ScaleLabel = styled.label`
-	font-weight: bold;
+  font-weight: bold;
 `;
 
 const StyledScale = styled(NumberAsScale)`
-	margin: ${({theme}) => theme.size(1)} 0;
+  margin: ${({theme}) => theme.size(1)} 0;
 `;
 
 const BooleanFieldsWrapper = styled.div`
-	display: flex;
-	text-align: center;
-	justify-content: space-between;
-	width: 95%;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  width: 95%;
 `;
 
 const StyledChipBoolean = styled(ChipBoolean)`
 `;
 
 const FreeText = styled.p`
-	background: rgba(0,0,0,0.2);
-	padding: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 5px;
 `;
 
 const ChipWrapper = styled.div`
-	display: flex;
+  display: flex;
 `;
 
 const Chip = styled.div`
-	background-color: #77777754;
-	padding: 5px;
-	border-radius: 2.5px;
-	flex-grow: 0;
-	height: 40px;
-	margin: 5px;
-	display: flex;
-	flex-direction: column;
+  background-color: #77777754;
+  padding: 5px;
+  border-radius: 2.5px;
+  flex-grow: 0;
+  height: 40px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const UpperWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 `;
 
 const ChipLabel = styled.label`
-	font-weight: ${({bold}) => (bold ? 'bold' : 'normal')};
+  font-weight: ${({bold}) => (bold ? 'bold' : 'normal')};
 `;
 
 const FlexWrapper = styled.div`
-	display: flex;
-	justify-content: space-between;
-	flex: 1;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
 `;
 
 const HomeSubCell = ({home, t}) => {

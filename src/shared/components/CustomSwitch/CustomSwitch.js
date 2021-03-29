@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const StyledListItem = styled.li`
   list-style: none;
   padding: 0;
-  margin: 0 32px;
+  margin: 0;
 `;
 const StyledTitle = styled.h4`
   font-size: 16px;
@@ -27,11 +27,12 @@ const StyledInput = styled.input`
   & *::before,
   & + ${StyledLabel} {
     box-sizing: border-box;
+
     &::selection {
       background: none;
     }
   }
- 
+
   & + ${StyledLabel} {
     outline: 0;
     display: block;
@@ -49,7 +50,7 @@ const StyledInput = styled.input`
       width: 50%;
       height: 100%;
     }
- 
+
     &::after {
       left: 0;
     }
@@ -70,6 +71,7 @@ const StyledInput = styled.input`
     transition: all 0.2s ease;
     font-family: sans-serif;
     perspective: 100px;
+
     &::after,
     &::before {
       display: inline-block;
@@ -86,14 +88,15 @@ const StyledInput = styled.input`
       backface-visibility: hidden;
       border-radius: 4px;
     }
+
     &::after {
       content: attr(data-tg-on);
-      background: #02C66F;
+      background: #444;
       transform: rotateY(-180deg);
     }
 
     &::before {
-      background: #FF3A19;
+      background: ${({theme}) => theme.colors.coolBlack};
       content: attr(data-tg-off);
     }
 
@@ -110,7 +113,7 @@ const StyledInput = styled.input`
     &::after {
       transform: rotateY(0);
       left: 0;
-      background: #7FC6A6;
+      background: ${({theme}) => theme.colors.lightGrey};
     }
 
     &:active::after {

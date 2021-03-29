@@ -63,7 +63,7 @@ const buyFields = [
 
 const rentFields = [
   ...sharedCompareFields,
-  'rent',
+  'monthlyPayment',
 ];
 
 const Compare = () => {

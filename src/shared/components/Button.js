@@ -11,6 +11,7 @@ const StyledButton = styled(ButtonBone)`
   && {
     text-transform: inherit;
     border: 1px solid ${({theme}) => theme.colors.thinGrey};
+
     &:disabled {
       cursor: not-allowed;
     }

@@ -11,6 +11,7 @@ const StyledSwitchInput = styled(SwitchBone)`
   &&& {
     .Mui-checked {
       color: ${({theme}) => theme.colors.lightGrey};
+
       &:hover {
         background-color: rgba(0, 0, 0, 0.04);
       }

@@ -11,8 +11,9 @@ const Root = styled.div`
   width: 80%;
   padding: ${({theme}) => theme.size(1)};
   margin-top: -100px;
-  ${({theme}) => theme.media('md', 'width: 500px')};
-  box-shadow: 17px 20px 11px 0px rgb(0 0 0 / 2%);
+  ${({theme}) => theme.media('md', 'width: 500px')}
+
+  box-shadow: 17px 20px 11px 0 rgb(0 0 0 / 2%);
 `;
 
 const MessageOnHeader = () => {

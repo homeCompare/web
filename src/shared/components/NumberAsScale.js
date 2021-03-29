@@ -19,24 +19,25 @@ const sizeByCurrentTier = currentTier => {
 };
 
 const ScaleRoot = styled.div`
-	display: flex;
-	flex: 1;
-	justify-content: space-between;
-	border-bottom: 5px dashed rgba(0, 0, 0, 0.2);
-	position: relative;
-	&:before {
-		content: '';
-		width: ${({currentTier}) => sizeByCurrentTier(currentTier)};
-		height: 100%;
-		border-bottom: 5px dashed #333;
-		position: absolute;
-	}
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  border-bottom: 5px dashed rgba(0, 0, 0, 0.2);
+  position: relative;
+
+  &::before {
+    content: '';
+    width: ${({currentTier}) => sizebycurrenttier(currentTier)};
+    height: 100%;
+    border-bottom: 5px dashed #333;
+    position: absolute;
+  }
 `;
 
 const Tier = styled.div`
-	display: flex;
-	position: relative;
-	top: -5px;
+  display: flex;
+  position: relative;
+  top: -5px;
 `;
 
 const NumberAsScale = ({number, className}) => {

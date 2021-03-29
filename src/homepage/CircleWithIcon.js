@@ -7,14 +7,14 @@ import EuroIcon from '@material-ui/icons/Euro';
 
 const iconSize = 4;
 const IconWrapper = styled.div`
-	width: ${({theme}) => theme.size(iconSize)};
-	height: ${({theme}) => theme.size(iconSize)};
-	border-radius: 50%;
-	background-color: ${({theme}) => theme.colors.darkGrey};
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	color: #fff;
+  width: ${({theme}) => theme.size(iconSize)};
+  height: ${({theme}) => theme.size(iconSize)};
+  border-radius: 50%;
+  background-color: ${({theme}) => theme.colors.darkGrey};
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: #fff;
 `;
 
 const Icons = {

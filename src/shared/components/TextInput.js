@@ -8,7 +8,7 @@ import styled from 'styled-components';
 // if you need to add something just override it in your own component
 // const CustomStyledInput = styled(Input)``;
 const StyledTextInput = styled(TextInputBone)`
-  .MuiInput-underline:after {
+  .MuiInput-underline::after {
     border-bottom: 2px solid ${({theme}) => theme.colors.thinGrey};
   }
 `;

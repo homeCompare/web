@@ -16,7 +16,7 @@ const StyledCard = styled(Card)`
   border-radius: 12.5px;
   height: 300px;
 }
-  
+
 `;
 const CardWrapper = styled.div`
   display: flex;
@@ -32,11 +32,10 @@ const FreeTextCard = ({image, text}) => {
           <CardMedia
             style={{width: '250px'}}
             component="img"
-            alt="Contemplative Reptile"
+            alt="Home"
             width="250"
             height="300"
             image={image}
-            title="Contemplative Reptile"
           />
 
           <CardContent style={{color: 'white'}}>

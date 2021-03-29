@@ -57,7 +57,7 @@ const AddHome = () => {
   return (
     <>
       <div style={{display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center'}}>
-        <CustomSwitch onChange={() => setIsRent(!isRent)} />
+        <CustomSwitch onChange={() => { setIsRent(!isRent); dispatch(actions.removeAllTempImages()); }} />
       </div>
       <HomeForm
         onSubmit={onSubmit}

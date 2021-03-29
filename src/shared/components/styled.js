@@ -14,7 +14,7 @@ export const HideOnMedium = styled.div`
 
 export const ShowOnMedium = styled.div`
   height: inherit;
-    display: flex;
-    flex: 1;
+  display: flex;
+  flex: 1;
 
 `;

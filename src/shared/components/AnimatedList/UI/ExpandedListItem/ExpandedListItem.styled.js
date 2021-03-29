@@ -13,22 +13,22 @@ export const FadeInAnim = keyframes`
 `;
 export const AnimatedInFlipped = styled(Flipped)`
 
- & > div {
-  animation: ${props => (props.started ? css`${FadeInAnim} 0.4s forwards` : null)};
- }
+  & > div {
+    animation: ${props => (props.started ? css`${FadeInAnim} 0.4s forwards` : null)};
+  }
 `;
 
 export const StyledHomeField = styled.h3`
- margin-left: 20px;
- margin-top: 10px;
- flex: 1 0 50%;
- ${({theme}) => theme.media('xs', `
+  margin-left: 20px;
+  margin-top: 10px;
+  flex: 1 0 50%;
+  ${({theme}) => theme.media('xs', `
     font-size: 10px;
      `)}
- ${({theme}) => theme.media('md', `
+  ${({theme}) => theme.media('md', `
     font-size: 10px;
      `)}
- ${({theme}) => theme.media('lg', `
+  ${({theme}) => theme.media('lg', `
     font-size: 14px;
      `)}
 `;
@@ -40,11 +40,11 @@ export const StyledExpandedListItem = styled.div`
   background-image: url('https://i.postimg.cc/Pq2fJrXw/bg00.jpg');
 `;
 export const ExpandedListItemContent = styled.div`
- padding: 32px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
 `;
 
 export const ExpandedAvatar = styled.div`
@@ -54,42 +54,48 @@ export const ExpandedAvatar = styled.div`
   height: 192px;
   margin-right: 0;
   margin-bottom: 16px;
+
   img {
-  background-size: cover;
+    background-size: cover;
   }
 `;
 
 export const AdditionalContent = styled.div`
   width: 100%;
   margin-top: 32px;
+
   & > div {
     opacity: 0;
-  border-radius: 25px;
-  background-color: whitesmoke;
-  height: 80px;
-  animation: ${FadeInAnim} 0.4s forwards;
+    border-radius: 25px;
+    background-color: ${({theme}) => theme.colors.coolWhite};
+    height: 80px;
+    animation: ${FadeInAnim} 0.4s forwards;
   }
+
+  & > div + div {
+    margin-top: 16px;
+  }
+
   & > div:nth-of-type(2) {
     animation-delay: 0.15s;
     border-radius: 25px;
     overflow: hidden;
+
     h4 {
       margin-left: 20px;
       margin-right: 20px;
     }
   }
+
   & > div:nth-of-type(3) {
     animation-delay: 0.3s;
   }
-  & > div + div {
-    margin-top: 16px;
-  }
+
+
 `;
 
 export const StyledCardImage = styled.div`
-   border-radius: 25px;
-
-
+  border-radius: 25px;
 
   .image-gallery-image {
     object-fit: cover;
@@ -100,16 +106,21 @@ export const StyledCardImage = styled.div`
     ${({theme}) => theme.media('md', `
     height: 800px;
      `)}
+
     max-height: 800px;
   }
+
   .image-gallery-slide .image-gallery-image {
     object-fit: cover;
   }
-  .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
+
+  .image-gallery-left-nav .image-gallery-svg,
+  .image-gallery-right-nav .image-gallery-svg {
     width: 48px;
     height: 70px;
     opacity: 0.5;
   }
+
   .image-gallery-slides {
     max-height: 800px;
     margin-bottom: 5px;
@@ -120,36 +131,37 @@ export const StyledCardImage = styled.div`
 export const StyledImageContainer = styled.div`
 && {
   width: 90%;
-height: 100%;
-margin-left: 5%;
-  }
+  height: 100%;
+  margin-left: 5%;
+}
 `;
 
 export const SectionsWrapper = styled.div`
 
 && {
   margin-left: 5%;
- display: flex;
- justify-content: center;
- ${({theme}) => theme.media('xs', `
-    flex-direction: column;
-    align-items: center;
-     `)}
- ${({theme}) => theme.media('md', `
-    flex-direction: row;
-    align-items: flex-start;
-     `)}
- span {
-   border: none;
-   font-weight: 700;
-   font-size: 20px;
-   margin-right: 5px;
-   &:hover {
-     color: grey;
-   }
- }
+  display: flex;
+  justify-content: center;
+  ${({theme}) => theme.media('xs', `
+flex-direction: column;
+align-items: center;
+`)}
+  ${({theme}) => theme.media('md', `
+flex-direction: row;
+align-items: flex-start;
+`)}
+  span {
+    border: none;
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 5px;
+
+    &:hover {
+      color: grey;
+    }
+  }
 }
- 
+
 `;
 
 export const Section = styled.div`
@@ -163,37 +175,35 @@ export const InnerSection = styled.div`
 ${({theme}) => theme.media('md', `
      width: 100px;
      `)}
-       ${({theme}) => theme.media('lg', `
+${({theme}) => theme.media('lg', `
        width: 250px;
      `)}
-  display: grid;
-  grid-template-columns: 50% 100px auto;
-  margin: 5%;
+
+display: grid;
+grid-template-columns: 50% 100px auto;
+margin: 5%;
 
 `;
 
 export const SectionCard = styled.div`
 backdrop-filter: blur(5px);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: transparent;
-  color: whitesmoke;
-  border-radius: 25px;
-  ${({theme}) => theme.media('xs', `
-    width: 200px;
-     `)}
-  ${({theme}) => theme.media('md', `
-     width: 140px;
-     margin-right: 25px;
-     `)}
-  ${({theme}) => theme.media('lg', `
-       width: 250px;
-       height: 420px;
-     `)}
-
-  h3 {
-  
-    margin-left: 10px;
-  }
-
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+background-color: transparent;
+color: ${({theme}) => theme.colors.coolWhite};
+border-radius: 25px;
+${({theme}) => theme.media('xs', `
+width: 200px;
+`)}
+${({theme}) => theme.media('md', `
+width: 140px;
+margin-right: 25px;
+`)}
+${({theme}) => theme.media('lg', `
+width: 250px;
+height: 420px;
+`)}
+h3 {
+  margin-left: 10px;
+}
 
 `;

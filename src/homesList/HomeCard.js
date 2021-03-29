@@ -60,7 +60,7 @@ const StyledIconButton = styled(IconButton)`
 `;
 
 const StyledCard = styled(Card)`
- z-index: 1;
+  z-index: 1;
 
 `;
 

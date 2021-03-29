@@ -11,6 +11,7 @@ import {supportedLanguages} from '@/shared/config';
 
 const InnerWrapper = styled.div`
   ${({theme}) => theme.defaultSizer}
+
   display: flex;
   overflow: hidden;
 `;

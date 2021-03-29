@@ -2,42 +2,125 @@ import React from 'react';
 
 import styled from 'styled-components';
 import propTypes from 'prop-types';
-import ButtonBone from '@material-ui/core/Button';
 
-const StyledControlButton = styled(ButtonBone)`
-  && {
-    text-transform: uppercase;
-    color: #E6EAEF;
-    background-color: #3F4351;
-    background-image: linear-gradient(0deg, #3F4351, #484c5c);
-    border-color: #292b34;
+const StyledControlButton = styled.a`
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+
+  display: inline-block;
+  margin-top: 40px;
+  font-family: 'Heebo', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+  line-height: 20px;
+  color: #fff;
+  position: relative;
+  text-shadow: 0 0 1px #bf4c28;
+
+  &::before {
+    content: '';
     display: inline-block;
-    margin: 6px;
-    margin-top: 30px;
-    font-size: inherit;
-    line-height: 1.42;
-    padding: 0.35em 1.1em;
-    font-weight: normal;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 1.01em;
-    cursor: pointer;
-    font-family: "Booster Next FY", "Avenir Next", Avenir, sans-serif;
-    user-select: none;
-    vertical-align: bottom;
-    box-shadow: 0 1px 1px 0 rgb(255 255 255 / 20%) inset;
-    &:hover {
-      background-color: #1c1e24;
-      background-image: linear-gradient(0deg, #1c1e24, #252730);
+    height: 40px;
+    position: absolute;
+    bottom: -1px;
+    left: 10px;
+    right: 10px;
+    z-index: -1;
+    border-radius: 32px;
+    filter: blur(14px) brightness(0.9);
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out;
+  }
+
+  span {
+    background: linear-gradient(136deg, rgb(242, 113, 33) 0%, rgb(233, 64, 87) 40%, rgb(138, 35, 135) 100%);
+    display: inline-block;
+    padding: 16px 20px;
+    border-radius: 50px;
+    position: relative;
+    z-index: 2;
+    will-change: transform, filter;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out;
+    transform: scale(0.9);
+  }
+
+  &:focus {
+    color: #fff;
+  }
+
+  &:hover {
+    color: #fff;
+
+    span {
+      filter: brightness(0.85) contrast(1.2);
+      transform: scale(0.82);
+    }
+
+    &::before {
+      bottom: 3px;
+      filter: blur(6px) brightness(0.8);
     }
   }
+
+  &:active span {
+    filter: brightness(0.75) contrast(1.7);
+  }
+
+  &.pop-onhover {
+    span {
+      border-radius: 4px;
+    }
+
+    &::before {
+      opacity: 0;
+      bottom: 10px;
+    }
+
+    &:hover {
+      &::before {
+        bottom: -7px;
+        opacity: 1;
+        filter: blur(16px);
+      }
+
+      span {
+        // transform: scale(1.03);
+        transform: scale(1);
+      }
+
+      &:active {
+        span {
+          filter: brightness(1) contrast(1);
+          transform: scale(1);
+          transition: all 0.2s ease-out;
+        }
+
+        &::before {
+          bottom: 0;
+          filter: blur(5px) brightness(0.85);
+          transition: all 0.2s ease-out;
+        }
+      }
+    }
+  }
+
 `;
 
 const CustomControlsButton = (props) => {
   const {children, onClick} = props;
   return (
     <StyledControlButton onClick={onClick}>
-      {children}
+      <span>
+        {children}
+      </span>
     </StyledControlButton>
   );
 };
