@@ -4,6 +4,7 @@ import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
+import Image from 'next/image';
 
 import {Link} from '@/shared/utils/router';
 import HeaderMenu from '@/shared/components/HeaderMenu';
@@ -72,7 +73,7 @@ const StyledLogoLink = styled(Link)`
   }
 `;
 
-const CoverImage = styled.img`
+const CoverImage = styled(Image)`
   width: 100%;
   height: 300px;
   object-fit: cover;
@@ -82,7 +83,6 @@ const CoverImage = styled.img`
 const CoverImageWrapper = styled.div`
   display: flex;
   overflow: hidden;
-  min-height: 300px;
 `;
 
 export const Logo = ({className}) => (
@@ -101,8 +101,8 @@ Logo.propTypes = {
 
 const CoverImg = memo(() => (
   <CoverImageWrapper>
-    <CoverImage src={CoverImageCatched} key="coverImg1" alt="" />
-    <CoverImage src={Cover2ImageCatched} key="coverImg2" alt="" />
+    <CoverImage src={CoverImageCatched} key="coverImg1" alt="" width={1400} height={300} />
+    <CoverImage src={Cover2ImageCatched} key="coverImg2" alt="" width={1400} height={300} />
   </CoverImageWrapper>
 ));
 
