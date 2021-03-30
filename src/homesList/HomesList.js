@@ -37,7 +37,7 @@ const HomesList = () => {
     {field: 'price', order: 'asc', buttonName: 'Price Ascending'},
     {field: 'price', order: 'desc', buttonName: 'Price Descending'},
     {field: 'city', order: 'desc', buttonName: 'Name A-Z'},
-    {field: 'city', order: 'asc', buttonName: 'Name A-Z'},
+    {field: 'city', order: 'asc', buttonName: 'Name Z-A'},
     {field: 'entry-date', order: 'asc', buttonName: 'Entry Date Asc'},
     {field: 'entry-date', order: 'desc', buttonName: 'Entry Date Desc'},
   ];
@@ -63,7 +63,7 @@ const HomesList = () => {
   return (
     <>
       <div style={{display: 'flex'}}>
-        <SkewedSwitch onChange={() => setIsRent(!isRent)} />
+        <SkewedSwitch onChange={() => { setIsRent(!isRent); setModifiedHomes(null); }} />
         <h3 style={{marginLeft: '20px', marginTop: '10px'}}>Sort by:</h3>
         <RenderSortingButtons />
       </div>
