@@ -1,10 +1,9 @@
 import React, {memo, useState} from 'react';
 
 import styled from 'styled-components';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import _, {isEmpty} from 'lodash';
 
-import * as actions from '@/state/actions';
 import Button from '@/shared/components/Button';
 import SkewedSwitch from '@/shared/components/CustomSwitch/SkewedSwitch';
 import {useTranslation} from '@/shared/i18n';
@@ -26,9 +25,9 @@ const StyledButton = styled(Button)`
 `;
 
 const HomesList = () => {
-  const dispatch = useDispatch();
   const [isRent, setIsRent] = useState(false);
   const homes = useSelector((state) => state.homes);
+  const [modifiedHomes, setModifiedHomes] = useState(null);
   // const currency = useSelector((state) => state.currency);
 
   if (isEmpty(homes)) {
@@ -49,14 +48,17 @@ const HomesList = () => {
   const RenderSortingButtons = () => {
     return _.times(6, (i) => {
       return (
-        <StyledButton onClick={() => dispatch(actions.sortHomesByField({
-          field: propsArray[i].field, order: propsArray[i].order,
-        }))}
+        <StyledButton onClick={() => setModifiedHomes({
+          listData: _.orderBy(homesList.listData,
+            propsArray[i].field, propsArray[i].order),
+          type: homesList.type,
+        })}
         >{propsArray[i].buttonName}
         </StyledButton>
       );
     });
   };
+  console.log(modifiedHomes);
 
   return (
     <>
@@ -68,7 +70,7 @@ const HomesList = () => {
 
       <Root style={{overflow: 'auto'}}>
 
-        <AnimatedList homes={homesList} />
+        <AnimatedList homes={modifiedHomes || homesList} />
       </Root>
     </>
   );
