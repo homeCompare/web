@@ -15,6 +15,18 @@ import {useTranslation} from '@/shared/i18n';
 const StyledTextInput = styled(TextInput)`
   width: 100%;
 
+  &&& {
+    & label.Mui-focused {
+      color: orange;
+    }
+
+    & .MuiOutlinedInput-root {
+      &.Mui-focused fieldset {
+        border-color: black;
+      }
+    }
+  }
+
   input {
     padding: 30 30px;
   }

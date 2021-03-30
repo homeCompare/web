@@ -19,38 +19,14 @@ const StyledFlipper = styled(Flipper)`
   }
 `;
 
-export const AnimatedList = (homes) => {
+export const AnimatedList = ({homes}) => {
   const createCardFlipId = index => `listItem-${index}`;
-  const listData = homes.homes || [];
+  const listData = homes.listData || [];
+  const listType = homes.type;
   const [focused, setFocused] = useState(null);
   const clicked = index => {
     if (focused === index) setFocused(null);
     else setFocused(index);
-  };
-  const rentList = listData.filter(listObj => listObj.type === 'rent');
-  const buyList = listData.filter(listObj => listObj.type === 'buy');
-  const propArray = [{
-    list: rentList,
-    listName: 'Rent Homes',
-  }, {
-    list: buyList,
-    listName: 'Buy Homes',
-  }];
-
-  const RenderLists = () => {
-    return _.times(2, (i) => {
-      return propArray[i].list.length ? (
-        <>
-          <h3>{propArray[i].listName}</h3>
-          <ListType
-            list={propArray[i].list}
-            clicked={clicked}
-            createCardFlipId={createCardFlipId}
-            focused={focused}
-          />
-        </>
-      ) : null;
-    });
   };
 
   return (
@@ -65,7 +41,13 @@ export const AnimatedList = (homes) => {
       decisionData={focused}
     >
 
-      <RenderLists />
+      <h3>{listType === 'rent' ? 'Rent Homes' : 'Buy Homes'}</h3>
+      <ListType
+        list={listData}
+        clicked={clicked}
+        createCardFlipId={createCardFlipId}
+        focused={focused}
+      />
 
     </StyledFlipper>
   );
