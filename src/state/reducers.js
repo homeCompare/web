@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import {makeReducer, composeReducers, makeAsyncReducer} from 'redux-toolbelt';
+import _ from 'lodash';
 
 import * as actions from './actions';
 
@@ -26,6 +27,7 @@ export const homes = composeReducers(
   makeReducer(actions.removeHomeById, (currentState, {payload: homeId}) => [
     ...currentState.filter(({id}) => id !== homeId),
   ]),
+  makeReducer(actions.sortHomesByField, (currentState, {payload: {field, order}}) => _.orderBy(currentState, [field], [order])),
 );
 
 export const dropzone = composeReducers(
