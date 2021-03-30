@@ -1,22 +1,27 @@
-import React, { memo } from 'react';
-import { useDispatch } from 'react-redux';
-import { omit } from 'lodash';
+import React, {memo} from 'react';
+
+import {useSelector, useDispatch} from 'react-redux';
+import {omit} from 'lodash';
 import {useRouter} from 'next/router';
 
-import { toBase64 } from '@/shared/utils/base64';
+import {toBase64} from '@/shared/utils/base64';
 import * as actions from '@/state/actions';
 import HomeForm from '@/shared/components/HomeForm';
-import { event } from '@/shared/utils/gtag';
+import {event} from '@/shared/utils/gtag';
+import {buyFields, rentFields} from '@/shared/utils/homeFields';
 
 const EditHome = ({home}) => {
+  console.log(home);
   const dispatch = useDispatch();
   const router = useRouter();
+  const tempImages = useSelector(state => state.dropzone);
+  const fields = home.type === 'rent' ? rentFields : buyFields;
 
   const onSubmit = async (formValues = {}) => {
     // modifying dropImage into images (array of strings of base64).
     const modefiedFormValues = formValues.dropImage ? {
       ...omit(formValues, 'dropImage'),
-      images: await Promise.all(formValues?.dropImage?.map(await toBase64)),
+      images: await Promise.all(tempImages.map(await toBase64)),
     } : formValues;
 
     event('edit_home_event', 'home_action', 'key_address', [formValues?.city, formValues?.street, formValues?.houseNumber].join(', '));
@@ -26,9 +31,11 @@ const EditHome = ({home}) => {
   };
 
   return (
+
     <HomeForm
       onSubmit={onSubmit}
       initialValues={home}
+      fields={fields}
     />
   );
 };
