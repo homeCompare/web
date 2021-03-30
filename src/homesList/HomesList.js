@@ -62,7 +62,7 @@ const HomesList = () => {
 
   return (
     <>
-      <div style={{display: 'flex'}}>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <SkewedSwitch onChange={() => { setIsRent(!isRent); setModifiedHomes(null); }} />
         <h3 style={{marginLeft: '20px', marginTop: '10px'}}>Sort by:</h3>
         <RenderSortingButtons />

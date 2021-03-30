@@ -3,15 +3,27 @@ import React from 'react';
 import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Close';
+import EditIcon from '@material-ui/icons/Edit';
 import {useDispatch} from 'react-redux';
+import Chip from '@material-ui/core/Chip';
+import styled from 'styled-components';
+import {useRouter} from 'next/router';
 
 import * as actions from '@/state/actions';
 
-import {StyledListItem, ListItemContent, Avatar, Description, StyledImage, StyledTag} from './ListItem.styled';
+import {StyledListItem, ListItemContent, Avatar, Description, StyledImage} from './ListItem.styled';
+
+const StyledChip = styled(Chip)`
+  && {
+    margin-left: 20px;
+  }
+`;
 
 const shouldFlip = index => (prev, current) => index === prev || index === current;
 
 const ListItem = ({index, onClick, createCardFlipId, listData}) => {
+  const router = useRouter();
+  console.log(listData);
   const dispatch = useDispatch();
   const onConfirmedRemoveButtonClick = (homeId) => {
     dispatch(actions.removeHomeById(homeId));
@@ -49,14 +61,19 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
                       delayUntil={createCardFlipId(index)}
                       key={i}
                     >
-                      <StyledTag>{listData[i]}</StyledTag>
+                      {
+                        listData[i] ? <StyledChip label={listData[i]} color="secondary" /> : null
+                      }
 
                     </Flipped>
                   ))
                 }
               </div>
-              <CloseIcon onClick={() => onConfirmedRemoveButtonClick(listData.id)} />
+              <div style={{marginBottom: '15px', display: 'flex', justifyContent: 'flex-end'}}>
+                <EditIcon onClick={() => router.push(`/edit/${listData.id}`)} />
+                <CloseIcon onClick={() => onConfirmedRemoveButtonClick(listData.id)} style={{marginLeft: '20px'}} />
 
+              </div>
             </Description>
           </ListItemContent>
         </Flipped>

@@ -25,14 +25,14 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
   },
   {
     sectionIcon: <MonetizationOnIcon />,
-    startProp: 15,
+    startProp: 14,
     endProp: 20,
     sectionName: 'Pricing',
     features: true,
   }, {
     sectionIcon: <AddBoxIcon />,
     startProp: 5,
-    endProp: 15,
+    endProp: 14,
     sectionName: 'Features',
     features: true,
   }];
