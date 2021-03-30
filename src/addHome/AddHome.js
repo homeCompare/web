@@ -39,6 +39,7 @@ const AddHome = () => {
     modefiedFormValues.id = uuidv4();
     if (isRent) modefiedFormValues.type = 'rent';
     else modefiedFormValues.type = 'buy';
+    modefiedFormValues.price = Number(modefiedFormValues.price);
 
     event('new_home_added', 'home_action', 'key_address', [formValues?.city, formValues?.street, formValues?.houseNumber].join(', '));
 

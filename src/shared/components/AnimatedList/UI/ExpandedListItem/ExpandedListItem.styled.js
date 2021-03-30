@@ -91,7 +91,6 @@ export const AdditionalContent = styled.div`
     animation-delay: 0.3s;
   }
 
-
 `;
 
 export const StyledCardImage = styled.div`
