@@ -4,10 +4,18 @@ import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Close';
 import {useDispatch} from 'react-redux';
+import Chip from '@material-ui/core/Chip';
+import styled from 'styled-components';
 
 import * as actions from '@/state/actions';
 
-import {StyledListItem, ListItemContent, Avatar, Description, StyledImage, StyledTag} from './ListItem.styled';
+import {StyledListItem, ListItemContent, Avatar, Description, StyledImage} from './ListItem.styled';
+
+const StyledChip = styled(Chip)`
+  && {
+    margin-left: 20px;
+  }
+`;
 
 const shouldFlip = index => (prev, current) => index === prev || index === current;
 
@@ -49,7 +57,9 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
                       delayUntil={createCardFlipId(index)}
                       key={i}
                     >
-                      <StyledTag>{listData[i]}</StyledTag>
+                      {
+                        listData[i] ? <StyledChip label={listData[i]} color="secondary" /> : null
+                      }
 
                     </Flipped>
                   ))
