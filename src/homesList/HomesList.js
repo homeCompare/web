@@ -32,6 +32,7 @@ const StyledButton = styled(Button)`
 
 && {
   margin-left: 10px;
+
 }
 
 `;

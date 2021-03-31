@@ -118,7 +118,8 @@ const Menu = ({children}) => {
 const HeaderMenu = () => {
   const {width} = useViewport();
   const [isOpen, setIsOpen] = useState(false);
-  const vp = 640;
+  const vp = 800;
+  console.log(width);
 
   useEffect(() => {
     const onScroll = () => {

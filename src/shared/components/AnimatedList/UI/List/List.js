@@ -26,10 +26,15 @@ height: 100vh;
     width: 100%;
     ${({theme}) => theme.media('xs', `
   display: flex;
-
+    margin-left: 10px;
+  `)}
+    ${({theme}) => theme.media('sm', `
+  display: flex;
+    margin-left: 100px;
   `)}
     ${({theme}) => theme.media('md', `
    width: 100%;
+   margin-left: 0;
 
   `)}
   }

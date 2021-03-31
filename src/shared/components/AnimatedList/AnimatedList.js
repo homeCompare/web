@@ -4,15 +4,12 @@ import PropTypes from 'prop-types';
 import {Flipper} from 'react-flip-toolkit';
 import styled from 'styled-components';
 
-import useViewport from '@/shared/hooks/useViewport';
-
 import ListType from './UI/List/List';
 
 const StyledFlipper = styled(Flipper)`
   &&& {
     ${({theme}) => theme.media('xs', `
      width: 100%;
-     margin-left: 10px;
          `)}
     ${({theme}) => theme.media('md', `
      width: 80%;
