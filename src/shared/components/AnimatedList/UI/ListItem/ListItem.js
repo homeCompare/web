@@ -5,25 +5,16 @@ import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
 import {useDispatch} from 'react-redux';
-import Chip from '@material-ui/core/Chip';
-import styled from 'styled-components';
 import {useRouter} from 'next/router';
 
 import * as actions from '@/state/actions';
 
-import {StyledListItem, ListItemContent, Avatar, Description, StyledImage} from './ListItem.styled';
-
-const StyledChip = styled(Chip)`
-  && {
-    margin-left: 20px;
-  }
-`;
+import {StyledChip, StyledListItem, ListItemContent, Avatar, Description, StyledImage, IconsWrapper} from './ListItem.styled';
 
 const shouldFlip = index => (prev, current) => index === prev || index === current;
 
 const ListItem = ({index, onClick, createCardFlipId, listData}) => {
   const router = useRouter();
-  console.log(listData);
   const dispatch = useDispatch();
   const onConfirmedRemoveButtonClick = (homeId) => {
     dispatch(actions.removeHomeById(homeId));
@@ -69,11 +60,10 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
                   ))
                 }
               </div>
-              <div style={{marginBottom: '15px', display: 'flex', justifyContent: 'flex-end'}}>
+              <IconsWrapper>
                 <EditIcon onClick={() => router.push(`/edit/${listData.id}`)} />
                 <CloseIcon onClick={() => onConfirmedRemoveButtonClick(listData.id)} style={{marginLeft: '20px'}} />
-
-              </div>
+              </IconsWrapper>
             </Description>
           </ListItemContent>
         </Flipped>
@@ -83,7 +73,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
 };
 
 ListItem.propTypes = {
-  index: PropTypes.number,
+  index: PropTypes.string,
   onClick: PropTypes.func,
   createCardFlipId: PropTypes.func,
   listData: PropTypes.object,

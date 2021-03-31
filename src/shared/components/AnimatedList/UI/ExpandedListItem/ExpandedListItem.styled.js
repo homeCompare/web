@@ -12,7 +12,6 @@ export const FadeInAnim = keyframes`
   }
 `;
 export const AnimatedInFlipped = styled(Flipped)`
-
   & > div {
     animation: ${props => (props.started ? css`${FadeInAnim} 0.4s forwards` : null)};
   }
@@ -49,7 +48,7 @@ export const ExpandedListItemContent = styled.div`
 
 export const ExpandedAvatar = styled.div`
   border-radius: 100px;
-  background-color: grey;
+  background-color: ${({theme}) => theme.colors.lightGrey};
   width: 192px;
   height: 192px;
   margin-right: 0;
@@ -136,7 +135,6 @@ export const StyledImageContainer = styled.div`
 `;
 
 export const SectionsWrapper = styled.div`
-
 && {
   margin-left: 5%;
   display: flex;
@@ -156,7 +154,7 @@ align-items: flex-start;
     margin-right: 5px;
 
     &:hover {
-      color: grey;
+      color: ${({theme}) => theme.colors.lightGrey};
     }
   }
 }
@@ -170,7 +168,6 @@ export const Section = styled.div`
 `;
 
 export const InnerSection = styled.div`
-
 ${({theme}) => theme.media('md', `
      width: 100px;
      `)}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import _ from 'lodash';
+import PropTypes from 'prop-types';
 import {Flipper} from 'react-flip-toolkit';
 import styled from 'styled-components';
 
@@ -51,6 +51,10 @@ export const AnimatedList = ({homes}) => {
 
     </StyledFlipper>
   );
+};
+
+AnimatedList.propTypes = {
+  homes: PropTypes.object,
 };
 
 export default AnimatedList;

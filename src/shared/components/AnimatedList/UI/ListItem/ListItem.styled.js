@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Chip from '@material-ui/core/Chip';
 
 export const StyledListItem = styled.div`
   ${({theme}) => theme.media(
@@ -61,7 +62,7 @@ export const Avatar = styled.div`
   width: 112px;
   height: 96px;
   border-radius: 100px;
-  background-color: grey;
+  background-color: ${({theme}) => theme.colors.lightGrey};
   ${StyledImage} {
     background-size: cover;
   }
@@ -108,4 +109,16 @@ export const StyledFreeTextArea = styled.div`
   width: 90%;
   height: 200px;
   margin-left: 5%;
+`;
+
+export const StyledChip = styled(Chip)`
+  && {
+    margin-left: 20px;
+  }
+`;
+
+export const IconsWrapper = styled.div`
+margin-bottom: 15px;
+display: flex;
+justify-content: flex-end;
 `;
