@@ -113,7 +113,6 @@ const Compare = () => {
             key={home.id}
             onClick={() => addHomeToCompare(home)}
             {...home}
-
             isActive={Boolean(homesToCompare?.find(({id}) => id === home.id))}
 
           />

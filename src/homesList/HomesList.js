@@ -16,10 +16,23 @@ const Root = styled.div`
   ${({theme}) => theme.media('lg', 'flex-direction: row')}
 `;
 
+const HomeListMenu = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${({theme}) => theme.media('xs', `
+  transform: scale(0.5);
+  `)}
+  ${({theme}) => theme.media('sm', `
+  transform: scale(1);
+  `)}
+`;
+
 const StyledButton = styled(Button)`
 
 && {
   margin-left: 10px;
+
 }
 
 `;
@@ -62,11 +75,11 @@ const HomesList = () => {
 
   return (
     <>
-      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <HomeListMenu>
         <SkewedSwitch onChange={() => { setIsRent(!isRent); setModifiedHomes(null); }} />
         <h3 style={{marginLeft: '20px', marginTop: '10px'}}>Sort by:</h3>
         <RenderSortingButtons />
-      </div>
+      </HomeListMenu>
 
       <Root style={{overflow: 'auto'}}>
 

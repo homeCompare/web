@@ -12,7 +12,6 @@ export const FadeInAnim = keyframes`
   }
 `;
 export const AnimatedInFlipped = styled(Flipped)`
-
   & > div {
     animation: ${props => (props.started ? css`${FadeInAnim} 0.4s forwards` : null)};
   }
@@ -38,18 +37,24 @@ export const StyledExpandedListItem = styled.div`
   padding-bottom: 32px;
   border-radius: 25px;
   background-image: url('https://i.postimg.cc/Pq2fJrXw/bg00.jpg');
+
+  ${({theme}) => theme.media('xs', `
+    width: 90%;
+     `)}
+  ${({theme}) => theme.media('md', `
+      width: 100%;
+     `)}
 `;
 export const ExpandedListItemContent = styled.div`
   padding: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;
 
 export const ExpandedAvatar = styled.div`
   border-radius: 100px;
-  background-color: grey;
+  background-color: ${({theme}) => theme.colors.lightGrey};
   width: 192px;
   height: 192px;
   margin-right: 0;
@@ -136,7 +141,6 @@ export const StyledImageContainer = styled.div`
 `;
 
 export const SectionsWrapper = styled.div`
-
 && {
   margin-left: 5%;
   display: flex;
@@ -156,7 +160,7 @@ align-items: flex-start;
     margin-right: 5px;
 
     &:hover {
-      color: grey;
+      color: ${({theme}) => theme.colors.lightGrey};
     }
   }
 }
@@ -170,7 +174,6 @@ export const Section = styled.div`
 `;
 
 export const InnerSection = styled.div`
-
 ${({theme}) => theme.media('md', `
      width: 100px;
      `)}

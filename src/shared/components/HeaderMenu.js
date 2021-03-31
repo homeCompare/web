@@ -34,7 +34,8 @@ const MenuUL = styled.ul`
   `)}
 `;
 
-const MenuLI = styled.li``;
+const MenuLI = styled.li`
+`;
 
 const menuLinkHoverCss = css`
   background-color: ${({theme}) => theme.colors.darkGrey};
@@ -117,7 +118,8 @@ const Menu = ({children}) => {
 const HeaderMenu = () => {
   const {width} = useViewport();
   const [isOpen, setIsOpen] = useState(false);
-  const vp = 640;
+  const vp = 800;
+  console.log(width);
 
   useEffect(() => {
     const onScroll = () => {

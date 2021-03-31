@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 
-import _ from 'lodash';
+import PropTypes from 'prop-types';
 import {Flipper} from 'react-flip-toolkit';
 import styled from 'styled-components';
 
 import ListType from './UI/List/List';
 
 const StyledFlipper = styled(Flipper)`
-  && {
+  &&& {
     ${({theme}) => theme.media('xs', `
      width: 100%;
-     margin-left: 8%;
          `)}
     ${({theme}) => theme.media('md', `
      width: 80%;
@@ -31,6 +30,7 @@ export const AnimatedList = ({homes}) => {
 
   return (
     <StyledFlipper
+      applyTransformOrigin
       flipKey={focused}
       spring={false}
       staggerConfig={{
@@ -51,6 +51,10 @@ export const AnimatedList = ({homes}) => {
 
     </StyledFlipper>
   );
+};
+
+AnimatedList.propTypes = {
+  homes: PropTypes.object,
 };
 
 export default AnimatedList;
