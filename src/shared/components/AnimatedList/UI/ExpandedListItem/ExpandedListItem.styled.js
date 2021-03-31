@@ -37,13 +37,19 @@ export const StyledExpandedListItem = styled.div`
   padding-bottom: 32px;
   border-radius: 25px;
   background-image: url('https://i.postimg.cc/Pq2fJrXw/bg00.jpg');
+
+  ${({theme}) => theme.media('xs', `
+    width: 90%;
+     `)}
+  ${({theme}) => theme.media('md', `
+      width: 100%;
+     `)}
 `;
 export const ExpandedListItemContent = styled.div`
   padding: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;
 
 export const ExpandedAvatar = styled.div`

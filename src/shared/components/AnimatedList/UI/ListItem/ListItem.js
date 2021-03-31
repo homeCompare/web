@@ -9,7 +9,7 @@ import {useRouter} from 'next/router';
 
 import * as actions from '@/state/actions';
 
-import {StyledChip, StyledListItem, ListItemContent, Avatar, Description, StyledImage, IconsWrapper} from './ListItem.styled';
+import {StyledChip, StyledListItem, ListItemContent, Avatar, Description, StyledImage, IconsWrapper, TagsWrapper} from './ListItem.styled';
 
 const shouldFlip = index => (prev, current) => index === prev || index === current;
 
@@ -42,7 +42,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
               </Avatar>
             </Flipped>
             <Description>
-              <div>
+              <TagsWrapper>
                 {
                   ['city', 'street', 'price', 'monthlyPayment', 'entryDate'].map(i => (
                     <Flipped
@@ -59,7 +59,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
                     </Flipped>
                   ))
                 }
-              </div>
+              </TagsWrapper>
               <IconsWrapper>
                 <EditIcon onClick={() => router.push(`/edit/${listData.id}`)} />
                 <CloseIcon onClick={() => onConfirmedRemoveButtonClick(listData.id)} style={{marginLeft: '20px'}} />

@@ -2,7 +2,7 @@
 import React, {memo} from 'react';
 
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, {ThemeContext} from 'styled-components';
 import {useSelector} from 'react-redux';
 import Image from 'next/image';
 
@@ -83,6 +83,15 @@ const CoverImage = styled(Image)`
 const CoverImageWrapper = styled.div`
   display: flex;
   overflow: hidden;
+
+  ${({theme}) => theme.media('xs', `
+    z-index: -1;
+    height: 100px;
+  `)}
+  ${({theme}) => theme.media('md', `
+    height: 200px;
+  `)}
+
 `;
 
 export const Logo = ({className}) => (

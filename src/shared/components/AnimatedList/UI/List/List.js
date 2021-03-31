@@ -10,17 +10,39 @@ const List = styled.ul`
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   padding: 20px;
   width: 100%;
-  overflow: auto;
-
+  ${({theme}) => theme.media('xs', `
+padding: 0;
+overflow: visible;
+height: 100%;
+`)}
+  ${({theme}) => theme.media('md', `
+padding: 20px;
+overflow: auto;
+height: 100vh;
+`)}
   li {
     width: 100%;
+    ${({theme}) => theme.media('xs', `
+  display: flex;
+
+  `)}
+    ${({theme}) => theme.media('md', `
+   width: 100%;
+
+  `)}
   }
 
   li + li {
+    ${({theme}) => theme.media('xs', `
+    margin-top: 60px;
+
+  `)}
+    ${({theme}) => theme.media('md', `
     margin-top: 16px;
+
+  `)}
   }
 `;
 

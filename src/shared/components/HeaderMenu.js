@@ -34,7 +34,8 @@ const MenuUL = styled.ul`
   `)}
 `;
 
-const MenuLI = styled.li``;
+const MenuLI = styled.li`
+`;
 
 const menuLinkHoverCss = css`
   background-color: ${({theme}) => theme.colors.darkGrey};
