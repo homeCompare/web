@@ -26,7 +26,7 @@ const zIndex = {
 };
 
 const breakpoints = {
-  xs: 375, // iphone 6/7/8
+  xs: 320, // iphone 6/7/8
   sm: 640, // big phone - tablet
   md: 768, // tablet
   lg: 1024, // small desktop
