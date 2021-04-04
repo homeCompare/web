@@ -47,7 +47,7 @@ const StyledName = styled.span`
   `)}
 `;
 
-const StyledHomeIcon = styled.img`
+const StyledHomeIcon = styled(Image)`
   width: 50px;
   height: 50px;
   display: flex;
@@ -95,7 +95,7 @@ const CoverImageWrapper = styled.div`
 
 export const Logo = ({className}) => (
   <LogoWrapper className={className}>
-    <StyledHomeIcon src={HomeCompareLogoImage} alt="homeCompare.io" />
+    <StyledHomeIcon src={HomeCompareLogoImage} alt="homeCompare.io" width={50} height={50} />
     HOMECOMPARE
   </LogoWrapper>
 );
