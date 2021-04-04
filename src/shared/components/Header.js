@@ -8,8 +8,7 @@ import Image from 'next/image';
 
 import {Link} from '@/shared/utils/router';
 import HeaderMenu from '@/shared/components/HeaderMenu';
-import CoverImageCatched from '@/shared/images/cover4.jpg';
-import Cover2ImageCatched from '@/shared/images/cover5.jpg';
+import cover from '@/shared/images/cover.jpg';
 import HomeCompareLogoImage from '@/shared/images/HomeCompare_Logo.png';
 
 const HeaderRoot = styled.header`
@@ -48,7 +47,7 @@ const StyledName = styled.span`
   `)}
 `;
 
-const StyledHomeIcon = styled.img`
+const StyledHomeIcon = styled(Image)`
   width: 50px;
   height: 50px;
   display: flex;
@@ -96,7 +95,7 @@ const CoverImageWrapper = styled.div`
 
 export const Logo = ({className}) => (
   <LogoWrapper className={className}>
-    <StyledHomeIcon src={HomeCompareLogoImage} alt="homeCompare.io" />
+    <StyledHomeIcon src={HomeCompareLogoImage} alt="homeCompare.io" width={50} height={50} />
     HOMECOMPARE
   </LogoWrapper>
 );
@@ -110,8 +109,7 @@ Logo.propTypes = {
 
 const CoverImg = memo(() => (
   <CoverImageWrapper>
-    <CoverImage src={CoverImageCatched} key="coverImg1" alt="" width={1400} height={300} />
-    <CoverImage src={Cover2ImageCatched} key="coverImg2" alt="" width={1400} height={300} />
+    <CoverImage src={cover} key="cover" alt="" width={2800} height={300} />
   </CoverImageWrapper>
 ));
 
