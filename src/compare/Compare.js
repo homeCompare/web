@@ -29,6 +29,18 @@ const HomesList = styled.div`
   flex: 1;
 `;
 
+const StyledTitle = styled.p`
+margin-right: 10px;
+margin-top: 20px;
+font-size: 20px;
+font-weight: 800;
+
+`;
+const StyledTitleWrapper = styled.div`
+  display: flex;
+
+`;
+
 const DraggableItem = styled.div`
   ${({isDragging, theme}) => isDragging && `
     background-color: ${theme.colors.thinGrey};
@@ -104,8 +116,10 @@ const Compare = () => {
 
   return (
     <>
-      <CustomSwitch onChange={() => { setIsRent(!isRent); setHomesToCompare([]); }} />
-      <p>{t('compare_page_paragraph')}</p>
+      <StyledTitleWrapper>
+        <StyledTitle>{t('compare_page_paragraph')}</StyledTitle>
+        <CustomSwitch onChange={() => { setIsRent(!isRent); setHomesToCompare([]); }} blank />
+      </StyledTitleWrapper>
 
       <HomesList>
         {list?.map(home => (
