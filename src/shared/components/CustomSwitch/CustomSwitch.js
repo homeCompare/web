@@ -123,10 +123,10 @@ const StyledInput = styled.input`
 `;
 
 const CustomSwitch = (props) => {
-  const {checked, onChange} = props;
+  const {checked, onChange, blank} = props;
   return (
     <StyledListItem>
-      <StyledTitle>Rent or Buy</StyledTitle>
+      <StyledTitle>{blank ? '' : 'Rent or Buy'}</StyledTitle>
       <StyledInput id="cb5" type="checkbox" checked={checked} onChange={onChange} />
       <StyledLabel htmlFor="cb5" data-tg-off="Buy" data-tg-on="Rent" />
     </StyledListItem>

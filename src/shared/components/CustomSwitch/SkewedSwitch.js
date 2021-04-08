@@ -98,7 +98,7 @@ const StyledInput = styled.input`
       content: attr(data-tg-off);
     }
 
-    &::active {
+    &:active {
       background: #888;
 
       &::before {
@@ -108,7 +108,7 @@ const StyledInput = styled.input`
   }
 
   &:checked + ${StyledLabel} {
-    background: #86d993;
+    background: #555;
 
     &::before {
       left: -100%;

@@ -17,9 +17,14 @@ const Root = styled.div`
 `;
 
 const HomeListMenu = styled.div`
+  background-color: #999;
+  border-radius: 25px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+
   ${({theme}) => theme.media('xs', `
   transform: scale(0.5);
   `)}
@@ -32,7 +37,6 @@ const StyledButton = styled(Button)`
 
 && {
   margin-left: 10px;
-
 }
 
 `;
@@ -61,11 +65,14 @@ const HomesList = () => {
   const RenderSortingButtons = () => {
     return _.times(6, (i) => {
       return (
-        <StyledButton onClick={() => setModifiedHomes({
-          listData: _.orderBy(homesList.listData,
-            propsArray[i].field, propsArray[i].order),
-          type: homesList.type,
-        })}
+        <StyledButton
+          onClick={() => setModifiedHomes({
+            listData: _.orderBy(homesList.listData,
+              propsArray[i].field, propsArray[i].order),
+            type: homesList.type,
+          })}
+          variant="outlined"
+          color="primary"
         >{propsArray[i].buttonName}
         </StyledButton>
       );
@@ -77,7 +84,7 @@ const HomesList = () => {
     <>
       <HomeListMenu>
         <SkewedSwitch onChange={() => { setIsRent(!isRent); setModifiedHomes(null); }} />
-        <h3 style={{marginLeft: '20px', marginTop: '10px'}}>Sort by:</h3>
+        <h3 style={{marginLeft: '50px', marginTop: '15px'}}>Sort by:</h3>
         <RenderSortingButtons />
       </HomeListMenu>
 
