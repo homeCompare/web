@@ -26,7 +26,7 @@ li {
   width: 100%;
   ${({theme}) => theme.media('xs', `
   display: flex;
-    margin-left: 10px;
+    margin-left: 20px;
   `)}
   ${({theme}) => theme.media('sm', `
   display: flex;

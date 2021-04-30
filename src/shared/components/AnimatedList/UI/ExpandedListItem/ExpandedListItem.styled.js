@@ -36,7 +36,7 @@ export const StyledExpandedListItem = styled.div`
   cursor: pointer;
   padding-bottom: 32px;
   border-radius: 25px;
-  background-image: url('https://i.postimg.cc/Pq2fJrXw/bg00.jpg');
+  background-color: #888;
 
   ${({theme}) => theme.media('xs', `
     width: 90%;
