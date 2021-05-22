@@ -1,8 +1,12 @@
 import { useState } from 'react';
 
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import styled from 'styled-components';
+
+import * as actions from '@/state/actions';
 
 const StyledCell = styled.div`
   background-color: #6772e5;
@@ -98,6 +102,8 @@ const StyledRow = styled.div`
 
 const CheckoutForm = () => {
   const [email, setEmail] = useState('');
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -131,16 +137,20 @@ const CheckoutForm = () => {
       const { client_secret, status } = res.data;
 
       if (status === 'requires_action') {
-        stripe.confirmCardPayment(client_secret).then((result) => {
+        stripe.confirmCardPayment(client_secret).then(async (result) => {
           if (result.error) {
             console.log('There was an issue');
             console.log(result.error);
           } else {
             console.log('You got the money');
+            await dispatch(actions.facebookLogin());
+            router.push('/');
           }
         });
       } else {
         console.log('You got the money');
+        await dispatch(actions.facebookLogin());
+        router.push('/');
       }
     }
   };
