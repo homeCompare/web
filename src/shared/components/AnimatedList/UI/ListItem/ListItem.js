@@ -4,7 +4,7 @@ import {Flipped} from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
 
 import * as actions from '@/state/actions';
@@ -16,8 +16,10 @@ const shouldFlip = index => (prev, current) => index === prev || index === curre
 const ListItem = ({index, onClick, createCardFlipId, listData}) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const onConfirmedRemoveButtonClick = (homeId) => {
+  const user = useSelector((state) => state.user.data);
+  const onConfirmedRemoveButtonClick = (homeId, userId) => {
     dispatch(actions.removeHomeById(homeId));
+    dispatch(actions.deleteHomeFromDb(userId, homeId));
   };
   return (
     <Flipped
@@ -36,9 +38,8 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
               delayUntil={createCardFlipId(index)}
             >
               <Avatar>
-                {listData.images?.length && (
-                  <StyledImage src={listData.images[0]} alt="home" />
-                )}
+                {listData.images?.length
+                  && listData.images[0] ? <StyledImage src={listData.images[0]} alt="home" /> : null}
               </Avatar>
             </Flipped>
             <Description>
@@ -62,7 +63,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
               </TagsWrapper>
               <IconsWrapper>
                 <EditIcon onClick={() => router.push(`/edit/${listData.id}`)} />
-                <CloseIcon onClick={() => onConfirmedRemoveButtonClick(listData.id)} style={{marginLeft: '20px'}} />
+                <CloseIcon onClick={() => onConfirmedRemoveButtonClick(listData.id, user ? user.id : null)} style={{marginLeft: '20px'}} />
               </IconsWrapper>
             </Description>
           </ListItemContent>

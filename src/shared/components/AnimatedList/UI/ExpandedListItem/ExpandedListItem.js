@@ -67,9 +67,8 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
                 delayUntil={createCardFlipId(index)}
               >
                 <ExpandedAvatar>
-                  {listData.images?.length && (
-                    <StyledImage alt="home" src={listData.images[0]} />
-                  )}
+                  {listData.images?.length
+                  && listData.images[0] ? <StyledImage src={listData.images[0]} alt="home" /> : null}
                 </ExpandedAvatar>
               </Flipped>
             </ExpandedListItemContent>

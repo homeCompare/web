@@ -72,8 +72,9 @@ const HomesList = () => {
     setAnchorEl(null);
   };
   const [isRent, setIsRent] = useState(false);
-  const homes = useSelector((state) => state.homes);
+  const homes = useSelector((state) => (state.homes.data));
   const [modifiedHomes, setModifiedHomes] = useState(null);
+  console.log(homes);
   // const currency = useSelector((state) => state.currency);
 
   if (isEmpty(homes)) {

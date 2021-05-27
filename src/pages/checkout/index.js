@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
-import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import {useRouter} from 'next/router';
+import {useDispatch, useSelector} from 'react-redux';
+import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -104,6 +104,8 @@ const CheckoutForm = () => {
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
   const router = useRouter();
+  const homes = useSelector(state => state.homes.data);
+  console.log(homes);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -126,7 +128,7 @@ const CheckoutForm = () => {
     if (result.error) {
       console.log(result.error.message);
     } else {
-      const res = await axios.post('http://localhost:3001/sub', {
+      const res = await axios.post('/api/sub', {
         payment_method: result.paymentMethod.id,
         email,
         headers: {
@@ -134,22 +136,18 @@ const CheckoutForm = () => {
         },
       });
 
-      const { client_secret, status } = res.data;
+      const {client_secret, status} = res.data;
 
       if (status === 'requires_action') {
-        stripe.confirmCardPayment(client_secret).then(async (result) => {
-          if (result.error) {
-            console.log('There was an issue');
-            console.log(result.error);
-          } else {
-            console.log('You got the money');
-            await dispatch(actions.facebookLogin());
-            router.push('/');
-          }
-        });
+        const paymentConfirmation = await stripe.confirmCardPayment(client_secret);
+        if (!paymentConfirmation.error) {
+          const user = await dispatch(actions.facebookLogin(homes));
+          await dispatch(actions.getHomesFromDb(user.id));
+          router.push('/');
+        }
       } else {
-        console.log('You got the money');
-        await dispatch(actions.facebookLogin());
+        const user = await dispatch(actions.facebookLogin(homes));
+        await dispatch(actions.getHomesFromDb(user.id));
         router.push('/');
       }
     }
@@ -171,7 +169,7 @@ const CheckoutForm = () => {
     const cardElement = elements.getElement(CardElement);
 
     // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const {error, paymentMethod} = await stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
     });

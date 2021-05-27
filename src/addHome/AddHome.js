@@ -24,7 +24,9 @@ const StyledSwitch = styled(Switch)`
 
 const AddHome = () => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user.data);
   const router = useRouter();
+  console.log(user);
   const tempImages = useSelector(state => state.dropzone);
   const [isRent, setIsRent] = useState(false);
   const fields = isRent ? rentFields : buyFields;
@@ -44,6 +46,11 @@ const AddHome = () => {
     event('new_home_added', 'home_action', 'key_address', [formValues?.city, formValues?.street, formValues?.houseNumber].join(', '));
 
     await dispatch(actions.addHome(modefiedFormValues));
+
+      // if user is premium call upserthometodb
+    if (user) {
+      if (user.isPremium) dispatch(actions.upsertHomeToDb(user.id, modefiedFormValues, undefined));
+    }
     await dispatch(actions.removeAllTempImages());
     router.push(`/home/${modefiedFormValues.id}`);
   };
