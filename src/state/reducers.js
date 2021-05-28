@@ -42,7 +42,7 @@ export const homes = composeReducers(
   makeReducer(actions.addHome, (currentState, {payload: newHome}) => ({
     ...currentState,
     data: [
-      ...currentState.data,
+      ...currentState.data || [],
       newHome,
     ],
   }
