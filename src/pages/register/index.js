@@ -142,12 +142,20 @@ const CheckoutForm = () => {
         const paymentConfirmation = await stripe.confirmCardPayment(client_secret);
         if (!paymentConfirmation.error) {
           const user = await dispatch(actions.facebookLogin(homes));
-          await dispatch(actions.getHomesFromDb(user.id));
+          const {userToken, id} = user;
+          await dispatch(actions.getHomesFromDb(id));
+          await axios.post('/api/make-premium-user', {
+            user,
+          });
           router.push('/');
         }
       } else {
         const user = await dispatch(actions.facebookLogin(homes));
-        await dispatch(actions.getHomesFromDb(user.id));
+        const {userToken, id} = user;
+        await dispatch(actions.getHomesFromDb(id));
+        await axios.post('/api/make-premium-user', {
+          user,
+        });
         router.push('/');
       }
     }

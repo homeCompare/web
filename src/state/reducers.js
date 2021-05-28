@@ -15,6 +15,13 @@ export const user = composeReducers(
       ...userRes,
     },
   })),
+  makeAsyncReducer(actions.facebookConfirmLogin, (currentState, {payload: {userRes}}) => ({
+    ...currentState,
+    data: {
+      ...currentState.data,
+      ...userRes,
+    },
+  })),
   makeReducer(actions.logout, () => userDefaultState),
 
 );
@@ -33,7 +40,12 @@ export const homes = composeReducers(
       ...currentState.data.map((home) => (editedHome.id === home.id ? editedHome : home)),
     ],
   })),
-  makeReducer(actions.setHomes, (currentState, {payload: homesList}) => homesList),
+  makeReducer(actions.setHomes, (currentState, {payload: homesList}) => ({
+    ...currentState,
+    data: [
+      ...homesList,
+    ],
+  })),
   makeReducer(actions.addHome, (currentState, {payload: newHome}) => ({
     ...currentState,
     data: [
@@ -49,6 +61,9 @@ export const homes = composeReducers(
       ...currentState.data.filter(({id}) => id !== homeId),
     ],
 
+  })),
+  makeReducer(actions.logout, () => ({
+    data: [],
   })),
 
 );

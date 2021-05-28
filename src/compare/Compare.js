@@ -80,7 +80,7 @@ const rentFields = [
 
 const Compare = () => {
   const {t} = useTranslation();
-  const homes = useSelector((state) => state.homes);
+  const homes = useSelector((state) => state.homes.data);
   const [homesToCompare, setHomesToCompare] = useState();
 
   const [isRent, setIsRent] = useState(false);

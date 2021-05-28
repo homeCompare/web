@@ -26,7 +26,6 @@ const AddHome = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.data);
   const router = useRouter();
-  console.log(user);
   const tempImages = useSelector(state => state.dropzone);
   const [isRent, setIsRent] = useState(false);
   const fields = isRent ? rentFields : buyFields;

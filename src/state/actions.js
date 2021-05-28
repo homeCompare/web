@@ -1,23 +1,29 @@
 import {makeActionCreator} from 'redux-toolbelt';
 import {makeThunkAsyncActionCreator} from 'redux-toolbelt-thunk';
-import {omit} from 'lodash';
-import firebase from 'firebase/app';
 import axios from 'axios';
 
-import {signInWithFacebook} from '@/shared/utils/auth';
+import {facebookLogIn} from '@/shared/utils/auth';
 
 export const facebookLogin = makeThunkAsyncActionCreator('FACEBOOK_LOGIN', async (homesList) => {
   try {
-    const facebookRes = await signInWithFacebook();
-    const userToken = await firebase.auth().currentUser.getIdToken();
-    const userData = {
-      ...omit(facebookRes.additionalUserInfo.profile, ['granted_scopes', 'id']),
-      id: facebookRes.user.uid, // user auth uid.
-    };
-    userData.userToken = userToken;
-
+    const userData = await facebookLogIn();
     const response = await axios.post('/api/login', {user: userData, homes: homesList}, {withCredentials: true});
-    return await response.data.userRes;
+
+    return await response.data.response;
+  } catch (error) {
+    console.error('facebookLogin failed', {error});
+    return error;
+  }
+});
+
+export const facebookConfirmLogin = makeThunkAsyncActionCreator('FACEBOOK_CONFIRM_LOGIN', async (homesList) => {
+  try {
+    const userData = await facebookLogIn();
+    const response = await axios.post('/api/confirm-login', {user: userData, homes: homesList}, {withCredentials: true});
+    console.log(response);
+
+    if (response) return await response.data.response;
+    return [];
   } catch (error) {
     console.error('facebookLogin failed', {error});
     return error;
