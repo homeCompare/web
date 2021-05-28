@@ -15,13 +15,6 @@ export const user = composeReducers(
       ...userRes,
     },
   })),
-  makeAsyncReducer(actions.facebookConfirmLogin, (currentState, {payload: {userRes}}) => ({
-    ...currentState,
-    data: {
-      ...currentState.data,
-      ...userRes,
-    },
-  })),
   makeReducer(actions.logout, () => userDefaultState),
 
 );

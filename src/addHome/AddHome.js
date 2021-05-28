@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import CustomSwitch from '@/shared/components/CustomSwitch/CustomSwitch';
 import Switch from '@/shared/components/Switch';
 import {toBase64} from '@/shared/utils/base64';
+import {upsertHomeToDb} from '@/shared/utils/db';
 import * as actions from '@/state/actions';
 import HomeForm from '@/shared/components/HomeForm';
 import {buyFields, rentFields} from '@/shared/utils/homeFields';
@@ -48,7 +49,7 @@ const AddHome = () => {
 
       // if user is premium call upserthometodb
     if (user) {
-      if (user.isPremium) dispatch(actions.upsertHomeToDb(user.id, modefiedFormValues, undefined));
+      if (user.isPremium) await upsertHomeToDb(user.id, modefiedFormValues, undefined);
     }
     await dispatch(actions.removeAllTempImages());
     router.push(`/home/${modefiedFormValues.id}`);

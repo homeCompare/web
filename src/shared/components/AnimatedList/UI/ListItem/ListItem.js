@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
 
+import {deleteHomeFromDb} from '@/shared/utils/db';
 import * as actions from '@/state/actions';
 
 import {StyledChip, StyledListItem, ListItemContent, Avatar, Description, StyledImage, IconsWrapper, TagsWrapper} from './ListItem.styled';
@@ -17,9 +18,9 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
-  const onConfirmedRemoveButtonClick = (homeId, userId) => {
+  const onConfirmedRemoveButtonClick = async (homeId, userId) => {
     dispatch(actions.removeHomeById(homeId));
-    dispatch(actions.deleteHomeFromDb(userId, homeId));
+    if (user) await deleteHomeFromDb(userId, homeId);
   };
   return (
     <Flipped

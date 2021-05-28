@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {omit} from 'lodash';
 import {useRouter} from 'next/router';
 
+import {upsertHomeToDb} from '@/shared/utils/db';
 import {toBase64} from '@/shared/utils/base64';
 import * as actions from '@/state/actions';
 import HomeForm from '@/shared/components/HomeForm';
@@ -29,7 +30,7 @@ const EditHome = ({home}) => {
     event('edit_home_event', 'home_action', 'key_address', [formValues?.city, formValues?.street, formValues?.houseNumber].join(', '));
 
     if (user) {
-      if (user.isPremium) dispatch(actions.upsertHomeToDb(user.id, modefiedFormValues, modefiedFormValues.editId));
+      if (user.isPremium) await upsertHomeToDb(user.id, modefiedFormValues, undefined);
     }
 
     await dispatch(actions.editHome(modefiedFormValues));

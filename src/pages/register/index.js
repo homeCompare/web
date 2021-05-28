@@ -141,7 +141,7 @@ const CheckoutForm = () => {
       if (status === 'requires_action') {
         const paymentConfirmation = await stripe.confirmCardPayment(client_secret);
         if (!paymentConfirmation.error) {
-          const user = await dispatch(actions.facebookLogin(homes));
+          const user = await dispatch(actions.facebookLogin('register', homes));
           const {userToken, id} = user;
           await dispatch(actions.getHomesFromDb(id));
           await axios.post('/api/make-premium-user', {
@@ -150,7 +150,7 @@ const CheckoutForm = () => {
           router.push('/');
         }
       } else {
-        const user = await dispatch(actions.facebookLogin(homes));
+        const user = await dispatch(actions.facebookLogin('register', homes));
         const {userToken, id} = user;
         await dispatch(actions.getHomesFromDb(id));
         await axios.post('/api/make-premium-user', {

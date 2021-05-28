@@ -24,10 +24,11 @@ const Auth = ({mobile}) => {
   let LoginComp = null;
 
   const Login = async () => {
-    const response = dispatch(actions.facebookConfirmLogin(homes));
+    const response = dispatch(actions.facebookLogin('login', homes));
     console.log(response);
   };
   const Logout = () => {
+    console.log('clicked');
     dispatch(actions.logout());
   };
   if (mobile && !userData) {
