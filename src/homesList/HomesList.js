@@ -1,13 +1,14 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useState, useEffect} from 'react';
 
 import styled from 'styled-components';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import _, {isEmpty} from 'lodash';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
+import * as actions from '@/state/actions';
 import Button from '@/shared/components/Button';
 import SkewedSwitch from '@/shared/components/CustomSwitch/SkewedSwitch';
 import {useTranslation} from '@/shared/i18n';
@@ -62,6 +63,17 @@ const StyledButton = styled(Button)`
 `;
 
 const HomesList = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => (state.user.data));
+  useEffect(() => {
+    const getHomesFromDB = async () => {
+      console.log('triggered');
+      const homes = await dispatch(actions.getHomesFromDb(user.id));
+      dispatch(actions.setHomes(homes));
+    };
+    if (user) getHomesFromDB();
+  }, []);
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -72,8 +84,9 @@ const HomesList = () => {
     setAnchorEl(null);
   };
   const [isRent, setIsRent] = useState(false);
-  const homes = useSelector((state) => state.homes);
+  const homes = useSelector((state) => (state.homes.data));
   const [modifiedHomes, setModifiedHomes] = useState(null);
+  console.log(homes);
   // const currency = useSelector((state) => state.currency);
 
   if (isEmpty(homes)) {
@@ -95,6 +108,7 @@ const HomesList = () => {
       const icon = propsArray[i].order === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />;
       return (
         <StyledMenuItem
+          key={`${propsArray[i].field}${propsArray[i].order}`}
           onClick={() => setModifiedHomes({
             listData: _.orderBy(homesList.listData,
               propsArray[i].field, propsArray[i].order),

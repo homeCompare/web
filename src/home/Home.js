@@ -8,7 +8,8 @@ import {StyledCard, CardImage, StyledCardContent, CardTitle, CardSecondTitle} fr
 
 const Home = ({homeId}) => {
 	// todo: move to page getInitialProps.
-  const homeItem = useSelector((state) => state.homes.find((home) => home.id === homeId));
+  const homeItem = useSelector((state) => state.homes.data.find((home) => home.id === homeId));
+
   const {city, street, images, price, squareMeter, numberOfRooms} = homeItem || {};
 
   return (

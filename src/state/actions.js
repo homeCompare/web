@@ -1,22 +1,17 @@
 import {makeActionCreator} from 'redux-toolbelt';
 import {makeThunkAsyncActionCreator} from 'redux-toolbelt-thunk';
-import {omit} from 'lodash';
-import firebase from 'firebase/app';
 import axios from 'axios';
 
-import {signInWithFacebook} from '@/shared/utils/auth';
+import {facebookLogIn} from '@/shared/utils/auth';
 
-export const facebookLogin = makeThunkAsyncActionCreator('FACEBOOK_LOGIN', async () => {
+export const facebookLogin = makeThunkAsyncActionCreator('FACEBOOK_LOGIN', async (type, homesList) => {
   try {
-    const facebookRes = await signInWithFacebook();
-    const userToken = await firebase.auth().currentUser.getIdToken();
-    const userData = {
-      ...omit(facebookRes.additionalUserInfo.profile, ['granted_scopes', 'id']),
-      id: facebookRes.user.uid, // user auth uid.
-    };
+    const userData = await facebookLogIn();
 
-    await axios.post('/api/login', {...userData, userToken}, {withCredentials: true});
-    return userData;
+    const response = await axios.post('/api/login', {user: userData, homes: homesList, type}, {withCredentials: true});
+
+    if (response) return await response.data.response;
+    return [];
   } catch (error) {
     console.error('facebookLogin failed', {error});
     return error;
@@ -31,6 +26,15 @@ export const addHome = makeActionCreator('ADD_HOME');
 export const editHome = makeActionCreator('EDIT_HOME');
 export const removeHomeById = makeActionCreator('REMOVE_HOME_BY_ID');
 export const setCurrency = makeActionCreator('SET_CURRENCY');
+export const getHomesFromDb = makeThunkAsyncActionCreator('GET_HOMES_FROM_DB', async (userId) => {
+  try {
+    const response = await axios.post('/api/gethomes', {userId});
+    return response.data.homes;
+  } catch (error) {
+    console.error('facebookLogin failed', {error});
+    return error;
+  }
+});
 
 // DROPZONE ACTIONS
 export const addTempImages = makeActionCreator('ADD_TEMP_IMAGES');

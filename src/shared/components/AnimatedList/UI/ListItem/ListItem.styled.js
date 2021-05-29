@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Chip from '@material-ui/core/Chip';
+import Image from 'next/image';
 
 export const StyledListItem = styled.div`
   ${({theme}) => theme.media(
@@ -59,7 +60,7 @@ export const ListItemContent = styled.div`
   `)}
 `;
 
-export const StyledImage = styled.img`
+export const StyledImage = styled(Image)`
   height: 100%;
   width: 100%;
   display: block;

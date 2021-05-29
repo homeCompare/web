@@ -10,7 +10,8 @@ const HomeItem = () => {
   const router = useRouter();
   const {id: homeId} = router.query;
 
-  const homeItem = useSelector((state) => state.homes.find((home) => home.id === homeId));
+  const homeItem = useSelector((state) => state.homes.data.find((home) => home.id === homeId));
+  console.log(homeItem);
   const {t} = useTranslation();
 
   return (

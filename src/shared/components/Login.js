@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {useRouter} from 'next/router';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
@@ -16,14 +17,18 @@ const LoginWrapper = styled.div`
 `;
 
 const Auth = ({mobile}) => {
+  const router = useRouter();
   const dispatch = useDispatch();
-  const userData = useSelector(state => state.user?.data);
+  const userData = useSelector((state) => state.user?.data);
+  const homes = useSelector((state) => state.homes.data);
   let LoginComp = null;
 
   const Login = async () => {
-    await dispatch(actions.facebookLogin());
+    const response = dispatch(actions.facebookLogin('login', homes));
+    console.log(response);
   };
   const Logout = () => {
+    console.log('clicked');
     dispatch(actions.logout());
   };
   if (mobile && !userData) {
@@ -31,16 +36,24 @@ const Auth = ({mobile}) => {
   } else if (mobile && userData) {
     LoginComp = <div onClick={Logout}>Logout</div>;
   } else if (!mobile && !userData) {
-    LoginComp = <PersonOutlineIcon style={{cursor: 'pointer'}} fontSize="large" onClick={Login} />;
+    LoginComp = (
+      <PersonOutlineIcon
+        style={{cursor: 'pointer'}}
+        fontSize="large"
+        onClick={Login}
+      />
+    );
   } else if (!mobile && userData) {
-    LoginComp = <ExitToAppIcon style={{cursor: 'pointer'}} fontSize="large" onClick={Logout} />;
+    LoginComp = (
+      <ExitToAppIcon
+        style={{cursor: 'pointer'}}
+        fontSize="large"
+        onClick={Logout}
+      />
+    );
   }
 
-  return (
-    <LoginWrapper>
-      {LoginComp}
-    </LoginWrapper>
-  );
+  return <LoginWrapper>{LoginComp}</LoginWrapper>;
 };
 
 Auth.propTypes = {

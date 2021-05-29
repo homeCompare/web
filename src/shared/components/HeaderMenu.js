@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
+import {useSelector} from 'react-redux';
 import styled, {css} from 'styled-components';
 import {useRouter} from 'next/router';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -90,9 +91,14 @@ const menu = [
     to: '/compare',
     label: 'menu_compare',
   },
+  {
+    to: '/register',
+    label: 'Become A Member',
+  },
 ];
 
 const Menu = ({children}) => {
+  const user = useSelector(state => state.user.data);
   const {pathname} = useRouter();
 
   // take pathame outside
@@ -102,11 +108,16 @@ const Menu = ({children}) => {
     <>
       <MenuContainer>
         <MenuUL>
-          { menu.map(item => (
-            <MenuLI key={item.label}>
-              <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
-            </MenuLI>
-          ))}
+          { menu.map(item => {
+            if (user && item.to === '/register') {
+              return null;
+            }
+            return (
+              <MenuLI key={item.label}>
+                <MenuLink href={item.to} active={pathname === item.to}>{t(item.label)}</MenuLink>
+              </MenuLI>
+            );
+          })}
           {children ? <MenuLI><MenuLink href="/">{children}</MenuLink></MenuLI> : null}
         </MenuUL>
 
