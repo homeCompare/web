@@ -68,7 +68,7 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
               >
                 <ExpandedAvatar>
                   {listData.images?.length
-                  && listData.images[0] ? <StyledImage src={listData.images[0]} alt="home" /> : null}
+                  && listData.images[0] ? <StyledImage src={listData.images[0]} alt="home" height={500} width={500} /> : null}
                 </ExpandedAvatar>
               </Flipped>
             </ExpandedListItemContent>

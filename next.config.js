@@ -14,7 +14,11 @@ module.exports = withPlugins([
       'ico',
     ],
     /* config for next-optimized-images */
+    images: {
+      domains: ['storage.googleapis.com'],
+    },
   }],
+
   // your other plugins here
 ], {
   i18n: {

@@ -40,7 +40,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
             >
               <Avatar>
                 {listData.images?.length
-                  && listData.images[0] ? <StyledImage src={listData.images[0]} alt="home" /> : null}
+                  && listData.images[0] ? <StyledImage src={listData.images[0]} alt="home" width={500} height={500} /> : null}
               </Avatar>
             </Flipped>
             <Description>
