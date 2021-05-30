@@ -1,8 +1,8 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
-import {useRouter} from 'next/router';
-import {useDispatch, useSelector} from 'react-redux';
-import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -104,7 +104,7 @@ const CheckoutForm = () => {
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
   const router = useRouter();
-  const homes = useSelector(state => state.homes.data);
+  const homes = useSelector((state) => state.homes.data);
   console.log(homes);
 
   const stripe = useStripe();
@@ -136,26 +136,20 @@ const CheckoutForm = () => {
         },
       });
 
-      const {client_secret, status} = res.data;
+      const { client_secret, status } = res.data;
 
       if (status === 'requires_action') {
-        const paymentConfirmation = await stripe.confirmCardPayment(client_secret);
+        const paymentConfirmation = await stripe.confirmCardPayment(
+          client_secret
+        );
         if (!paymentConfirmation.error) {
           const user = await dispatch(actions.facebookLogin('register', homes));
-          const {userToken, id} = user;
-          await dispatch(actions.getHomesFromDb(id));
-          await axios.post('/api/make-premium-user', {
-            user,
-          });
+
           router.push('/');
         }
       } else {
         const user = await dispatch(actions.facebookLogin('register', homes));
-        const {userToken, id} = user;
-        await dispatch(actions.getHomesFromDb(id));
-        await axios.post('/api/make-premium-user', {
-          user,
-        });
+
         router.push('/');
       }
     }
@@ -177,7 +171,7 @@ const CheckoutForm = () => {
     const cardElement = elements.getElement(CardElement);
 
     // Use your card Element with other Stripe.js APIs
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
     });
