@@ -30,7 +30,7 @@ const EditHome = ({home}) => {
     event('edit_home_event', 'home_action', 'key_address', [formValues?.city, formValues?.street, formValues?.houseNumber].join(', '));
 
     if (user) {
-      if (user.isPremium) await upsertHomeToDb(modefiedFormValues, undefined);
+      if (user.isPremium) await upsertHomeToDb(modefiedFormValues, modefiedFormValues.editId);
     }
 
     await dispatch(actions.editHome(modefiedFormValues));

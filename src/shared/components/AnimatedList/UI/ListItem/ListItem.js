@@ -18,7 +18,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
-  const onConfirmedRemoveButtonClick = async (homeId, userId) => {
+  const onConfirmedRemoveButtonClick = async (homeId) => {
     dispatch(actions.removeHomeById(homeId));
     if (user) await deleteHomeFromDb(homeId);
   };
@@ -64,7 +64,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
               </TagsWrapper>
               <IconsWrapper>
                 <EditIcon onClick={() => router.push(`/edit/${listData.id}`)} />
-                <CloseIcon onClick={() => onConfirmedRemoveButtonClick(listData.id, user ? user.id : null)} style={{marginLeft: '20px'}} />
+                <CloseIcon onClick={() => onConfirmedRemoveButtonClick(listData.id)} style={{marginLeft: '20px'}} />
               </IconsWrapper>
             </Description>
           </ListItemContent>
