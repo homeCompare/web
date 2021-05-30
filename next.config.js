@@ -42,7 +42,7 @@ module.exports = withPlugins([
     return [
       {
         source: '/api/:match*',
-        destination: isDev ? 'http://localhost:3001/:match*' : 'https://api.homeCompare.io/:match*',
+        destination: isDev ? 'http://localhost:3001/:match*' : 'https://api.homecompare.io/:match*',
       },
     ];
   },
