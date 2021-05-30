@@ -20,7 +20,7 @@ const ListItem = ({index, onClick, createCardFlipId, listData}) => {
   const user = useSelector((state) => state.user.data);
   const onConfirmedRemoveButtonClick = async (homeId, userId) => {
     dispatch(actions.removeHomeById(homeId));
-    if (user) await deleteHomeFromDb(userId, homeId);
+    if (user) await deleteHomeFromDb(homeId);
   };
   return (
     <Flipped
