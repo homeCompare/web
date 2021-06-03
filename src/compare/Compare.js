@@ -27,6 +27,8 @@ const CompareWrapper = styled.div`
 const HomesList = styled.div`
   display: flex;
   flex: 1;
+  overflow-y: hidden;
+  overflow-x: scroll;
 `;
 
 const StyledTitle = styled.p`
