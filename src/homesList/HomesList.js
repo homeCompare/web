@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Loader from 'react-loader-spinner';
+import SearchBar from 'material-ui-search-bar';
 
 import * as actions from '@/state/actions';
 import Button from '@/shared/components/Button';
@@ -84,6 +85,7 @@ const HomesList = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const [isRent, setIsRent] = useState(false);
   const homes = useSelector((state) => (state.homes.data));
   const [modifiedHomes, setModifiedHomes] = useState(null);
@@ -113,6 +115,14 @@ const HomesList = () => {
   const rentList = homes.filter(listObj => listObj.type === 'rent');
   const buyList = homes.filter(listObj => listObj.type === 'buy');
   const homesList = isRent ? {listData: rentList, type: 'rent'} : {listData: buyList, type: 'buy'};
+
+  const handleChange = (value) => {
+    setModifiedHomes({
+      listData: _.filter(homesList.listData, {city: value}),
+      type: homesList.type,
+    });
+  };
+
   const RenderSortingButtons = () => {
     return _.times(6, (i) => {
       const icon = propsArray[i].order === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />;
@@ -136,6 +146,14 @@ const HomesList = () => {
     <>
       <div style={{display: 'flex', justifyContent: 'space-between', margin: '10px 20px'}}>
         <SkewedSwitch onChange={() => { setIsRent(!isRent); setModifiedHomes(null); }} />
+        <SearchBar
+          onChange={handleChange}
+          onRequestSearch={handleChange}
+          style={{
+            margin: '0 auto',
+            width: 800,
+          }}
+        />
         <StyledButton
           aria-controls="customized-menu"
           aria-haspopup="true"
