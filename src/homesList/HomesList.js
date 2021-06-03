@@ -69,12 +69,11 @@ const HomesList = () => {
   const user = useSelector((state) => (state.user.data));
   useEffect(() => {
     const getHomesFromDB = async () => {
-      console.log('triggered');
       const homes = await dispatch(actions.getHomesFromDb(user.id));
       dispatch(actions.setHomes(homes));
     };
     if (user) getHomesFromDB();
-  }, [homes]);
+  }, [homes, user]);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -118,7 +117,7 @@ const HomesList = () => {
 
   const handleChange = (value) => {
     setModifiedHomes({
-      listData: _.filter(homesList.listData, {city: value}),
+      listData: _.filter(homesList.listData, (home) => { return !home.city.toLowerCase().indexOf(value); }),
       type: homesList.type,
     });
   };
