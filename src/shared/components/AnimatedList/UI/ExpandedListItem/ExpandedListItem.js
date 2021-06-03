@@ -49,6 +49,7 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
           sectionName={propArray[i].sectionName}
           features={propArray[i].features}
         />
+
       );
     });
   };
