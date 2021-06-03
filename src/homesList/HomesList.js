@@ -7,6 +7,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import Loader from 'react-loader-spinner';
 
 import * as actions from '@/state/actions';
 import Button from '@/shared/components/Button';
@@ -72,7 +73,7 @@ const HomesList = () => {
       dispatch(actions.setHomes(homes));
     };
     if (user) getHomesFromDB();
-  }, []);
+  }, [homes]);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -90,7 +91,16 @@ const HomesList = () => {
   // const currency = useSelector((state) => state.currency);
 
   if (isEmpty(homes)) {
-    return <div>no homes stored</div>;
+    return (
+      <Loader
+        style={{textAlign: 'center'}}
+        type="Rings"
+        color="gray"
+        height={300}
+        width={300}
+        timeout={3000}
+      />
+    );
   }
   const propsArray = [
     {field: 'price', order: 'asc', buttonName: 'Price'},
@@ -146,7 +156,6 @@ const HomesList = () => {
       </Menu>
 
       <Root style={{overflow: 'auto'}}>
-
         <AnimatedList homes={modifiedHomes || homesList} />
       </Root>
     </>
