@@ -117,7 +117,7 @@ const HomesList = () => {
 
   const handleChange = (value) => {
     setModifiedHomes({
-      listData: _.filter(homesList.listData, (home) => { return !home.city.toLowerCase().indexOf(value); }),
+      listData: _.filter(homesList.listData, (home) => { return !home.city.toLowerCase().indexOf(value.toLowerCase()); }),
       type: homesList.type,
     });
   };
