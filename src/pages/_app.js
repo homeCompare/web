@@ -1,29 +1,29 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import '@/shared/utils/wdyr';
 
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import { ThemeProvider, StyleSheetManager } from 'styled-components';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import {ThemeProvider, StyleSheetManager} from 'styled-components';
 import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 import rtlcss from 'stylis-rtlcss';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-import { useStore, usePersist } from '@/state/store';
+import {useStore, usePersist} from '@/state/store';
 import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
 import * as gtag from '@/shared/utils/gtag';
-import { firebaseConfig, isDev } from '@/shared/config';
-import { useTranslation } from '@/shared/i18n';
-import { Container } from '@/shared/components/Layout/styled';
+import {firebaseConfig, isDev} from '@/shared/config';
+import {useTranslation} from '@/shared/i18n';
+import {Container} from '@/shared/components/Layout/styled';
 import Header from '@/shared/components/Header';
 import Footer from '@/shared/components/Footer';
 import SplashScreen from '@/shared/components/SplashScreen';
 
-export function reportWebVitals({ id, name, label, value }) {
+export function reportWebVitals({id, name, label, value}) {
   // report prefromance to GA
   window.gtag('event', name, {
     event_category:
@@ -39,13 +39,13 @@ const handleRouteChange = (url) => {
 };
 
 const stripePromise = loadStripe(
-  'pk_test_51HjQ2UHvvptYs3KDEK62fvTsCfKuHdGg3Kv6WhLuCN4IYH4SKPeR8nltSIPx0HtIaoomcGwRXhPjB834GhKVzvNJ00UpmXMsTE'
+  'pk_test_51HjQ2UHvvptYs3KDEK62fvTsCfKuHdGg3Kv6WhLuCN4IYH4SKPeR8nltSIPx0HtIaoomcGwRXhPjB834GhKVzvNJ00UpmXMsTE',
 );
 
-const App = ({ Component, pageProps, router }) => {
+const App = ({Component, pageProps, router}) => {
   const store = useStore(pageProps.initialReduxState);
   const persistor = usePersist(store);
-  const { isRTL } = useTranslation();
+  const {isRTL} = useTranslation();
 
   useEffect(() => {
     if (!firebase.apps.length) {
@@ -68,7 +68,7 @@ const App = ({ Component, pageProps, router }) => {
       <Provider store={store}>
         <PersistGate loading={<SplashScreen />} persistor={persistor}>
           <ThemeProvider theme={theme}>
-            <StyleSheetManager {...(isRTL ? { stylisPlugins: [rtlcss] } : {})}>
+            <StyleSheetManager {...(isRTL ? {stylisPlugins: [rtlcss]} : {})}>
               <>
                 <Container>
                   <Header />
