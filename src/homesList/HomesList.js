@@ -1,8 +1,8 @@
-import React, {memo, useState, useEffect} from 'react';
+import React, {memo, useState} from 'react';
 
 import styled from 'styled-components';
-import {useSelector, useDispatch} from 'react-redux';
-import _, {isEmpty} from 'lodash';
+import {useSelector} from 'react-redux';
+import {filter, times, orderBy} from 'lodash';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -10,34 +10,16 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Loader from 'react-loader-spinner';
 import SearchBar from 'material-ui-search-bar';
 
-import * as actions from '@/state/actions';
 import Button from '@/shared/components/Button';
 import SkewedSwitch from '@/shared/components/CustomSwitch/SkewedSwitch';
-import {useTranslation} from '@/shared/i18n';
 import {AnimatedList} from '@/shared/components/AnimatedList/AnimatedList';
+import {selectHomes, selectIsHomesLoaded} from '@/state/selectors';
 
 const Root = styled.div`
   flex-direction: column;
   display: flex;
   flex-wrap: wrap;
   ${({theme}) => theme.media('lg', 'flex-direction: row')}
-`;
-
-const HomeListMenu = styled.div`
-  background-color: #999;
-  border-radius: 25px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-
-  ${({theme}) => theme.media('xs', `
-  transform: scale(0.5);
-  `)}
-  ${({theme}) => theme.media('sm', `
-  transform: scale(1);
-  `)}
 `;
 
 const StyledMenuItem = styled(MenuItem)`
@@ -47,35 +29,37 @@ const StyledMenuItem = styled(MenuItem)`
 `;
 
 const StyledButton = styled(Button)`
+  && {
+    width: 100px;
+    height: 45px;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #333;
+    color: whitesmoke;
 
-&& {
-  width: 100px;
-  height: 45px;
-  margin-left: 10px;
-  font-size: 16px;
-  font-weight: 700;
-  background-color: #333;
-  color: whitesmoke;
-
-  &:hover {
-    background-color: black;
+    &:hover {
+      background-color: black;
+    }
   }
-}
-
 `;
 
-const HomesList = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => (state.user.data));
-  useEffect(() => {
-    const getHomesFromDB = async () => {
-      const homes = await dispatch(actions.getHomesFromDb(user.id));
-      dispatch(actions.setHomes(homes));
-    };
-    if (user) getHomesFromDB();
-  }, [homes, user]);
+const SORT_BY_OPTIONS = [
+  {field: 'price', order: 'asc', buttonName: 'Price'},
+  {field: 'price', order: 'desc', buttonName: 'Price'},
+  {field: 'city', order: 'desc', buttonName: 'Name'},
+  {field: 'city', order: 'asc', buttonName: 'Name'},
+  {field: 'entry-date', order: 'asc', buttonName: 'Entry Date'},
+  {field: 'entry-date', order: 'desc', buttonName: 'Entry Date'},
+];
 
+const HomesList = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isRent, setIsRent] = useState(false);
+  const [modifiedHomes, setModifiedHomes] = useState(null);
+
+  const homes = useSelector(selectHomes);
+  const homesLoaded = useSelector(selectIsHomesLoaded);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -85,13 +69,9 @@ const HomesList = () => {
     setAnchorEl(null);
   };
 
-  const [isRent, setIsRent] = useState(false);
-  const homes = useSelector((state) => (state.homes.data));
-  const [modifiedHomes, setModifiedHomes] = useState(null);
-  console.log(homes);
-  // const currency = useSelector((state) => state.currency);
+  console.log('homesLoaded', homesLoaded);
 
-  if (isEmpty(homes)) {
+  if (!homesLoaded && !homes) {
     return (
       <Loader
         style={{textAlign: 'center'}}
@@ -103,39 +83,39 @@ const HomesList = () => {
       />
     );
   }
-  const propsArray = [
-    {field: 'price', order: 'asc', buttonName: 'Price'},
-    {field: 'price', order: 'desc', buttonName: 'Price'},
-    {field: 'city', order: 'desc', buttonName: 'Name'},
-    {field: 'city', order: 'asc', buttonName: 'Name'},
-    {field: 'entry-date', order: 'asc', buttonName: 'Entry Date'},
-    {field: 'entry-date', order: 'desc', buttonName: 'Entry Date'},
-  ];
+
+  if (homesLoaded && !homes) {
+    return (<p>no homes in list, add some!</p>);
+  }
+
   const rentList = homes.filter(listObj => listObj.type === 'rent');
   const buyList = homes.filter(listObj => listObj.type === 'buy');
   const homesList = isRent ? {listData: rentList, type: 'rent'} : {listData: buyList, type: 'buy'};
 
   const handleChange = (value) => {
     setModifiedHomes({
-      listData: _.filter(homesList.listData, (home) => { return !home.city.toLowerCase().indexOf(value.toLowerCase()); }),
+      listData: filter(
+        homesList.listData,
+        home => !home.city.toLowerCase().indexOf(value.toLowerCase()),
+      ),
       type: homesList.type,
     });
   };
 
   const RenderSortingButtons = () => {
-    return _.times(6, (i) => {
-      const icon = propsArray[i].order === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />;
+    return times(6, (i) => {
+      const icon = SORT_BY_OPTIONS[i].order === 'asc' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />;
       return (
         <StyledMenuItem
-          key={`${propsArray[i].field}${propsArray[i].order}`}
+          key={`${SORT_BY_OPTIONS[i].field}${SORT_BY_OPTIONS[i].order}`}
           onClick={() => setModifiedHomes({
-            listData: _.orderBy(homesList.listData,
-              propsArray[i].field, propsArray[i].order),
+            listData: orderBy(homesList.listData,
+              SORT_BY_OPTIONS[i].field, SORT_BY_OPTIONS[i].order),
             type: homesList.type,
           })}
           variant="outlined"
           color="primary"
-        >{propsArray[i].buttonName} {icon}
+        >{SORT_BY_OPTIONS[i].buttonName} {icon}
         </StyledMenuItem>
       );
     });

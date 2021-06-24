@@ -1,16 +1,20 @@
 import React, {memo} from 'react';
 
+import PropTypes from 'prop-types';
 import {useSelector} from 'react-redux';
 
 import ImageGallery from '@/shared/components/ImageGallery';
+import {selectHomes} from '@/state/selectors';
 
 import {StyledCard, CardImage, StyledCardContent, CardTitle, CardSecondTitle} from './Home.styles';
 
-const Home = ({homeId}) => {
-	// todo: move to page getInitialProps.
-  const homeItem = useSelector((state) => state.homes.data.find((home) => home.id === homeId));
+const EMPTY_OBJECT = {};
 
-  const {city, street, images, price, squareMeter, numberOfRooms} = homeItem || {};
+const Home = ({homeId}) => {
+  const homes = useSelector(selectHomes);
+  const homeItem = homes.find(({id}) => id === homeId);
+
+  const {city, street, images, price, squareMeter, numberOfRooms} = homeItem || EMPTY_OBJECT;
 
   return (
     <StyledCard>
@@ -29,6 +33,10 @@ const Home = ({homeId}) => {
       </StyledCardContent>
     </StyledCard>
   );
+};
+
+Home.propTypes = {
+  homeId: PropTypes.string,
 };
 
 export default memo(Home);

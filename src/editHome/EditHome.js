@@ -12,9 +12,10 @@ import * as actions from '@/state/actions';
 import HomeForm from '@/shared/components/HomeForm';
 import {event} from '@/shared/utils/gtag';
 import {buyFields, rentFields} from '@/shared/utils/homeFields';
+import {selectUserData} from '@/state/selectors';
 
 const EditHome = ({home}) => {
-  const user = useSelector(state => state.user.data);
+  const user = useSelector(selectUserData);
   const dispatch = useDispatch();
   const router = useRouter();
   const tempImages = useSelector(state => state.dropzone);
@@ -28,11 +29,12 @@ const EditHome = ({home}) => {
     } : formValues;
     event('edit_home_event', 'home_action', 'key_address', [formValues?.city, formValues?.street, formValues?.houseNumber].join(', '));
 
-    if (user) {
-      if (user.isPremium) await upsertHomeToDb(modefiedFormValues, modefiedFormValues.id);
+    if (user?.isPremium) {
+      await dispatch(actions.editRemoteHome(modefiedFormValues));
+    } else {
+      dispatch(actions.editLocalHome(modefiedFormValues));
     }
 
-    await dispatch(actions.editHome(modefiedFormValues));
     router.push(`/home/${modefiedFormValues.id}`);
   };
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {useState, useEffect} from 'react';
 
 import {useSelector} from 'react-redux';
@@ -11,6 +12,7 @@ import {useTranslation} from '@/shared/i18n';
 import {Link} from '@/shared/utils/router';
 import {IconButton} from '@/shared/components/Button';
 import {ShowOnMedium, HideOnMedium} from '@/shared/components/styled';
+import {selectUserData} from '@/state/selectors';
 
 const MenuUL = styled.ul`
   position: fixed;
@@ -93,12 +95,12 @@ const menu = [
   },
   {
     to: '/register',
-    label: 'Become A Member',
+    label: 'become_a_member',
   },
 ];
 
 const Menu = ({children}) => {
-  const user = useSelector(state => state.user.data);
+  const user = useSelector(selectUserData);
   const {pathname} = useRouter();
 
   // take pathame outside

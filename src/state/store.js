@@ -13,9 +13,9 @@ let store;
 const rootReducer = composeReducers(combineReducers(reducers));
 
 const persistedReducer = persistReducer({
-  key: 'root2',
+  key: 'root3',
   storage,
-  blacklist: ['_persist'],
+  blacklist: ['_persist', 'user'],
 },
 rootReducer);
 

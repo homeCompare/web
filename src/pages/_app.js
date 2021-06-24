@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import '@/shared/utils/wdyr';
 
+import {StylesProvider} from '@material-ui/core/styles';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import {ThemeProvider, StyleSheetManager} from 'styled-components';
@@ -12,6 +13,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
+import * as actions from '@/state/actions';
 import {useStore, usePersist} from '@/state/store';
 import GlobalCss from '@/shared/style/GlobalCss';
 import theme from '@/shared/style/theme';
@@ -48,6 +50,10 @@ const App = ({Component, pageProps, router}) => {
   const {isRTL} = useTranslation();
 
   useEffect(() => {
+    store.dispatch(actions.login({loginByCookie: true}));
+  }, []);
+
+  useEffect(() => {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
       if (isDev) {
@@ -67,18 +73,20 @@ const App = ({Component, pageProps, router}) => {
     <Elements stripe={stripePromise}>
       <Provider store={store}>
         <PersistGate loading={<SplashScreen />} persistor={persistor}>
-          <ThemeProvider theme={theme}>
-            <StyleSheetManager {...(isRTL ? {stylisPlugins: [rtlcss]} : {})}>
-              <>
-                <Container>
-                  <Header />
-                  <Component {...pageProps} />
-                  <Footer />
-                </Container>
-                <GlobalCss />
-              </>
-            </StyleSheetManager>
-          </ThemeProvider>
+          <StylesProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <StyleSheetManager {...(isRTL ? {stylisPlugins: [rtlcss]} : {})}>
+                <>
+                  <Container>
+                    <Header />
+                    <Component {...pageProps} />
+                    <Footer />
+                  </Container>
+                  <GlobalCss />
+                </>
+              </StyleSheetManager>
+            </ThemeProvider>
+          </StylesProvider>
         </PersistGate>
       </Provider>
     </Elements>

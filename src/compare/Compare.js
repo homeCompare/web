@@ -2,7 +2,7 @@ import React, {memo, useState} from 'react';
 
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
-import {snakeCase} from 'lodash';
+import {snakeCase, groupBy} from 'lodash';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import TouchAppIconIcon from '@material-ui/icons/TouchApp';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
@@ -10,6 +10,7 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import CustomSwitch from '@/shared/components/CustomSwitch/CustomSwitch';
 import {useTranslation} from '@/shared/i18n';
 import {reorder} from '@/shared/utils/dnd';
+import {selectHomes} from '@/state/selectors';
 
 import HomeOptionButton from './HomeOptionButton';
 import CompareCard, {HomeCompareCardULRow, HomeCompareCardUL, HomeCompareItem, HomeCompareImage} from './CompareCol';
@@ -82,13 +83,13 @@ const rentFields = [
 
 const Compare = () => {
   const {t} = useTranslation();
-  const homes = useSelector((state) => state.homes.data);
+  const homes = useSelector(selectHomes);
   const [homesToCompare, setHomesToCompare] = useState();
 
   const [isRent, setIsRent] = useState(false);
-  const rentList = homes?.filter(home => home.type === 'rent');
-  const buyList = homes?.filter(home => home.type === 'buy');
+  const {buy: buyList, rent: rentList} = groupBy(homes, 'type');
   const list = isRent ? rentList : buyList;
+
   const fieldToCompare = isRent ? rentFields : buyFields;
 
   const onDragEnd = result => {

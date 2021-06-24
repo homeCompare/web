@@ -7,8 +7,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
 
-import {deleteHomeFromDb} from '@/shared/utils/db';
 import * as actions from '@/state/actions';
+import {selectUserData} from '@/state/selectors';
 
 import {StyledChip, StyledListItem, ListItemContent, Avatar, Description, StyledImage, IconsWrapper, TagsWrapper} from './ListItem.styled';
 
@@ -17,11 +17,16 @@ const shouldFlip = index => (prev, current) => index === prev || index === curre
 const ListItem = ({index, onClick, createCardFlipId, listData}) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.data);
+  const user = useSelector(selectUserData);
+
   const onConfirmedRemoveButtonClick = async (homeId) => {
-    dispatch(actions.removeHomeById(homeId));
-    if (user) await deleteHomeFromDb(homeId);
+    if (user?.isPremium) {
+      await dispatch(actions.removeRemoteHomeById(homeId));
+    } else {
+      dispatch(actions.removeLocalHomeById(homeId));
+    }
   };
+
   return (
     <Flipped
       flipId={createCardFlipId(index)}
@@ -79,7 +84,6 @@ ListItem.propTypes = {
   onClick: PropTypes.func,
   createCardFlipId: PropTypes.func,
   listData: PropTypes.object,
-
 };
 
 export default ListItem;

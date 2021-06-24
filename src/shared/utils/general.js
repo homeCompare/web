@@ -1,9 +1,9 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/prefer-default-export */
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
+
+import {selectCurrency} from '@/state/selectors';
 
 export const usePriceWithCurrency = price => {
-  const currency = useSelector(state => state.currency);
+  const currency = useSelector(selectCurrency);
   return Intl.NumberFormat(window.navigator.language, {
     currency,
     style: 'currency',

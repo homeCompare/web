@@ -5,14 +5,17 @@ import EditHome from '@/editHome/index';
 import Layout from '@/shared/components/Layout';
 import Meta from '@/shared/components/Meta';
 import {useTranslation} from '@/shared/i18n';
+import {selectHomes} from '@/state/selectors';
 
 const HomeItem = () => {
   const router = useRouter();
   const {id: homeId} = router.query;
 
-  const homeItem = useSelector((state) => state.homes.data.find((home) => home.id === homeId));
-  console.log(homeItem);
+  const homes = useSelector(selectHomes);
+
   const {t} = useTranslation();
+
+  const homeItem = homes.find(({id}) => id === homeId);
 
   return (
     <>
