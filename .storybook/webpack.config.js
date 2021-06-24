@@ -18,7 +18,8 @@ module.exports = ({ config }) => {
     "@/compare": path.resolve(__dirname, "../src/compare"),
     "@/shared": path.resolve(__dirname, "../src/shared"),
     "@/state": path.resolve(__dirname, "../src/state"),
-    "@/pages": path.resolve(__dirname, "../src/pages")
+    "@/pages": path.resolve(__dirname, "../src/pages"),
+    "@/register": path.resolve(__dirname, "../src/register")
   };
 
   return config;
