@@ -2,7 +2,7 @@
 import React, {memo} from 'react';
 
 import PropTypes from 'prop-types';
-import styled, {ThemeContext} from 'styled-components';
+import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 import Image from 'next/image';
 
@@ -10,6 +10,7 @@ import {Link} from '@/shared/utils/router';
 import HeaderMenu from '@/shared/components/HeaderMenu';
 import cover from '@/shared/images/cover.jpg';
 import HomeCompareLogoImage from '@/shared/images/HomeCompare_Logo.png';
+import {selectUserData} from '@/state/selectors';
 
 const HeaderRoot = styled.header`
   height: ${({theme}) => theme.base.header.height}px;
@@ -114,7 +115,7 @@ const CoverImg = memo(() => (
 ));
 
 const Header = ({withCoverImage}) => {
-  const userData = useSelector(state => state.user?.data);
+  const userData = useSelector(selectUserData);
   return (
     <>
       <HeaderRoot>

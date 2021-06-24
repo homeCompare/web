@@ -1,52 +1,85 @@
-import { makeActionCreator } from 'redux-toolbelt';
-import { makeThunkAsyncActionCreator } from 'redux-toolbelt-thunk';
+import {makeActionCreator, makeAsyncActionCreator} from 'redux-toolbelt';
+import {makeThunkAsyncActionCreator} from 'redux-toolbelt-thunk';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
-import { facebookLogIn } from '@/shared/utils/auth';
+import {googleLogin} from '@/shared/utils/auth';
 
-export const facebookLogin = makeThunkAsyncActionCreator(
-  'FACEBOOK_LOGIN',
-  async (type, homesList) => {
+export const register = makeThunkAsyncActionCreator(
+  'regsiter',
+  async ({socialConnectionData, homes, paymentMethod}) => {
     try {
-      const userData = await facebookLogIn();
-
-      const response = await axios.post(
-        '/api/login',
-        { user: userData, homes: homesList, type },
-        { withCredentials: true }
-      );
-
-      if (response) return await response.data.response;
-      return [];
+      const {data} = await axios.post('/api/register', {socialConnectionData, homes, paymentMethod});
+      return data;
     } catch (error) {
-      console.error('facebookLogin failed', { error });
-      return error;
+      console.error('register action failed', error);
+      throw error;
     }
-  }
+  },
 );
 
-export const logout = makeActionCreator('LOGOUT', () => null);
+export const login = makeThunkAsyncActionCreator('LOGIN', async ({loginByCookie}) => {
+  try {
+    if (loginByCookie) {
+      const userHasUserTokenCookie = Cookies.getJSON('userToken');
+      if (userHasUserTokenCookie) {
+        const {data} = await axios.get('/api/login');
+        return data;
+      }
+
+      return;
+    }
+
+    const socialConnectionData = await googleLogin();
+    const {data} = await axios.post('/api/login', {socialConnectionData});
+    return data;
+  } catch (error) {
+    console.error('login action failed', error);
+    throw error;
+  }
+});
+
+export const logout = makeActionCreator('LOGOUT', () => {
+  Cookies.remove('userToken');
+  return null;
+});
 
 // HOME ACTIONS
-export const setHomes = makeActionCreator('SET_HOMES');
-export const addHome = makeActionCreator('ADD_HOME');
-export const editHome = makeActionCreator('EDIT_HOME');
-export const removeHomeById = makeActionCreator('REMOVE_HOME_BY_ID');
-export const setCurrency = makeActionCreator('SET_CURRENCY');
-export const getHomesFromDb = makeThunkAsyncActionCreator(
-  'GET_HOMES_FROM_DB',
-  async () => {
-    try {
-      const response = await axios.post('/api/gethomes', {
-        withCredentials: true,
-      });
-      return response.data.homes;
-    } catch (error) {
-      console.error('facebookLogin failed', { error });
-      return error;
-    }
+export const addLocalHome = makeActionCreator('ADD_LOCAL_HOME');
+export const editLocalHome = makeActionCreator('EDIT_LOCAL_HOME');
+export const removeLocalHomeById = makeActionCreator('REMOVE_LOCAL_HOME_BY_ID');
+
+export const addRemoteHome = makeAsyncActionCreator('ADD_REMOTE_HOME', async home => {
+  try {
+    const {data} = await axios.post('/api/home/upsert', {home});
+    return data;
+  } catch (error) {
+    console.error('Add remote home failed', error);
+    throw error;
   }
-);
+});
+
+export const editRemoteHome = makeAsyncActionCreator('EDIT_REMOTE_HOME', async home => {
+  try {
+    const {data} = await axios.post('/api/home/upsert', {home, isEdit: true});
+    return data;
+  } catch (error) {
+    console.error('Edit remote home failed', error);
+    throw error;
+  }
+});
+
+export const removeRemoteHomeById = makeAsyncActionCreator('REMOVE_REMOTE_HOME', async homeId => {
+  try {
+    const {data} = await axios.post('/api/home/delete', {homeId});
+    return data;
+  } catch (error) {
+    console.error('Remove remote home failed', error);
+    throw error;
+  }
+});
+
+export const setCurrency = makeActionCreator('SET_CURRENCY');
 
 // DROPZONE ACTIONS
 export const addTempImages = makeActionCreator('ADD_TEMP_IMAGES');

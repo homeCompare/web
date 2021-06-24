@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {useRouter} from 'next/router';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
@@ -8,6 +7,7 @@ import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import * as actions from '@/state/actions';
+import {selectUserData} from '@/state/selectors';
 
 const LoginWrapper = styled.div`
   display: flex;
@@ -17,20 +17,19 @@ const LoginWrapper = styled.div`
 `;
 
 const Auth = ({mobile}) => {
-  const router = useRouter();
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.user?.data);
-  const homes = useSelector((state) => state.homes.data);
+  const userData = useSelector(selectUserData);
   let LoginComp = null;
 
-  const Login = async () => {
-    const response = dispatch(actions.facebookLogin('login', homes));
-    console.log(response);
+  const Login = () => {
+    dispatch(actions.login());
   };
+
   const Logout = () => {
-    console.log('clicked');
     dispatch(actions.logout());
   };
+
+  // TODO: refactor this.
   if (mobile && !userData) {
     LoginComp = <div onClick={Login}>Login</div>;
   } else if (mobile && userData) {

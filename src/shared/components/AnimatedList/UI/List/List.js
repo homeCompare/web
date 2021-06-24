@@ -7,21 +7,22 @@ import ExpandedListItem from '../ExpandedListItem/ExpandedListItem';
 import ListItem from '../ListItem/ListItem';
 
 const List = styled.ul`
-list-style-type: none;
-display: flex;
-flex-direction: column;
-padding: 20px;
-width: 100%;
-${({theme}) => theme.media('xs', `
-padding: 0;
-overflow: visible;
-height: 100%;
-`)}
-${({theme}) => theme.media('md', `
-padding: 20px;
-overflow: auto;
-height: 100vh;
-`)}
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+
+  ${({theme}) => theme.media('xs', `
+    padding: 0;
+    overflow: visible;
+    height: 100%;
+  `)}
+  ${({theme}) => theme.media('md', `
+    padding: 20px;
+    overflow: auto;
+    height: 100%;
+  `)}
 li {
   width: 100%;
   ${({theme}) => theme.media('xs', `
