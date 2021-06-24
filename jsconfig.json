@@ -10,7 +10,8 @@
       "@/compare/*": ["src/compare/*"],
       "@/shared/*": ["src/shared/*"],
       "@/state/*": ["src/state/*"],
-      "@/pages/*": ["src/pages/*"]
+      "@/pages/*": ["src/pages/*"],
+      "@/register/*": ["src/register/*"]
     }
   }
 }

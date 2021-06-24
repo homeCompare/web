@@ -39,6 +39,7 @@ module.exports = {
           ['@/shared', './src/shared/'],
           ['@/state', './src/state/'],
           ['@/pages', './src/pages/'],
+          ['@/register', './src/register/'],
         ],
         extensions: ['.js', '.jsx', '.json', '.jpg', '.png', '.ico'],
       },

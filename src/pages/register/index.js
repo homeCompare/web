@@ -5,6 +5,7 @@ import {useRouter} from 'next/router';
 import {useDispatch, useSelector} from 'react-redux';
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 
+import {SubmitButton, Container, Form} from '@/register/styled';
 import Layout from '@/shared/components/Layout';
 import Meta from '@/shared/components/Meta';
 import * as actions from '@/state/actions';
@@ -12,8 +13,6 @@ import {selectHomes} from '@/state/selectors';
 import {googleLogin} from '@/shared/utils/auth';
 import Button from '@/shared/components/Button';
 import {useTranslation} from '@/shared/i18n';
-
-import {SubmitButton, Container, Form} from './styled';
 
 const CheckoutForm = () => {
   const [socialConnectionData, setSocialConnectionData] = useState();
