@@ -18,14 +18,17 @@ const StyledFlipper = styled(Flipper)`
   }
 `;
 
+const EMPTY_ARRAY = [];
+
 export const AnimatedList = ({homes}) => {
-  const createCardFlipId = index => `listItem-${index}`;
-  const listData = homes.listData || [];
-  const listType = homes.type;
   const [focused, setFocused] = useState(null);
+
+  const createCardFlipId = index => `listItem-${index}`;
+  const listData = homes.listData || EMPTY_ARRAY;
+  const listType = homes.type;
+
   const clicked = index => {
-    if (focused === index) setFocused(null);
-    else setFocused(index);
+    setFocused(focused === index ? null : index);
   };
 
   return (
@@ -46,7 +49,7 @@ export const AnimatedList = ({homes}) => {
         list={listData}
         clicked={clicked}
         createCardFlipId={createCardFlipId}
-        focused={focused}
+        focused={Boolean(focused)}
       />
 
     </StyledFlipper>

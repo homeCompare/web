@@ -12,7 +12,9 @@ import Dropzone from '@/shared/components/Dropzone';
 import Switch from '@/shared/components/Switch';
 import {useTranslation} from '@/shared/i18n';
 
-const StyledTextInput = styled(TextInput)`
+const StyledTextInput = styled(TextInput).attrs({
+  InputProps: {disableUnderline: true},
+})`
   width: 100%;
 
   &&& {
@@ -99,13 +101,11 @@ const CustomField = field => {
             {...{...field, ...input}}
             label={t(field.label)}
             error={!!hasError}
-            dirty={meta.dirty}
             id="outlined-error-helper-text"
             placeholder={t(field.placeholder)}
             input={input}
             required={field?.validation?.required}
             helperText={!!hasError && 'Required'}
-            InputProps={{disableUnderline: true}}
             variant="outlined"
           />
         );

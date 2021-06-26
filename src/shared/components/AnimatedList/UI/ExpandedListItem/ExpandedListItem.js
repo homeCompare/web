@@ -41,6 +41,7 @@ const ExpandedListItem = ({index, onClick, createCardFlipId, listData}) => {
     return _.times(3, (i) => {
       return (
         <Sections
+          key={i}
           sectionIcon={propArray[i].sectionIcon}
           object={listData}
           index={index}

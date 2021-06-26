@@ -1,4 +1,4 @@
-import {makeActionCreator, makeAsyncActionCreator} from 'redux-toolbelt';
+import {makeActionCreator} from 'redux-toolbelt';
 import {makeThunkAsyncActionCreator} from 'redux-toolbelt-thunk';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -49,30 +49,36 @@ export const addLocalHome = makeActionCreator('ADD_LOCAL_HOME');
 export const editLocalHome = makeActionCreator('EDIT_LOCAL_HOME');
 export const removeLocalHomeById = makeActionCreator('REMOVE_LOCAL_HOME_BY_ID');
 
-export const addRemoteHome = makeAsyncActionCreator('ADD_REMOTE_HOME', async home => {
+export const addRemoteHome = makeThunkAsyncActionCreator('ADD_REMOTE_HOME', async home => {
   try {
     const {data} = await axios.post('/api/home/upsert', {home});
-    return data;
+    if (data.success) {
+      return home;
+    }
+
+    console.error('addRemoteHome didnt succeed', data);
   } catch (error) {
     console.error('Add remote home failed', error);
     throw error;
   }
 });
 
-export const editRemoteHome = makeAsyncActionCreator('EDIT_REMOTE_HOME', async home => {
+export const editRemoteHome = makeThunkAsyncActionCreator('EDIT_REMOTE_HOME', async home => {
   try {
     const {data} = await axios.post('/api/home/upsert', {home, isEdit: true});
-    return data;
+    if (data.success) {
+      return home;
+    }
   } catch (error) {
     console.error('Edit remote home failed', error);
     throw error;
   }
 });
 
-export const removeRemoteHomeById = makeAsyncActionCreator('REMOVE_REMOTE_HOME', async homeId => {
+export const removeRemoteHomeById = makeThunkAsyncActionCreator('REMOVE_REMOTE_HOME', async homeId => {
   try {
-    const {data} = await axios.post('/api/home/delete', {homeId});
-    return data;
+    await axios.post('/api/home/delete', {homeId});
+    return homeId;
   } catch (error) {
     console.error('Remove remote home failed', error);
     throw error;

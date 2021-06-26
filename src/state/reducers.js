@@ -32,12 +32,24 @@ export const homes = combineReducers({
   remote: composeReducers(
     makeReducer({
       [actions.logout.TYPE]: () => DEFAULT_ASYNC_STATE,
-      [actions.addRemoteHome.success.TYPE]: (currentState, {payload: newHomeFromApi}) => [
-        ...(currentState || EMPTY_ARRAY),
-        newHomeFromApi,
-      ],
-      [actions.editRemoteHome.success.TYPE]: (currentState, {payload: editedHomeFromApi}) => currentState.map(home => (home.id === editedHomeFromApi.id ? editedHomeFromApi : home)),
-      [actions.removeRemoteHomeById.success.TYPE]: (currentState, {payload: homeId}) => currentState.filter(({id}) => id !== homeId),
+      [actions.addRemoteHome.success.TYPE]: (currentState, {payload: newHome}) => {
+        if (!newHome) {
+          console.error('addRemoteHome newHome didnt arrive to reducer homes.remote', {newHome});
+        }
+
+        return {
+          ...currentState,
+          data: [...currentState.data, newHome],
+        };
+      },
+      [actions.editRemoteHome.success.TYPE]: (currentState, {payload: editedHome}) => ({
+        ...currentState,
+        data: currentState.data.map(home => (home.id === editedHome.id ? editedHome : home)),
+      }),
+      [actions.removeRemoteHomeById.success.TYPE]: (currentState, {payload: homeId}) => ({
+        ...currentState,
+        data: currentState.data.filter(({id}) => id !== homeId),
+      }),
     }, {defaultState: DEFAULT_ASYNC_STATE}),
     makeAsyncReducer(actions.register, {dataGetter: overrideRemoteHomes}),
     makeAsyncReducer(actions.login, {dataGetter: overrideRemoteHomes}),
